@@ -1,17 +1,17 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import HomePage from './Pages/HomePage';
-import ProfilePage from './Pages/ProfilePage';
-import ErrorPage from './Pages/ErrorPage';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import Login from './pages/Login';
+import HomePage from './pages/Home'
+import Error from './pages/Error';
 
-export default function Routers() {
-    return (
-        <Router>
+export default function Router() {
+    return(
+        <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={HomePage}></Route>
-                <Route path="/u" component={ProfilePage}></Route>
-                <Route path="/error" component={ErrorPage}></Route>
+                <Route path="/login" component={Login}></Route>
+                <Route path="/error" component={Error}></Route>
             </Switch>
-        </Router>
+        </BrowserRouter>
     )
 }

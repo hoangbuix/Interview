@@ -1,0 +1,134 @@
+.container-edit {
+  display: flex;
+  flex-direction: row;
+  padding-top: 70px;
+  padding-left: 40px;
+  background-color: #f0f2f5;
+}
+.header-login {
+  margin-left: 100px;
+  width: 600px;
+  height: 500px;
+  // background-color: white;
+  // border-radius: 10px;
+  // border: 1px solid #1877f2;
+  padding-left: 40px;
+}
+.user-login {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-value {
+  justify-content: center;
+  text-align: center;
+  color: black;
+  border: 1px solid #1877f2;
+  border-radius: 20px;
+}
+.user-value-wrap {
+  border-radius: 50px;
+}
+.image-user {
+  background-color: pink;
+  // height: 150px;
+  // width: 160px;
+  border-bottom: 1px solid blue;
+  border-radius: 20px;
+}
+.role-name {
+  margin: 10px;
+}
+.link-edit {
+  text-decoration: none;
+  color: black;
+}
+.edit-image {
+  height: 150px;
+  width: 159px;
+  // border: 1px solid #1877f2;
+  border-radius: 20px;
+}
+
+//
+.no-user {
+  justify-content: center;
+  text-align: center;
+  // background-color: red;
+  margin-left: 20px;
+  border: 1px solid #1877f2;
+  border-radius: 20px;
+}
+.image-none {
+  // background-color: yellow;
+  height: 150px;
+  width: 160px;
+  padding-top: 50px;
+  // border: 1px solid #1877f2;
+  border-radius: 20px;
+}
+.add-account {
+  margin: 10px;
+}
+
+//end header
+
+// start main
+.main-login {
+  padding-top: 10px;
+  margin-left: 100px;
+  width: 400px;
+  height: 500px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #1877f2;
+}
+
+.text-edit {
+  width: 364px;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  color: gray;
+  margin: 20px;
+  color: black;
+  outline: none;
+  padding: 20px;
+}
+
+.button-edit {
+  border-radius: 10px;
+  border: 1px solid #1877f2;
+  width: 364px;
+  height: 48px;
+  font-weight: bold;
+  font-size: 22px;
+  margin: 20px;
+  color: white;
+  background-color: #1877f2;
+}
+.edit-link {
+  text-align: center;
+  padding-left: 140px;
+  font-size: 18px;
+}
+
+.none {
+  width: 350px;
+  border-bottom: 1px solid gainsboro;
+  margin-left: 20px;
+  padding-top: 20px;
+}
+
+.button-edit-new {
+  border-radius: 10px;
+  border: 1px solid #0fb839;
+  width: 250px;
+  height: 48px;
+  font-weight: bold;
+  font-size: 22px;
+  margin: 20px;
+  color: white;
+  background-color: #0fb839;
+  margin-left: 80px;
+}
