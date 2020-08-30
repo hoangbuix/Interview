@@ -1,6 +1,13 @@
-import * as mongoose from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-export const UserSchema = new mongoose.Schema({
-    fullName: String,
-    age: Number,
-});
+@Schema()
+export class User extends Document {
+    @Prop()
+    fullName: string;
+
+    @Prop()
+    age: number;
+}
+
+export const UserSchema = SchemaFactory.createForClass(User);
