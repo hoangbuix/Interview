@@ -20,19 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08963278-5966-454b-bf3d-e9930c3b2520" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/1_init.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db/db.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dbconfig.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migarations/1_init.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/Users.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../font-end/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../font-end/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../font-end/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../font-end/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../font-end/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../font-end/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../font-end/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../font-end/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../font-end/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../font-end/src/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../font-end/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../font-end/yarn.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/1_init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1_init.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dbconfig.yml" beforeDir="false" afterPath="$PROJECT_DIR$/dbconfig.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migarations/1_init.sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,10 +71,13 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\HoangBui\Desktop\Interview\back-end" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\HoangBui\Desktop\Interview\back-end\db" />
+      <recent name="C:\Users\HoangBui\Desktop\Interview\back-end\migarations" />
+      <recent name="C:\Users\HoangBui\Desktop\Interview\back-end\model" />
       <recent name="C:\Users\HoangBui\Desktop\Interview\back-end" />
     </key>
   </component>
