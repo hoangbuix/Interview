@@ -13,6 +13,10 @@ function CoverUser() {
   const [avatar, setAvatar] = useState("https://bom.to/A5Wrukd");
   const [cover, setCover] = useState("https://bom.to/aQN4HLc");
 
+
+  
+
+
   return (
     <div className="app-main">
       <div className="panel-top">
