@@ -11,13 +11,15 @@ export const UserSchema = new mongoose.Schema({
   email: { type: String },
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  changePasswordAt: { type: Date},
+  changePasswordAt: { type: Date },
   active: { type: Boolean, default: true },
   roles: {
     type: [{ type: String, enum: ['admin', 'user', 'manager', 'teacher'] }],
     required: true,
     default: ['user'],
   },
+  major: [{ type: String }],
+  teacher: [{ type: String }],
   createdAt: { type: Date, default: Date.now() },
   updatedAt: { type: Date, default: Date.now() },
 });

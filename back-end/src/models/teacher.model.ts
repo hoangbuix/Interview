@@ -1,8 +1,8 @@
 import { Document } from 'mongoose';
 
 export interface TeacherModel extends Document {
-  teacherId: string;
-  teacherName: string;
-  createdAt: Date;
-  updatedAt: Date;
+  readonly teacherId: string;
+  readonly teacherName: string;
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
 }

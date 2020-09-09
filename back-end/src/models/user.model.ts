@@ -13,7 +13,9 @@ export interface UserModel extends Document {
   readonly password: string;
   readonly changePasswordAt: Date;
   readonly active: boolean;
-  readonly roles: any;
+  readonly roles: string;
+  readonly major: any;
+  readonly teacher: any;
   readonly createdAt: Date;
   readonly updatedAt: Date;
 }

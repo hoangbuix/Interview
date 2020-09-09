@@ -32,6 +32,7 @@
     "bcryptjs": "^2.4.3",
     "class-validator": "^0.12.2",
     "fastify-swagger": "^3.3.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.2",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",

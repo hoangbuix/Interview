@@ -1,8 +1,9 @@
 import { Document } from 'mongoose';
 
 export interface MajorModel extends Document {
-  majorId: { type: string };
-  majorName: { type: string };
-  createdAt: { type: number };
-  updatedAt: { type: number };
+  readonly majorId: string ;
+  readonly majorName: string;
+  readonly majorDescription: string ;
+  readonly createdAt: number;
+  readonly updatedAt: number;
 }

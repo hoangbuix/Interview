@@ -12,6 +12,8 @@ export const responseUser = user => {
     password,
     email,
     roles,
+    major,
+    teacher,
     active,
   } = user;
 
@@ -28,6 +30,8 @@ export const responseUser = user => {
     password,
     email,
     roles,
+    major,
+    teacher,
     active,
   };
 };

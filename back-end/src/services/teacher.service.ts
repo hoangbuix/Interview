@@ -9,7 +9,7 @@ import { NotFoundException } from 'src/exceptions/notfound.exception';
 export class TeacherService {
   constructor(
     @InjectModel('teacher') private readonly teacherModel: Model<TeacherModel>,
-  ) {}
+  ) { }
 
   async getAll(): Promise<TeacherModel[]> {
     return await this.teacherModel.find().exec();
@@ -27,8 +27,15 @@ export class TeacherService {
   }
 
   async getTeacherId(id: string) {
-    const teacher = this.teacherModel.findOne({id}).exec();
+    const teacher = await this.teacherModel.findOne({ "teacherId": id }).exec();
     if (!teacher) throw new NotFoundException(`Không tìm thấy giáo viên có id : ${id}`);
     return teacher;
   }
+
+  async getTeacherName(teacherName: string) {
+    const teacher = await this.teacherModel.findOne({ 'teacherName': teacherName }).exec();
+    if (!teacher) throw new NotFoundException(`Không tìm thấy giáo viên với tên ${teacherName}`);
+    return teacher;
+  }
+
 }
