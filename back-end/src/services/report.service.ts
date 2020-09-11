@@ -15,8 +15,30 @@ export class ReportService {
     return topic;
   }
 
+
   async createReport(createReportDto: CreateReportDto): Promise<ReportModel> {
-    const topic = new this.reportModel(createReportDto);
-    return await topic.save();
+    const results = await this.reportModel.findOneAndUpdate({'userId': createReportDto.userId}, {
+      $push: {
+        'info': {
+          'reportName': createReportDto.reportName,
+          'content': {
+            'file': createReportDto.file,
+            'image': createReportDto.image,
+          },
+          'teacherId': createReportDto.teacherId,
+          'reportDate': new Date(),
+        }
+      }
+    }, { new: true, upsert: false }).exec();
+
+    return results;
+  }
+
+  async getReportName(reportName: string) {
+    const report = await this.reportModel.findOne({ 'info.reportName': reportName }).exec().catch((err) =>
+      console.log("err" + err)
+    )
+    console.log(report + "------------------------------" + 'report')
+    return report;
   }
 }

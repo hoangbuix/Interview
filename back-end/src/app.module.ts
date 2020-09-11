@@ -13,7 +13,7 @@ import { ReportModule } from './modules/report.module';
     TaskModule,
     ReportModule,
     MajorModule,
-    MongooseModule.forRoot("mongodb+srv://hoangbuix:151998@cluster0.utilx.mongodb.net/interview?retryWrites=true&w=majority")
+    MongooseModule.forRoot("mongodb+srv://hoangbuix:151998@cluster0.utilx.mongodb.net/interview?retryWrites=true&w=majority"),
   ],
 })
 export class AppModule { }

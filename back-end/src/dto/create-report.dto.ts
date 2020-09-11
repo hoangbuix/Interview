@@ -4,4 +4,5 @@ export class CreateReportDto {
     readonly topicName: string;
     readonly file: string;
     readonly image: string;
+    readonly reportName: string;
 }
