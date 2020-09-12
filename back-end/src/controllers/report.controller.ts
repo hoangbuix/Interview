@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Response, Request } from "@nestjs/common";
 import { ReportModel } from "src/models/report.model";
 import { ReportService } from "src/services/report.service";
 import { CreateReportDto } from "src/dto/create-report.dto";
-import { BadRequestException } from "src/exceptions/badrequest.exception";
+import { BadRequestException } from "src/exceptions/bad-request.exception";
 
 @Controller('report')
 export class ReportController {
@@ -19,6 +19,6 @@ export class ReportController {
         const checkExits = await this.reportService.getReportName(createReportDto.reportName)
         if (checkExits) throw new BadRequestException('Tên báo cáo đã tồn tại!');
         const report = await this.reportService.createReport(createReportDto);
-        res.status(200).json(report);
+        return res.status(200).json(report);
     }
 }

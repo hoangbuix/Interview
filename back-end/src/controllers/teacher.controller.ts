@@ -2,7 +2,7 @@ import { Controller, Get, Body, Response, Request, Post } from "@nestjs/common";
 import { TeacherService } from "src/services/teacher.service";
 import { TeacherModel } from "src/models/teacher.model";
 import { CreateTeacherDto } from "src/dto/create-teacher.dto";
-import { BadRequestException } from "src/exceptions/badrequest.exception";
+import { BadRequestException } from "src/exceptions/bad-request.exception";
 
 
 @Controller('teacher')

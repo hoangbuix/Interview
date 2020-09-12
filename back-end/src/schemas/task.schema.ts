@@ -6,6 +6,6 @@ export const TaskSchema = new mongoose.Schema({
   title: { type: String },
   description: { type: String },
   userId: { type: String },
-  createdAt: { type: Number },
-  updatedAt: { type: Number },
+  createdAt: { type: Date },
+  updatedAt: { type: Date },
 });

@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { TeacherModel } from 'src/models/teacher.model';
 import { CreateTeacherDto } from 'src/dto/create-teacher.dto';
-import { NotFoundException } from 'src/exceptions/notfound.exception';
+import { NotFoundException } from 'src/exceptions/not-found.exception';
 
 @Injectable()
 export class TeacherService {

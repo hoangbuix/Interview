@@ -3,7 +3,7 @@ import { MajorModel } from 'src/models/major.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateMajorDto } from 'src/dto/create-major.dto';
-import { NotFoundException } from 'src/exceptions/notfound.exception';
+import { NotFoundException } from 'src/exceptions/not-found.exception';
 
 @Injectable()
 export class MajorService {
