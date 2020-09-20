@@ -18,8 +18,10 @@ export const UserSchema = new mongoose.Schema({
     required: true,
     default: ['user'],
   },
-  major: [{ type: String }],
-  teacher: [{ type: String }],
+  companyId: { type: String },
+  topicId: { type: String },
+  majorId: { type: String },
+  teacherId: { type: String },
   createdAt: { type: Date, default: Date.now() },
   updatedAt: { type: Date, default: Date.now() },
 });

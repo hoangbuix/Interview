@@ -25,8 +25,14 @@ export class MajorService {
   }
 
   async getMajorName(majorName: string) {
-    const major = await this.majorModel.findOne({ 'majorName': majorName }).exec();
+    const major = await this.majorModel.findOne({majorName: majorName }).exec();
     if (!major) throw new NotFoundException("Không tìm thấy ngành học của bạn!");
     return major
+  }
+
+  async getMajorById(id: string) {
+    const major = await this.majorModel.findById({ _id: id }).exec();
+    if (!major) throw new NotFoundException("Không tìm thấy id ngành học của bạn");
+    return major;
   }
 }

@@ -1,8 +1,9 @@
 import { TeacherController } from "src/controllers/teacher.controller";
 import { TeacherService } from "src/services/teacher.service";
-import { Module } from "@nestjs/common";
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { TeacherSchema } from "src/schemas/teacher.schema";
+import { AuthMiddleware } from "src/middleware/auth.middleware";
 
 
 @Module({
@@ -12,4 +13,10 @@ import { TeacherSchema } from "src/schemas/teacher.schema";
     exports: [TeacherService]
 })
 
-export class TeacherModule {}
+export class TeacherModule implements NestModule{
+    public configure(consumer: MiddlewareConsumer) {
+        consumer
+        .apply()
+        .forRoutes({path: 'teacher', method: RequestMethod.ALL})
+    }
+}

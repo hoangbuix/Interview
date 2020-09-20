@@ -1,9 +1,11 @@
 import { Body, Controller, Get, Param, Post, Req, Res } from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { CreateTopicDto } from "src/dto/create-topic.dto";
 import { TopicModel } from "src/models/topic.model";
 import { TopicService } from "src/services/topic.service";
 
-
+@ApiBearerAuth()
+@ApiTags('topic')
 @Controller('topic')
 export class TopicController {
     constructor(private readonly topicService: TopicService) { }
@@ -13,7 +15,7 @@ export class TopicController {
         return await this.topicService.getAll();
     }
 
-    @Post()
+    @Post('/create-topic')
     async createTopic(@Res() res, @Body() createTopicDto: CreateTopicDto): Promise<TopicModel> {
         const topic = await this.topicService.createTopic(createTopicDto);
         return res.status(200).json({

@@ -27,7 +27,7 @@ export class TeacherService {
   }
 
   async getTeacherId(id: string) {
-    const teacher = await this.teacherModel.findOne({ "teacherId": id }).exec();
+    const teacher = await this.teacherModel.findById({ _id: id }).exec();
     if (!teacher) throw new NotFoundException(`Không tìm thấy giáo viên có id : ${id}`);
     return teacher;
   }

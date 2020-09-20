@@ -3,14 +3,12 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ReportModel } from 'src/models/report.model';
 import { CreateReportDto } from 'src/dto/create-report.dto';
-import { TopicService } from './topic.service';
 import { BadRequestException } from 'src/exceptions/bad-request.exception';
 
 @Injectable()
 export class ReportService {
   constructor(
-    @InjectModel('report') private readonly reportModel: Model<ReportModel>,
-    private readonly topicService: TopicService
+    @InjectModel('report') private readonly reportModel: Model<ReportModel>
   ) { }
 
   async getAllReport() {
@@ -20,17 +18,14 @@ export class ReportService {
 
 
   async createReport(createReportDto: CreateReportDto) {
-
-    const topic = await this.topicService.getTopicId(createReportDto.topicId);
     const checkExits: ReportModel = new this.reportModel({
       userId: createReportDto.userId,
-      topicId: topic._id,
-      teacherId: createReportDto.teacherId
+      teacherId: createReportDto.teacherId,
     });
 
     const checkUser = await this.reportModel.findOne({ userId: createReportDto.userId }).exec();
-    const checkTopic = await this.reportModel.findOne({ topicId: createReportDto.topicId }).exec();
-    if (checkUser == null && checkTopic == null) {
+
+    if (checkUser == null) {
       await checkExits.save();
     }
 
@@ -38,7 +33,6 @@ export class ReportService {
       $push: {
         'info': {
           'reportName': createReportDto.reportName,
-          'companyId': createReportDto.companyId,
           'meetId': createReportDto.meetId,
           'content': {
             'contentReport': createReportDto.contentReport,
@@ -49,8 +43,7 @@ export class ReportService {
           'reportDate': new Date(),
         }
       }
-    }, { new: true, upsert: false }).exec();
-
+    }, { new: true, upsert: true }).exec();
     const dataResult = results
 
     return dataResult;

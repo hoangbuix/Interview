@@ -3,13 +3,19 @@ import { TeacherService } from "src/services/teacher.service";
 import { TeacherModel } from "src/models/teacher.model";
 import { CreateTeacherDto } from "src/dto/create-teacher.dto";
 import { BadRequestException } from "src/exceptions/bad-request.exception";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { Roles } from "src/shared/decorators/roles.decorator";
 
 
+@ApiBearerAuth()
+@ApiTags('teacher')
 @Controller('teacher')
 export class TeacherController {
     constructor( private readonly teacherService: TeacherService){}
 
+
     @Get('/get-all')
+    // @Roles('admin')
     async getAll(): Promise<TeacherModel[]> {
         return await this.teacherService.getAll();
     }
