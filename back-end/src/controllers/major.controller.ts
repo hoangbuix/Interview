@@ -1,8 +1,11 @@
 import { MajorService } from "src/services/major.service";
 import { Controller, Get, Post, Body, HttpStatus, Res } from "@nestjs/common";
 import { CreateMajorDto } from "src/dto/create-major.dto";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
 
+@ApiBearerAuth()
+@ApiTags('major')
 @Controller('major')
 export class MajorController {
     constructor(private readonly majorService: MajorService) {}

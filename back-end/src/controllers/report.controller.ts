@@ -3,7 +3,11 @@ import { ReportModel } from "src/models/report.model";
 import { ReportService } from "src/services/report.service";
 import { CreateReportDto } from "src/dto/create-report.dto";
 import { BadRequestException } from "src/exceptions/bad-request.exception";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
+
+@ApiBearerAuth()
+@ApiTags('report')
 @Controller('report')
 export class ReportController {
     constructor(private readonly reportService: ReportService) { }

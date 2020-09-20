@@ -1,8 +1,11 @@
 import { Body, Controller, Get, Post, Res } from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { CreateMeetDto } from "src/dto/create-meet.dto";
 import { MeetModel } from "src/models/meet.model";
 import { MeetService } from "src/services/meet.service";
 
+@ApiBearerAuth()
+@ApiTags('meet')
 @Controller('meet')
 export class MeetController {
     constructor(private readonly meetService: MeetService) {}

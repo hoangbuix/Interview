@@ -1,9 +1,12 @@
 import { Body, Controller, Get, Post, Res } from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { CreateCompanyDto } from "src/dto/create-company.dto";
 import { CompanyModel } from "src/models/company.model";
 import { CompanyService } from "src/services/company.service";
 
 
+@ApiBearerAuth()
+@ApiTags('company')
 @Controller('company')
 
 export class CompanyController {
