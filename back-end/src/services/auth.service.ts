@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { sign } from 'jsonwebtoken';
+import { jwtConstants } from 'src/exceptions/constants';
 import { NotAcceptableException } from 'src/exceptions/not-acceptable.exception';
 import { NotFoundException } from 'src/exceptions/not-found.exception';
 import { UnAuthorizedException } from 'src/exceptions/un-authorized.exception';
@@ -10,6 +12,7 @@ export class AuthService {
   constructor(
     private readonly userService: UserService
   ) {}
+
 
   async validateUser(payload: JwtPayload): Promise<any> {
     const user = await this.userService.getUserById(payload._id);

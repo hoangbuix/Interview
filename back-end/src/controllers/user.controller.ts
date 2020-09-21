@@ -7,17 +7,18 @@ import { ValidationPipe } from 'src/shared/pipe/validation.pipe';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { RolesGuard } from 'src/auth/guards/role.guard';
 import { Roles } from 'src/shared/decorators/roles.decorator';
+import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 
 @ApiBearerAuth()
 @ApiTags('user')
-// @UseGuards()
 @Controller()
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
-  // @Roles('admin')
   @Get('user/get-all')
+  @UseGuards(JwtAuthGuard)
   async getAll() {
     return await this.userService.getAllUser();
   }

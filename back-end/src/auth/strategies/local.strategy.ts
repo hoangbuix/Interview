@@ -1,7 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
-import { AuthService } from '../auth.service';
+import { UnAuthorizedException } from 'src/exceptions/un-authorized.exception';
+import { JwtPayload } from 'src/models/jwtPayload.model';
+import { AuthService } from 'src/services/auth.service';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
@@ -9,11 +11,11 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     super();
   }
 
-  async validate(username: string, password: string): Promise<any> {
-    const user = await this.authService.validateUser(username, password);
+  async validate(payload: JwtPayload, done) {
+    const user = await this.authService.validateUser(payload);
     if (!user) {
-      throw new UnauthorizedException();
+      return done( new UnAuthorizedException("Không tìm thất người dùng này!"), false);
     }
-    return user;
+    done(null, user);
   }
 }

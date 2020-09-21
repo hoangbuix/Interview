@@ -14,6 +14,7 @@ import { NotAcceptableException } from 'src/exceptions/not-acceptable.exception'
 import { UnAuthorizedException } from 'src/exceptions/un-authorized.exception';
 import { JwtPayload } from 'src/models/jwtPayload.model';
 import { jwtConstants } from 'src/exceptions/constants';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class UserService {
@@ -22,25 +23,18 @@ export class UserService {
     private readonly majorService: MajorService,
     private readonly teacherService: TeacherService,
     private readonly companyService: CompanyService,
-    private readonly topicService: TopicService
+    private readonly topicService: TopicService,
   ) { }
 
   protected generatorToken = (payload) => {
     return jwt.sign(payload, jwtConstants.secret);
   }
 
-  // public generatorToken(user) {
-  //   let today = new Date();
-  //   let exp = new Date(today);
-  //   exp.setDate(today.getDate() + 60);
+  validateToken(token: string) {
+    return true;
+  }
 
-  //   return jwt.sign({
-  //     id: user._id,
-  //     username: user.username,
-  //     email: user.email,
-  //     exp: exp.getTime() / 1000,
-  //   }, jwtConstants.secret);
-  // };
+
 
 
   public getPermission = (permissions: any) => {
