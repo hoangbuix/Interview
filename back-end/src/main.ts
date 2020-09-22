@@ -40,7 +40,7 @@ async function bootstrap() {
   app.set('trust proxy', 1);
   app.use(helmet());
 
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('');
   await app.listen(3000);
 }
 bootstrap();
