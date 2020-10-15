@@ -8,17 +8,16 @@ import { ReportModule } from './modules/report.module';
 import { TopicModule } from './modules/topic.module';
 import { CompanyModule } from './modules/company.module';
 import { MeetModule } from './modules/meet.module';
-import { LoggerMiddleware } from './middleware/logger.middleware';
-import { UserController } from './controllers/user.controller';
-import { Connection } from 'mongoose';
 import { AuthModule } from './auth/auth.module';
-import { CoreModule } from './shared/core/core.module';
+import { default as config } from './config';
 
+const userString = config.db.user && config.db.pass ? (config.db.user + ':' + config.db.pass + '@') : '';
+const authSource = config.db.authSource ? ('?authSource=' + config.db.authSource + '&w=1') : '';
+const dv = "mongodb+srv://hoangbuix:151998@cluster0.utilx.mongodb.net/interview?retryWrites=true&w=majority"
 
 @Module({
   imports: [
-    MongooseModule.forRoot("mongodb+srv://hoangbuix:151998@cluster0.utilx.mongodb.net/interview?retryWrites=true&w=majority"),
-
+    MongooseModule.forRoot(dv || 'mongodb://' + userString + config.db.host + ':' + (config.db.port || '27017') + '/' + config.db.database + authSource),
     UserModule,
     TeacherModule,
     TaskModule,
@@ -27,8 +26,7 @@ import { CoreModule } from './shared/core/core.module';
     TopicModule,
     CompanyModule,
     MeetModule,
-    AuthModule,
-    CoreModule
+    AuthModule
   ],
 })
-export class AppModule {}
+export class AppModule { }

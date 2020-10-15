@@ -4,7 +4,7 @@ import { TeacherModel } from "src/models/teacher.model";
 import { CreateTeacherDto } from "src/dto/create-teacher.dto";
 import { BadRequestException } from "src/exceptions/bad-request.exception";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
-import { Roles } from "src/shared/decorators/roles.decorator";
+import { Roles } from "src/auth/decorators/roles.decorator";
 
 
 @ApiBearerAuth()

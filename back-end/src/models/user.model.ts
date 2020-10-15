@@ -1,4 +1,5 @@
 import { Document } from 'mongoose';
+import { UserRole } from './user-role.enum';
 
 export interface UserModel extends Document {
   readonly userId?: string;
@@ -13,8 +14,8 @@ export interface UserModel extends Document {
   readonly password: string;
   readonly changePasswordAt: Date;
   readonly active: boolean;
-  readonly roles: string;
-  readonly companyId: any;
+  readonly roles?: Array<any>;
+  readonly companyId:any;
   readonly topicId: any;
   readonly majorId: any;
   readonly teacherId: any;

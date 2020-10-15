@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import { UserRole } from 'src/models/user-role.enum';
 
 export const UserSchema = new mongoose.Schema({
   userId: { type: String },
@@ -14,9 +15,9 @@ export const UserSchema = new mongoose.Schema({
   changePasswordAt: { type: Date },
   active: { type: Boolean, default: true },
   roles: {
-    type: [{ type: String, enum: ['admin', 'user', 'manager', 'teacher'] }],
+    type: [{ type: String}],
     required: true,
-    default: ['user'],
+    default: UserRole.user,
   },
   companyId: { type: String },
   topicId: { type: String },

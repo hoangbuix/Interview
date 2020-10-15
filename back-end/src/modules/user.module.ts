@@ -8,6 +8,7 @@ import { TeacherModule } from './teacher.module';
 import { TopicModule } from './topic.module';
 import { CompanyModule } from './company.module';
 import { AuthMiddleware } from 'src/middleware/auth.middleware';
+import { LoggerMiddleware } from 'src/middleware/logger.middleware';
 
 
 @Module({
@@ -21,7 +22,7 @@ import { AuthMiddleware } from 'src/middleware/auth.middleware';
 export class UserModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(AuthMiddleware)
+      .apply(AuthMiddleware, LoggerMiddleware)
       .forRoutes({path: 'user', method: RequestMethod.GET}, {path: 'user', method: RequestMethod.PUT});
   }
 }

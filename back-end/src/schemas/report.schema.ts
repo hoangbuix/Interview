@@ -6,12 +6,12 @@ export const ReportSchema = new mongoose.Schema({
     info: [{
         reportName: { type: String },
         meetId: { type: String },
-        content: new mongoose.Schema({
+        reportDate: { type: Date },
+        content: [{
             contentReport: { type: String },
             teacherRequest: { type: String },
             expectedContent: { type: String },
             image: { type: String }
-        }),
-        reportDate: { type: Date },
+        }],
     }],
 })
