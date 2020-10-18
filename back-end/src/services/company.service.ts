@@ -16,7 +16,7 @@ export class CompanyService {
     }
 
     async createCompany(createCompanyDto: CreateCompanyDto): Promise<CompanyModel> {
-        const exitCompany = await this.companyModel.findOne({companyId: createCompanyDto.companyId}).exec();
+        const exitCompany = await this.companyModel.findOne({companyName: createCompanyDto.companyName}).exec();
         if(exitCompany) throw new NotFoundException('Công ty đã tồn tại!');
         const company: CompanyModel = new this.companyModel(createCompanyDto);
         return await company.save();

@@ -1,13 +1,25 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { getToken } from './common';
+import { useAuth } from '../hooks/auth';
+// import { getToken } from './common';
 
 // handle the private routes
-function PrivateRoute({ component: Component, ...rest }) {
+const PrivateRoute = ({ isPrivate =false, component: Component, ...rest }) => {
+  const {token} = useAuth();
+  if(isPrivate) {
+    return(
+      <Route>
+        {...rest}
+        render={() => {
+          return (<p>Loading...</p>)
+        }}
+      </Route>
+    )
+  }
   return (
     <Route
       {...rest}
-      render={(props) => getToken() ? <Component {...props} /> : <Redirect to={{ pathname: '/dang-nhap', state: { from: props.location } }} />}
+      render={(props) => isPrivate === !!token ? <Component {...props} /> : <Redirect to={{ pathname:isPrivate ? '/dang-nhap': '/', state: { from: props.location } }} />}
     />
   )
 }

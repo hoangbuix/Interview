@@ -54,6 +54,7 @@ const Homepage = () => {
                     <Card data={data} index={index} key={index} />
                 ))
             }
+            
         </div>
     )
 };

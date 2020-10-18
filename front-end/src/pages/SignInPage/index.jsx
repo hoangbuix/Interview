@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import api from "../../config/api";
 import { setUserSession } from "../../routers/common";
-
+// import { useAuth} from "../../hooks/auth";
 
 const SignInPage = (props) => {
+    // const {signIn} = useAuth();
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -19,7 +20,15 @@ const SignInPage = (props) => {
         }))
     }
 
-    const handleSubmit = (e) => {
+    // const handleSubmit = useCallback( async() => {
+    //     const payload = {
+    //                 username: dataState.username,
+    //                 password: dataState.password,
+    //             }
+    //     await signIn({payload});
+    // })
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
         setLoading(true);
@@ -27,8 +36,9 @@ const SignInPage = (props) => {
             username: dataState.username,
             password: dataState.password,
         }
-   
-        api.post("user/login", payload).then((response) => {
+
+        // await signIn({payload})
+        await api.post("user/login", payload).then((response) => {
             setLoading(false);
             setUserSession(response.data.token);
             props.history.push('/');
@@ -52,7 +62,7 @@ const SignInPage = (props) => {
                     <WrapperInput>
                         <Input type="password" name="password" placeholder="Nhập mật khẩu ..." required value={dataState.password} onChange={handleChange} />
                     </WrapperInput>
-                    {<label>{error ? error : null}</label>}
+                    <div style={{display:'flex'}}>{<label>{error ? error : null}</label>}</div>
                     <WrapperButton>
                         {loading ? <Button>Đang đăng nhập...</Button> : <Button >Đăng nhập</Button>}
                     </WrapperButton>
@@ -100,7 +110,6 @@ const WrapperSub = styled.div`
 const FormData = styled.form``
 
 const WrapperInput = styled.div`
-    background-color: blue;
     display: flex;
     justify-content: center;
     margin: 10px;
@@ -125,6 +134,7 @@ const WrapperButton = styled.div`
 
 const Button = styled.button`
     background-color: red;
+    width: 22vw;
 `
 
 const WrapperLink = styled.div`

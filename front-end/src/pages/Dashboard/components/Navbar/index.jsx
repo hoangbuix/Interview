@@ -1,5 +1,6 @@
 import React from "react";
 // import * as FaIcons from 'react-icons/fa';
+import * as FiIcons from 'react-icons/fi';
 import * as AiIcons from 'react-icons/ai';
 // import * as IoIcons from 'react-icons/io';
 import {
@@ -9,9 +10,14 @@ import {
     Link
 } from "react-router-dom";
 import Charts from "../Chart/index";
-import CompanyTable from "../Tabale/CompanyTable";
-import ReportTable from "../Tabale/report";
-import UserTable from "../Tabale/UserTable";
+import CompanyTable from "../Table/company";
+
+import TeacherTable from "../Table/Teacher";
+import UserTable from "../Table/User";
+import MeetTable from "../Table/meet";
+import MajorTable from "../Table/major";
+import ReportTable from "../Table/report";
+
 
 
 const routes = [
@@ -20,16 +26,45 @@ const routes = [
         path: "/quan-tri",
         exact: true,
         icon: <AiIcons.AiFillHome />,
-        sidebar: () => <div>home!</div>,
         main: () => <Charts />
     },
     {
         title:'Báo cáo',
         path: "/bao-cao",
         icon: <AiIcons.AiFillDatabase />,
-        sidebar: () => <div>bubblegum!</div>,
+        main: () => <ReportTable />
+    },
+    {
+        title:'Người dùng',
+        path: "/user",
+        icon: <AiIcons.AiFillDatabase />,
+        main: () => <UserTable />
+    },
+    {
+        title:'Công ty',
+        path: "/company",
+        icon: <AiIcons.AiFillDatabase />,
         main: () => <CompanyTable />
     },
+    {
+        title:'Giáo viên',
+        path: "/teacher",
+        icon: <AiIcons.AiOutlineProfile />,
+        main: () => <TeacherTable />
+    },
+    {
+        title:'Đối thoại',
+        path: "/meet",
+        icon: <FiIcons.FiPhoneMissed />,
+        main: () => <MeetTable />
+    },
+    {
+        title:'Khoa',
+        path: "/major",
+        icon: <FiIcons.FiTrendingDown />,
+        main: () => <MajorTable />
+    },
+    
 ];
 
 export default function Navbar() {
@@ -38,9 +73,9 @@ export default function Navbar() {
             <div style={{ display: "flex" }}>
                 <div
                     style={{
-                        padding: "10px",
-                        width: "40%",
-                        background: "#f0f0f0"
+                        // padding: "10px",
+                        // width: "40%",
+                        // background: "#f0f0f0"
                     }}
                 >
                     <ul style={{ listStyleType: "none", padding: 0 }}>

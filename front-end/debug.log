@@ -1,2 +1,1 @@
-[1015/115715.017:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1015/122654.718:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\HoangBui\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\72cd81b3-5e52-4ca0-b5c2-763ab8c551d0: The system cannot find the path specified. (0x3)
+[1018/193147.927:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
