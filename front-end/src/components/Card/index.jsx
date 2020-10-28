@@ -3,8 +3,6 @@ import styled from "styled-components";
 
 const Card = (props) => {
     const { data, index } = props;
-    console.log(data);
-
     return (
         <Container>
             <WrapperBase>

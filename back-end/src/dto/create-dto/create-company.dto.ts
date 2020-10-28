@@ -1,6 +1,7 @@
 export class CreateCompanyDto {
-    // readonly companyId: string;
     readonly companyName: string;
     readonly mentorCompany: string;
     readonly description: string;
+    readonly startDate: string | Date;
+    readonly endDate: string | Date;
 }

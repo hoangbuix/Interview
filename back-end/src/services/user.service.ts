@@ -5,7 +5,6 @@ import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken'
 import { UserModel } from 'src/models/user.model';
 import { responseUser } from 'src/response-data/user.response';
-import { CreateUserDto } from 'src/dto/create-user.dto';
 import { MajorService } from './major.service';
 import { TeacherService } from './teacher.service';
 import { CompanyService } from './company.service';
@@ -17,8 +16,9 @@ import { jwtConstants } from 'src/exceptions/constants';
 import { AuthService } from './auth.service';
 import { UserRole } from 'src/models/user-role.enum';
 import { BadRequestException } from 'src/exceptions/bad-request.exception';
-import { UpdateRoleDto } from 'src/dto/update-role';
-import { LoginDto } from 'src/dto/login.dto';
+import { UpdateRoleDto } from 'src/dto/update-dto/update-role';
+import { LoginDto } from 'src/dto/req/login.dto';
+import { CreateUserDto } from 'src/dto/create-dto/create-user.dto';
 
 
 @Injectable()
@@ -97,15 +97,15 @@ export class UserService {
   }
 
   async getUserByUserName(username: string) {
-    const user = await this.userModel.findOne({ "username": username }).exec();
-    if (!user) throw new NotFoundException('Người dùng không tồn tại');
+    const user = await this.userModel.findOne({ "username" : username }).exec().catch(err => {
+      throw new NotFoundException('Người dùng không tồn tại');
+    });
     return user;
   }
 
   async getUserById(userId: string) {
     const user = await this.userModel.findById({ "_id": userId }).exec();
     if (!user) throw new NotFoundException('Không tìm thấy id của người dùng');
-
     return user;
   }
 
@@ -119,7 +119,7 @@ export class UserService {
 
   async createUser(createUserDto: CreateUserDto): Promise<UserModel> {
     if (this.isValidEmail(createUserDto.email) && createUserDto.password) {
-      var userRegistered = await this.findByEmail(createUserDto.email);
+      const userRegistered = await this.findByEmail(createUserDto.email);
       if (!userRegistered) {
         const salt = await bcrypt.genSaltSync(12);
         const username = createUserDto.username;
@@ -151,10 +151,15 @@ export class UserService {
 
   isValidEmail(email: string) {
     if (email) {
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     } else return false
   }
+
+  // async updateUser(update: UpdateRoleDto) {
+    
+  //   await this.userModel.findOneAndUpdate({fullName: update});
+  // }
 
 
   async updatePermission(role: any, id: string) {

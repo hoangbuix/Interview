@@ -4,6 +4,7 @@ export interface MajorModel extends Document {
   readonly majorId: string ;
   readonly majorName: string;
   readonly majorDescription: string ;
-  readonly createdAt: number;
-  readonly updatedAt: number;
+  active: boolean;
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
 }

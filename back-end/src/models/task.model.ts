@@ -6,6 +6,7 @@ export interface TaskModel extends Document {
   title: string;
   description: string;
   userId: string;
+  active: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

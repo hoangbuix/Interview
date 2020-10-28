@@ -4,6 +4,7 @@ export const MajorSchema = new mongoose.Schema({
   majorId: { type: String },
   majorName: { type: String },
   majorDescription: { type: String },
-  createdAt: { type: Number },
-  updatedAt: { type: Number },
+  active: { type: Boolean, default: true },
+  createdAt: { type: Date, default: Date.now()},
+  updatedAt: { type: Date, default: Date.now()},
 });

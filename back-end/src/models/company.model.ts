@@ -6,6 +6,9 @@ export interface CompanyModel extends Document {
     companyName: string;
     description: string;
     mentorCompany: string;
-    startDate: Date;
-    endDate: Date;
+    startDate:string;
+    endDate: string;
+    active: boolean;
+    createdAt: Date;
+    updatedAt: Date;
 }

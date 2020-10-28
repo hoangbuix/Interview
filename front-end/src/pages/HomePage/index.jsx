@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "../../components/Card";
 import Header from "../../components/Header";
 import api from "../../config/api";
+import authHeader from "../../services/auth-header";
 
 
 const Homepage = () => {
@@ -9,6 +10,7 @@ const Homepage = () => {
         _id: "",
         userId: "",
         teacherId: "",
+        companyId: "",
         info: [
             {
                 content: [
@@ -28,15 +30,21 @@ const Homepage = () => {
         ],
     }]
 
-    const [report, setReport] = useState(initialState)
+    const [report, setReport] = useState(initialState);
+    // const [data, setData] = useState();
 
     useEffect(() => {
         getData();
     }, [])
 
     const getData = async () => {
-        await api.get("report/get-all").then(res => {
-            setReport(JSON.parse(JSON.stringify(res.data)))
+        await api.get("report/get-all", {headers: authHeader()}).then(res => {
+
+                setReport(JSON.parse(JSON.stringify(res.data)))
+
+                // api.get("/" ).then(res => {
+
+                // })
         }).catch(err => console.log(err))
     }
     // console.log(report)

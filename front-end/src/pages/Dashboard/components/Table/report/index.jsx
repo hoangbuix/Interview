@@ -37,7 +37,7 @@ const ReportTable = () => {
         }).catch(err => console.log(err))
     }
 
-    console.log(report)
+    // console.log(report)
 
     return (
         <table className="responstable">

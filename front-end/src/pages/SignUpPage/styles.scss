@@ -1,0 +1,125 @@
+.container {
+  // background-color: ;
+  display: flex;
+  justify-content: center;
+  justify-self: center;
+  width: 100vw;
+  height: 100vh;
+
+  .wrapper {
+    height: 50vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red !important;
+    border-radius: 10px;
+    padding: 3em;
+    margin-top: 4rem;
+    background: url("https://bitly.com.vn/fZbyo" ) no-repeat right;
+
+    .wrapper-top {
+      // margin: 50px;
+    }
+    .wrapper-center {
+      // margin: 50px;
+      // padding: 10px;
+      padding-top: 10px;
+      .wrapper-full-name {
+        display: flex;
+        flex-direction: row;
+
+        .wrapper-input-fist input {
+          width: 10vw;
+          height: 20px;
+        }
+        .wrapper-input-last input {
+          width: 10vw;
+          height: 20px;
+        }
+      }
+      .wrapper-input {
+        padding-top: 10px;
+        input {
+          width: 43vh;
+          height: 20px;
+        }
+      }
+
+      .wrapper-username {
+        padding-top: 10px;
+        input {
+          width: 43vh;
+          height: 20px;
+        }
+      }
+
+      .wrapper-input-password {
+        display: flex;
+        flex-direction: row;
+        padding-top: 10px;
+
+        .input-password input {
+          width: 10vw;
+          height: 20px;
+        }
+        .input-new-password input {
+          width: 10vw;
+          height: 20px;
+        }
+      }
+
+      .wrapper-date {
+        display: flex;
+        flex-direction: row;
+
+        .month {
+          padding-top: 10px;
+          select {
+            // width: 10vw;
+            height: 25px;
+          }
+        }
+
+        .wrapper-input input {
+          width: 7.1vw;
+        }
+      }
+      .wrapper-gender {
+        padding-top: 10px;
+        select {
+            // width: 10vw;
+            height: 25px;
+          }
+      }
+    }
+    .wrapper-bottom {
+      display: flex;
+      flex-direction: row;
+      text-align: center;
+
+      .button-signIn {
+        margin-top: 25px;
+        margin-right: 50px;
+        a {
+            text-decoration: none; 
+            padding: 5px;
+        } a:hover { 
+            cursor: pointer;
+            background-color: red;
+            padding: 5px;
+        }
+      }
+
+      .button-signUp {
+        margin-top: 20px;
+        margin-left: 80px;
+        button {
+            background-color: blue;
+            width: auto;
+            color: white;
+            height: 30px;
+          }
+      }
+    }
+  }
+}

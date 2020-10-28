@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import api from "../../config/api";
 import { setUserSession } from "../../routers/common";
-// import { useAuth} from "../../hooks/auth";
 
 const SignInPage = (props) => {
-    // const {signIn} = useAuth();
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -52,7 +50,7 @@ const SignInPage = (props) => {
     return (
         <Container>
             <WrapperTop>
-                <h1>AAA</h1>
+                {/* <h1></h1> */}
             </WrapperTop>
             <WrapperSub>
                 <FormData onSubmit={handleSubmit}>
@@ -63,13 +61,13 @@ const SignInPage = (props) => {
                         <Input type="password" name="password" placeholder="Nhập mật khẩu ..." required value={dataState.password} onChange={handleChange} />
                     </WrapperInput>
                     <div style={{display:'flex'}}>{<label>{error ? error : null}</label>}</div>
-                    <WrapperButton>
-                        {loading ? <Button>Đang đăng nhập...</Button> : <Button >Đăng nhập</Button>}
-                    </WrapperButton>
+                    <WrapperButtonSignIn>
+                        {loading ? <ButtonSignIn>Đang đăng nhập...</ButtonSignIn> : <ButtonSignIn >Đăng nhập</ButtonSignIn>}
+                    </WrapperButtonSignIn>
                     <WrapperLink> <Link to="">Quên mật khẩu?</Link></WrapperLink>
-                    <WrapperButton>
-                        <Button>Đăng ký</Button>
-                    </WrapperButton>
+                    <WrapperButtonSignUp>
+                        <ButtonSignUp>Đăng ký</ButtonSignUp>
+                    </WrapperButtonSignUp>
                 </FormData>
             </WrapperSub>
         </Container>
@@ -84,6 +82,7 @@ const Container = styled.div`
     /* background-color: yellowgreen; */
     justify-content: center;
     
+    
 `;
 
 const WrapperTop = styled.div`
@@ -94,6 +93,7 @@ const WrapperTop = styled.div`
     margin-top: 20vh;
     margin-right: 10px;
     padding: 10px;
+    
 `;
 
 const WrapperSub = styled.div`
@@ -124,17 +124,37 @@ const Input = styled.input`
     outline: none;
     color: black;
     margin-bottom: 10px;
+    font-size: 18px;
 `;
 
-const WrapperButton = styled.div`
+const WrapperButtonSignUp = styled.div`
     display: flex;
     justify-content: center;
     margin: 10px;
+    
 `
 
-const Button = styled.button`
-    background-color: red;
+const WrapperButtonSignIn = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    
+`
+
+const ButtonSignIn = styled.button`
+    background-color: green;
     width: 22vw;
+    height: 6vh;
+    color: white;  
+    font-size: 18px; 
+`
+
+const ButtonSignUp = styled.button`
+    background-color: red;
+    width: 15vw;
+    height: 6vh;
+    color:white;
+    font-size: 18px;
 `
 
 const WrapperLink = styled.div`

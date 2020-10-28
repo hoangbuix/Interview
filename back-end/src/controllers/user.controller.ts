@@ -2,19 +2,19 @@ import { Controller, Post, Get, Body, Request, Response, UsePipes, UseGuards, Pu
 import { UserService } from '../services/user.service';
 import { BadRequestException } from 'src/exceptions/bad-request.exception';
 import { responseUser } from 'src/response-data/user.response';
-import { CreateUserDto } from 'src/dto/create-user.dto';
 import { ValidationPipe } from 'src/pipe/validation.pipe';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { RolesGuard } from 'src/auth/guards/role.guard';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { UserRole } from 'src/models/user-role.enum';
-import { UpdateRoleDto } from 'src/dto/update-role';
+import { UpdateRoleDto } from 'src/dto/update-dto/update-role';
 import { AuthGuard } from '@nestjs/passport';
 import * as jwt from 'jsonwebtoken'
-import { LoginDto } from 'src/dto/login.dto';
+import { LoginDto } from 'src/dto/req/login.dto';
 import { LoggingInterceptor } from 'src/interceptors/logging.interceptor';
 import { TransformInterceptor } from 'src/interceptors/transform.interceptor';
+import { CreateUserDto } from 'src/dto/create-dto/create-user.dto';
 
 
 @ApiBearerAuth()
@@ -25,7 +25,7 @@ export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Get('get-all')
-  @Roles(UserRole.admin, UserRole.teacher, UserRole.teacher)
+  @Roles()
   @UseGuards(JwtAuthGuard, RolesGuard)
   async getAll() {
     return await this.userService.getAllUser();
@@ -53,13 +53,13 @@ export class UserController {
     res.status(200).json(token);
   }
 
-  @Roles(UserRole.admin, UserRole.teacher, UserRole.teacher)
+  @Roles(UserRole.admin, UserRole.teacher, UserRole.manager)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Put('update-role')
   async updatePermission(@Request() req, @Response() res, @Body() updateRoleDto: UpdateRoleDto) {
     const token = req.headers.authorization.slice(7);
-    const payload: Object = jwt.decode(token);
-    let ID = Object(payload)
+    const payload: any = jwt.decode(token);
+    const ID = Object(payload)
 
     const permissions: Array<string> = updateRoleDto.roles;
     // if (typeof(permissions) !== "string" || typeof(permissions) !== "object" ){throw new}

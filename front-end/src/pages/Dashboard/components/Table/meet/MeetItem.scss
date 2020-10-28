@@ -1,0 +1,48 @@
+.__container {
+    display: flex;
+    background-color: rgb(200, 226, 248);
+    height: 50vh;
+    width: 60vw;
+    font-size: 18px;
+    border-radius: 20px;
+    margin-left: 10vw;
+    padding: 20px;
+    
+    .__wrapper {
+        display: flex;
+        flex-direction: column;
+        margin-left: 30vh;
+        margin: auto;
+
+        .__wrapper-input {
+            display: flex;
+            margin: 10px;
+            align-items: center;
+            width: auto;
+            label {
+                width: 15vw;
+                // width: auto;
+                margin-right: 20px;
+            }
+            input {
+                margin: 10px;
+                width: 40vw;
+                height: 5vh;
+                font-size: 18px;
+            } 
+        }
+        .__wrapper-button {
+            display: flex;
+            justify-content: center;
+
+            button {
+                margin-left: 50px;
+                height: 5vh;
+                width: auto;
+                font-size: 18px;
+                color: white;
+            }
+        }
+    }
+
+}

@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Response, Request } from "@nestjs/common";
 import { ReportModel } from "src/models/report.model";
 import { ReportService } from "src/services/report.service";
-import { CreateReportDto } from "src/dto/create-report.dto";
 import { BadRequestException } from "src/exceptions/bad-request.exception";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { CreateReportDto } from "src/dto/create-dto/create-report.dto";
 
 
 @ApiBearerAuth()

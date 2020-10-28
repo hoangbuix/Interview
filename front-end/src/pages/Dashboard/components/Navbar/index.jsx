@@ -16,7 +16,7 @@ import TeacherTable from "../Table/Teacher";
 import UserTable from "../Table/User";
 import MeetTable from "../Table/meet";
 import MajorTable from "../Table/major";
-import ReportTable from "../Table/report";
+import ReportTable from "../Table/Report";
 
 
 

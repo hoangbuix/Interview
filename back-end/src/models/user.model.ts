@@ -1,8 +1,6 @@
 import { Document } from 'mongoose';
-import { UserRole } from './user-role.enum';
 
 export interface UserModel extends Document {
-  readonly userId?: string;
   readonly fullName: string;
   readonly gender: string;
   readonly birthday: string;
