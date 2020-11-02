@@ -16,7 +16,6 @@ import { jwtConstants } from 'src/exceptions/constants';
 import { AuthService } from './auth.service';
 import { UserRole } from 'src/models/user-role.enum';
 import { BadRequestException } from 'src/exceptions/bad-request.exception';
-import { UpdateRoleDto } from 'src/dto/update-dto/update-role';
 import { LoginDto } from 'src/dto/req/login.dto';
 import { CreateUserDto } from 'src/dto/create-dto/create-user.dto';
 

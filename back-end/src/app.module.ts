@@ -19,6 +19,7 @@ import { ReportController } from './controllers/report.controller';
 import { TeacherController } from './controllers/teacher.controller';
 import { TopicController } from './controllers/topic.controller';
 import { TaskController } from './controllers/task.controller';
+import { ImageModule } from './modules/image.module';
 
 const userString = config.db.user && config.db.pass ? (config.db.user + ':' + config.db.pass + '@') : '';
 const authSource = config.db.authSource ? ('?authSource=' + config.db.authSource + '&w=1') : '';
@@ -35,7 +36,8 @@ const dv = "mongodb+srv://hoangbuix:151998@cluster0.utilx.mongodb.net/interview?
     TopicModule,
     CompanyModule,
     MeetModule,
-    AuthModule
+    AuthModule,
+    ImageModule,
   ],
 })
 export class AppModule  implements NestModule {

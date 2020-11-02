@@ -25,8 +25,8 @@ export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Get('get-all')
-  @Roles()
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles()
+  // @UseGuards(JwtAuthGuard, RolesGuard)
   async getAll() {
     return await this.userService.getAllUser();
   }

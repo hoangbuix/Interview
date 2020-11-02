@@ -5,13 +5,13 @@ import * as express from 'express';
 import { join } from 'path';
 import * as rateLimit from 'express-rate-limit';
 import * as helmet from 'helmet';
+import * as bodyParser from "body-parser";
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AllExceptionsFilter } from './filters/all-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.use('/public', express.static(join(__dirname, '../../public')));
-  var bodyParser = require('body-parser');
   app.use(bodyParser.json({ limit: '5mb' }));
   app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
   app.useGlobalFilters(new AllExceptionsFilter());

@@ -11,60 +11,59 @@ import {
 } from "react-router-dom";
 import Charts from "../Chart/index";
 import CompanyTable from "../Table/company";
-
 import TeacherTable from "../Table/Teacher";
 import UserTable from "../Table/User";
 import MeetTable from "../Table/meet";
 import MajorTable from "../Table/major";
-import ReportTable from "../Table/Report";
+import ReportTable from "../Table/report";
 
 
 
 const routes = [
     {
-        title:'Trang chủ',
+        title: 'Trang chủ',
         path: "/quan-tri",
         exact: true,
         icon: <AiIcons.AiFillHome />,
         main: () => <Charts />
     },
     {
-        title:'Báo cáo',
+        title: 'Báo cáo',
         path: "/bao-cao",
         icon: <AiIcons.AiFillDatabase />,
         main: () => <ReportTable />
     },
     {
-        title:'Người dùng',
+        title: 'Người dùng',
         path: "/user",
         icon: <AiIcons.AiFillDatabase />,
         main: () => <UserTable />
     },
     {
-        title:'Công ty',
+        title: 'Công ty',
         path: "/company",
         icon: <AiIcons.AiFillDatabase />,
         main: () => <CompanyTable />
     },
     {
-        title:'Giáo viên',
+        title: 'Giáo viên',
         path: "/teacher",
         icon: <AiIcons.AiOutlineProfile />,
         main: () => <TeacherTable />
     },
     {
-        title:'Đối thoại',
+        title: 'Đối thoại',
         path: "/meet",
         icon: <FiIcons.FiPhoneMissed />,
         main: () => <MeetTable />
     },
     {
-        title:'Khoa',
+        title: 'Khoa',
         path: "/major",
         icon: <FiIcons.FiTrendingDown />,
         main: () => <MajorTable />
     },
-    
+
 ];
 
 export default function Navbar() {
