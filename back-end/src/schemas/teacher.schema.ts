@@ -4,6 +4,6 @@ export const TeacherSchema = new mongoose.Schema({
   teacherId: { type: String },
   teacherName: { type: String },
   active: { type: Boolean, default: true },
-  createdAt: { type: Number },
-  updatedAt: { type: Number },
+  createdAt: { type: Date, default: Date.now() },
+  updatedAt: { type: Date, default: Date.now() },
 });

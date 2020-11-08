@@ -16,36 +16,41 @@ import { ForbiddenException } from "src/exceptions/forbidden.exception";
 @ApiTags('teacher')
 @Controller('teacher')
 export class TeacherController {
-    constructor( private readonly teacherService: TeacherService){}
+    constructor(private readonly teacherService: TeacherService) { }
 
     @Post('/create-teacher')
     async createTeacher(@Request() req, @Response() res, @Body() createTeacherDto: CreateTeacherDto) {
         const teacherExist = await this.teacherService.getTeacherId(createTeacherDto.teacherId);
-        if (teacherExist) throw new BadRequestException('Giáo viên đã tồn tại');
-        const teacher = await this.teacherService.addTeacher(createTeacherDto);
-        res.status(200).json(teacher);
+        if (teacherExist) { throw new BadRequestException('Giáo viên đã tồn tại'); }
+        else {
+            const teacher = await this.teacherService.addTeacher(createTeacherDto);
+            res.status(200).json({
+                message: "Tạo mới thành công",
+                teacher
+            });
+        }
     }
 
     @Put('update-teacher/:id')
-    @Roles(UserRole.admin,  UserRole.manager)
+    @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
-    async updateTeacher(@Req() req, @Res() res, @Param('id') id: string, @Body() update: UpdateTeacherDto ){
+    async updateTeacher(@Req() req, @Res() res, @Param('id') id: string, @Body() update: UpdateTeacherDto) {
         // console.log(req.user)
         const role = this.teacherService.getPermission(req.user.roles);
         if (!(role.isAdmin || role.isManager)) throw new ForbiddenException('Bạn không có quyền để thực hiện điều này!');
-        await this.teacherService.updateTeacher( id, update);
-        res.json({message: 'Cập nhật thành công!'});
+        await this.teacherService.updateTeacher(id, update);
+        res.json({ message: 'Cập nhật thành công!' });
     }
 
 
     @Delete("delete-teacher/:id")
-    @Roles(UserRole.admin,  UserRole.manager)
+    @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
     async deleteTeacher(@Req() req, @Res() res, @Param('id') id: string) {
         const role = this.teacherService.getPermission(req.user.roles);
         if (!(role.isAdmin || role.isManager)) throw new ForbiddenException('Bạn không có quyền để thực hiện điều này!');
         await this.teacherService.deleteTeacher(id);
-        res.json({message: 'Xóa giáo viên thành công!'});
+        res.json({ message: 'Xóa giáo viên thành công!' });
     }
 
     @Get('/get-all')
@@ -55,7 +60,7 @@ export class TeacherController {
     }
 
     @Get('/get-teacher/:id')
-    async getTeacherById(@Param('id') id: string): Promise<TeacherModel>{
+    async getTeacherById(@Param('id') id: string): Promise<TeacherModel> {
         return await this.teacherService.getTeacherId(id);
     }
 

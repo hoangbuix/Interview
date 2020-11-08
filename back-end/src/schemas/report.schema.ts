@@ -7,7 +7,7 @@ export const ReportSchema = new mongoose.Schema({
     info: [{
         reportName: { type: String },
         meetId: { type: String },
-        reportDate: { type: Date },
+        reportDate: { type: Date, default: Date.now() },
         active: { type: Boolean, default: true },
         content: [{
             contentReport: { type: String },

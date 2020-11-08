@@ -35,6 +35,8 @@ async function bootstrap() {
   app.use("/user/create-user", createAccountLimiter);
   /******/
 
+  app.enableCors()
+
   app.enableCors({
     origin: [/^(.*)/],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',

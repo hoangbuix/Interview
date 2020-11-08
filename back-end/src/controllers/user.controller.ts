@@ -70,7 +70,6 @@ export class UserController {
       if (permissions.length !== 1) throw new BadRequestException('Quyền không hợp lệ!---');
       if (permissions[0] !== 'student') throw new BadRequestException('Quyền không hợp lệ!----');
     }
-  
     const result = await this.userService.updatePermission(permissions, ID._id);
     res.status(HttpStatus.OK).json({ message: 'Cập nhật quyền thành công!', data: result });
   }

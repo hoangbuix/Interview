@@ -18,29 +18,29 @@ export class TeacherService {
   }
 
   async addTeacher(createdTeacherDto: CreateTeacherDto): Promise<TeacherModel> {
-    const exitTeacher = await this.teacherModel.findOne({
-      teacherId: createdTeacherDto.teacherId,
-    });
-    if (exitTeacher) {
-      throw new NotFoundException('Giáo viên này đã tồn tại!');
-    }
-    const createTeacher = new this.teacherModel(createdTeacherDto);
-    return await createTeacher.save();
+    const exitTeacher = await this.teacherModel.findOne({ teacherName: createdTeacherDto.teacherName});
+    
+    if (!exitTeacher) {
+      throw new NotFoundException("Không tồn tại")
+    } else {
+      const createTeacher = new this.teacherModel(createdTeacherDto);
+      return await createTeacher.save();
+    } 
   }
 
-  async updateTeacher(id: string,update: UpdateTeacherDto): Promise<TeacherModel>{
-    const teacher = await this.teacherModel.findByIdAndUpdate({"_id": id, active: true}, {teacherName:update.teacherName, active: update.active, updatedAt: new Date()}, {new: true}).exec().catch((err) => {
-        throw new NotFoundException('Không tìm thấy giáo viên này của bạn yêu cầu!');
+  async updateTeacher(id: string, update: UpdateTeacherDto): Promise<TeacherModel> {
+    const teacher = await this.teacherModel.findByIdAndUpdate({ "_id": id, active: true }, { teacherName: update.teacherName, active: update.active, updatedAt: new Date() }, { new: true }).exec().catch((err) => {
+      throw new NotFoundException('Không tìm thấy giáo viên này của bạn yêu cầu!');
     });
     return teacher;
-}
+  }
 
-async deleteTeacher(id: string) {
-    const teacher = await this.teacherModel.findByIdAndUpdate({"_id": id}, {active: false}, { new: true}).exec().catch((err) => {
-        throw new NotFoundException("Không tìm thấy giáo viên để xóa!");
+  async deleteTeacher(id: string) {
+    const teacher = await this.teacherModel.findByIdAndUpdate({ "_id": id }, { active: false }, { new: true }).exec().catch((err) => {
+      throw new NotFoundException("Không tìm thấy giáo viên để xóa!");
     });
     return teacher;
-}
+  }
 
   async getTeacherId(id: string) {
     const teacher = await this.teacherModel.findById({ _id: id }).exec();
@@ -62,6 +62,6 @@ async deleteTeacher(id: string) {
     const isStudent = permissions.includes(role.student);
     const isManager = permissions.includes(role.manager);
     return { isAdmin, isManager, isTeacher, isStudent, isUser }
-}
+  }
 
 }

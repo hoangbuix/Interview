@@ -1,0 +1,29 @@
+.container-sidebar {
+    background-color: chartreuse;
+    .wrapper-sidebar {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: row;
+        .wrapper-menu {
+            width: 70%;
+            display: flex;
+            flex-direction: row;
+            .nav-menu {
+                width: 20%;
+                background-color: aqua;
+            }
+            .nav-item {
+                width: 80%;
+                background-color: aquamarine;
+            }
+        }
+        .wrapper-item { 
+            width: 30%;
+            background-color: cadetblue;
+        }
+    }
+    
+
+}
+
