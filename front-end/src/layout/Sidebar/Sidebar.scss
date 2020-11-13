@@ -1,29 +1,91 @@
 .container-sidebar {
-    background-color: chartreuse;
+    width: 100%;
+    height: 80vh;
+
     .wrapper-sidebar {
         width: 100%;
-        height: 100vh;
+        height: 80vh;
         display: flex;
         flex-direction: row;
+
         .wrapper-menu {
-            width: 70%;
+            width: 60%;
+            height: auto;
             display: flex;
             flex-direction: row;
+
             .nav-menu {
-                width: 20%;
-                background-color: aqua;
+                width: 15%;
+                height: auto;
+                padding: 0px 10px;
+                border-right: 1px solid black;
+                background-color: white;
+
+                .nav-item-menu {
+                    display: contents;
+                    margin: auto;
+
+                }
+
+                .nav-item-list {
+                    margin: 20px 0px;
+                }
+
+                a {
+                    color: red;
+                    font-size: 17px;
+                }
+
+                svg {
+                    padding-right: 5px;
+                }
+
             }
+
             .nav-item {
-                width: 80%;
-                background-color: aquamarine;
+                overflow: auto;
+                width: 85%;
+                height: auto;
+                // background-color: aquamarine;
             }
         }
-        .wrapper-item { 
-            width: 30%;
-            background-color: cadetblue;
+
+        .wrapper-item {
+
+            background: rgb(211, 99, 99);
+            width: auto;
+            height: 40px;
+            padding: 15px 50px;
+
+            .search-item {
+
+
+                background-color: white;
+                height: 30px;
+                padding: 0px 20px 8px 20px;
+
+                input[type="text"] {
+                    padding: 7px;
+                    outline: none !important;
+                    box-shadow: none !important;
+                    border: 1px solid rgba(255, 255, 255, 0.267);
+                }
+
+                button {
+                    background-color: white;
+                    position: relative;
+                    top: 5px;
+                    outline: none;
+                    border: 1px solid white;
+                }
+
+            }
+
+
         }
     }
-    
-
 }
 
+.close {
+    display: none;
+}

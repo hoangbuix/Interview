@@ -7,10 +7,10 @@ import SignIn from "../Pages/SignIn";
 const Routes: React.FC = () => {
     return (
         <Switch>
-            <Route exact path={["/", '/home']} component={Home} />
+            < Route exact path={["/", '/home']} component={Home} />
             <Route path="/admin" component={Dashboard} />
             <Route path="/sign-in" component={SignIn} />
-        </Switch>
+        </Switch >
     )
 };
 

@@ -5,12 +5,13 @@ import Sidebar from "../../layout/Sidebar";
 import "./Dashboard.scss";
 
 
+
 const Dashboard: React.FC = () => {
     return (
         <div className="container-dashboard">
             <div className="wrapper-dashboard">
                 <div className="top-dashboard">
-                    <Navbar/>
+                    <Navbar />
                 </div>
                 <div className="main-dashboard">
                     <div className="main-dashboard-content">
@@ -18,7 +19,7 @@ const Dashboard: React.FC = () => {
                     </div>
                 </div>
                 <div className="button-dashboard">
-                   <Footer/>
+                    <Footer />
                 </div>
             </div>
         </div>

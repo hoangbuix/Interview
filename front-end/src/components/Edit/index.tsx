@@ -2,8 +2,8 @@ import React from "react";
 import "./Edit.scss";
 
 interface EditProps {
-    handleSubmitEdit?: any;
-    handleCloseEdit?: any;
+    handleSubmitEdit?: () => void;
+    handleCloseEdit?: () => void;
     show?: boolean;
 }
 

@@ -1,0 +1,34 @@
+.container-table-report {
+	font-size: small;
+
+	.wrapper-table-report {
+		width: 100%;
+	}
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	border: 1px solid #ddd;
+}
+
+th {
+	text-align: left;
+	padding: 5px;
+	overflow-y: auto;
+	vertical-align: center;
+}
+
+td {
+	text-align: left;
+	padding: 5px;
+	overflow-y: auto;
+	vertical-align: center;
+}
+
+tr {
+	&:nth-child(even) {
+		background-color: #f2f2f2;
+	}
+}

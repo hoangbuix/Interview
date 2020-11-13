@@ -2,8 +2,8 @@ import React from "react";
 import "./Modal.scss";
 
 interface ModalProps {
-    handleSubmit?: any;
-    handleClose?: any;
+    handleSubmit?: () => void;
+    handleClose?: () => void;
     show?: boolean;
 }
 
@@ -12,7 +12,7 @@ const Modal: React.FC<ModalProps> = ({ handleSubmit, handleClose, show, children
     return (
         <div className={showHideClassName}>
             <section className='modal-main'>
-                <div style={{fontSize: '24px', color: 'tomato', padding: '20px'}}>
+                <div style={{ fontSize: '24px', color: 'tomato', padding: '20px' }}>
                     {children}
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', flex: 1 }}>

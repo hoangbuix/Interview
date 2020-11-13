@@ -41,10 +41,10 @@ const UserTable: React.FC = () => {
     console.log(user);
 
     return (
-        <div className="container-table">
-            <div className="wrapper-table">
-                <table>
-                    <thead>
+        <div className="container-table-user">
+            <div className="wrapper-table-user">
+                <table className="purpleHorizon">
+                    <thead >
                         <tr>
                             <th>Mã</th>
                             <th>Mã người dùng</th>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TeacherApi from "../../../apis/teacher.api";
 import Edit from "../../../components/Edit";
 import Modal from "../../../components/Modal";
+import useDebounce from "../../../hooks/useDebounce";
 import "./TeacherTable.scss";
 
 interface TeacherProps {
@@ -13,71 +14,19 @@ interface TeacherProps {
     updatedAt: Date;
 }
 
-type ItemEditProps = {
-    data?: Object;
-    close?: any;
-    handleSubmit?: () => void;
-}
-
-const ItemEdit: React.FC<ItemEditProps> = ({ data, close, handleSubmit }) => {
-
-    const [editName, setEditName] = useState(false);
-    const [editActive, setEditActive] = useState(false);
-    const [teacherName, setTeacherName] = useState('');
-    const [active, setActive] = useState(false);
-
-
-    const handleShowEditName = () => {
-        setEditName(true)
-    }
-    const handleShowActive = () => {
-        setEditActive(true)
-    }
-
-    const handleTeacherName = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setTeacherName(event.target.defaultValue)
-    }
-
-    const handleActive = () => {
-        setActive((e) => !e)
-    }
-
-    useEffect(() => {
-        if (!close) {
-            setEditName(false);
-            setEditActive(false);
-        }
-    }, [close])
-
-    const update = () => {
-        TeacherApi.updateTeacher(data._id, teacherName, active)
-            .then((r) => console.log(r))
-            .catch(err => console.log(err))
-    }
-
-    return (
-        <div>
-            <div className="wrapper-edit-input-teacher" onClick={handleShowEditName} >
-                <span>Tên giáo viên: </span>
-                {editName ? <input type="text" defaultValue={data.teacherName} onChange={handleTeacherName} /> : <span>{data.teacherName}</span>}
-            </div>
-            <div className="wrapper-edit-input-teacher" onClick={handleShowActive}>
-                <span>Trạng thái: </span>
-                {editActive ? <input type="checkbox" onChange={handleActive} checked={data.active} /> : <span>{data.active ? "Đang hoạt động" : "Ngừng hoạt động"}</span>}
-            </div>
-        </div>
-    )
-}
-
-
 const TeacherTable: React.FC = () => {
     const [show, setShow] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
+    const [editName, setEditName] = useState(false);
+    const [editActive, setEditActive] = useState(false);
     const [id, setId] = useState('');
-    const [data, setData] = useState({})
-    const [teacher, setTeacher] = useState<TeacherProps[]>([])
+    const [data, setData] = useState<any>({})
+    const [teacherName, setTeacherName] = useState('');
+    const [active, setActive] = useState(true)
+    const [teacher, setTeacher] = useState<TeacherProps[]>([]);
 
-
+    const debouncedValue = useDebounce(teacherName, 300)
+    // let history = useHistory()
     useEffect(() => {
         const timer = setTimeout(() => {
             TeacherApi.getAllTeacher().then((result) => {
@@ -101,38 +50,69 @@ const TeacherTable: React.FC = () => {
     const showEditModal = (item: Object) => {
         setData(item);
         setShowEdit(true);
-        
     }
 
     const hideEditModal = () => {
         setShowEdit(false);
     }
 
+    const handleShowEditName = () => {
+        setEditName(true)
+    }
+    const handleShowActive = () => {
+        setEditActive(true)
+    }
+
+    const handleTeacherName = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value
+        setTeacherName(value)
+    }
+    console.log(debouncedValue)
+
+    const handleActive = () => {
+        setActive((e: Boolean) => !e)
+    }
+
     const handleDeleteTeacher = () => {
         TeacherApi.deleteTeacher(id).catch((result) => {
-            console.log(result)
+            console.log(result.data.message)
         }).catch(err => console.log(err))
     }
 
     const update = () => {
-        // TeacherApi.updateTeacher(data._id, teacherName, active)
+        if ((data || debouncedValue || active) !== null) {
+            TeacherApi.updateTeacher(data._id, debouncedValue, active)
+                .then((r) => {
+                    // console.log(r)
+                    window.location.reload()
+                })
+                .catch(err => console.log(err))
+        }
     }
 
 
 
     return (
         <>
-            <Edit show={showEdit} handleCloseEdit={hideEditModal} >
-                <ItemEdit data={data} close={showEdit}  />
+            <Edit show={showEdit} handleCloseEdit={hideEditModal} handleSubmitEdit={update} >
+                {/* <ItemEdit data={data} close={showEdit}  /> */}
+                <div className="wrapper-edit-input-teacher" onClick={handleShowEditName} >
+                    <span>Tên giáo viên: </span>
+                    {editName ? <input type="text" defaultValue={data.teacherName} value={teacherName} onChange={handleTeacherName} /> : <span>{data.teacherName}</span>}
+                </div>
+                <div className="wrapper-edit-input-teacher" onClick={handleShowActive}>
+                    <span>Trạng thái: </span>
+                    {editActive ? <input type="checkbox" defaultChecked={data.active} onChange={handleActive} checked={active} /> : <span>{data.active ? "Đang hoạt động" : "Ngừng hoạt động"}</span>}
+                </div>
             </Edit>
             <Modal show={show} handleClose={hideModal} handleSubmit={handleDeleteTeacher} >
                 <div className="wrapper-input-edit-teacher">
                     <span style={{ padding: '10px' }} >Bạn có muốn xóa</span>
                 </div>
             </Modal>
-            <div className="container-table">
-                <div className="wrapper-table">
-                    <table>
+            <div className="container-table-teacher">
+                <div className="wrapper-table-teacher">
+                    <table >
                         <thead>
                             <tr>
                                 <th>Mã</th>
@@ -144,6 +124,7 @@ const TeacherTable: React.FC = () => {
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             {
                                 teacher?.map((item, index) => (
