@@ -1,0 +1,5 @@
+- populate nested array
+// .populate({
+      //   path: 'majorId',
+      //   populate: { path: 'teacherId' }
+      // })

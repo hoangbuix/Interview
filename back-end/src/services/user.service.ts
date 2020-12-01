@@ -78,7 +78,24 @@ export class UserService {
 
 
   async getAllUser() {
-    const user = await this.userModel.find().exec().catch(err => {
+    const query = [
+      {
+        path: 'majorId',
+        select: 'majorName'
+      },
+      {
+        path: 'companyId',
+        select: 'companyName'
+      },
+      {
+        path: 'teacherId',
+        select: 'teacherName'
+      }, {
+        path: 'topicId',
+        select: 'topicName'
+      }//populate nested array
+    ];
+    const user = await this.userModel.find().populate(query).lean().exec().catch(err => {
       throw new NotFoundException('Không tìm thấy user' + err.message);
     });
     const users = user.map(u => {
@@ -88,19 +105,36 @@ export class UserService {
   }
 
   async findByEmail(email: string) {
-    return await this.userModel.findOne({ email: email }).exec();
+    return await this.userModel.findOne({ email: email }).exec(err => { throw new NotFoundException('Không tìm thấy user' + err.message) });
   }
 
   async findOne(username: string): Promise<UserModel | undefined> {
     return await this.userModel.findOne(user => user.username === username);
   }
 
+  escapeRegExp(string: string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  }
+
+  async getUserByName(fullName: string) {
+    const user = await this.userModel.find({
+      "fullName": { $regex: fullName, $options: 'i' }
+    }).exec()
+      .catch(err => {
+        throw new NotFoundException('Người dùng không tồn tại');
+      });
+    return user;
+  }
+
   async getUserByUserName(username: string) {
-    const user = await this.userModel.findOne({ "username" : username }).exec().catch(err => {
+    const user = await this.userModel.findOne({ "username": username }).exec().catch(err => {
       throw new NotFoundException('Người dùng không tồn tại');
     });
     return user;
   }
+
+
 
   async getUserById(userId: string) {
     const user = await this.userModel.findById({ "_id": userId }).exec();
@@ -156,7 +190,7 @@ export class UserService {
   }
 
   // async updateUser(update: UpdateRoleDto) {
-    
+
   //   await this.userModel.findOneAndUpdate({fullName: update});
   // }
 

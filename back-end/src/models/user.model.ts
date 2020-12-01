@@ -13,7 +13,7 @@ export interface UserModel extends Document {
   readonly changePasswordAt: Date;
   readonly active: boolean;
   readonly roles?: Array<any>;
-  readonly companyId:any;
+  readonly companyId: any;
   readonly topicId: any;
   readonly majorId: any;
   readonly teacherId: any;

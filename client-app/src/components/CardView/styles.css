@@ -1,0 +1,88 @@
+.container-cardview {
+    background-color: whitesmoke;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 50px;
+    
+}
+.container-cardview > .wrapper-cardview {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+    /* height: 750px; */
+}
+/* cardview-1 */
+.cardview-1 {
+    /* background-color: deepskyblue; */
+    border-radius: 5px;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+}
+ /* 1-1 */
+.cardview-1 > .cardview-1-1 {
+    padding: 10px 10px;
+}
+.cardview-1-1 > img {
+    padding:auto;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(110, 23, 77, 0.432);
+    border-radius: 50%;
+}
+
+/* 1-2 */
+.cardview-1-2 {
+    display: flex;
+    padding: 10px 5px;
+    width: 90%;
+    height: 45px; 
+}
+.cardview-1-2-1 {
+    width: 90%;
+    padding: 10px;
+}
+.cardview-1-2-2 {
+    padding-left: 25px;
+    padding-top: 5px;
+    width: 10%;
+}
+
+/* cardview-2 */
+.cardview-2 {
+    border: 1px solid palevioletred;
+}
+.cardview-2 > img {
+    width: 100%;
+    height: 615px;
+}
+/* cardview-3 */
+.cardview-3 {
+    border-radius: 5px; 
+    background-color: firebrick;
+    width: 100%;
+    height: 40px;
+}
+.cardview-3 > .cardview-3-1 {
+    background-color: fuchsia;
+    float: left;
+    height: 40px;
+    padding: 0px 20px;
+}
+
+.cardview-3 > .cardview-3-2 {
+    background-color: rosybrown;
+    float: right;
+    height: 40px;
+    padding: 0px 20px;
+}
+
+.cardview-3 > .cardview-3-3 {
+    background-color: yellow;
+    float: left;
+    height: 40px;
+    padding: 0px 20px;
+    margin-left: 15rem;
+}
+

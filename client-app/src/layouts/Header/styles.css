@@ -1,0 +1,48 @@
+.header-container {
+    background-color: palegreen;
+    padding: 5px 0px;
+}
+
+.header-container > .header-wrapper {
+    width: 100%;
+    height: 50px;
+    max-height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.header-left {
+    padding-top: 5px;
+    width: auto;
+    height: 50px;
+}
+.header-left > img {
+    width: 40px;
+    height: 40px;
+    border: 1px solid snow;
+    background-color: navajowhite;
+    border-radius: 50%;
+}
+
+.header-main {
+    padding-top: 10px;
+}
+
+.header-main > input {
+    padding: 5px;
+    max-width: 20rem;
+}
+
+.header-right > .header-menu {
+    margin: 0;
+    padding: 0;
+}
+
+.header-item {
+    float: left;
+}
+
+.header-item a {
+    display: block;
+    padding: 14px 20px;
+}

@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body, Request, Response, UsePipes, UseGuards, Put, ForbiddenException, HttpStatus, NotFoundException, UseInterceptors } from '@nestjs/common';
+import { Controller, Post, Get, Body, Request, Response, UsePipes, UseGuards, Put, ForbiddenException, HttpStatus, NotFoundException, UseInterceptors, Param } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import { BadRequestException } from 'src/exceptions/bad-request.exception';
 import { responseUser } from 'src/response-data/user.response';
@@ -29,6 +29,11 @@ export class UserController {
   // @UseGuards(JwtAuthGuard, RolesGuard)
   async getAll() {
     return await this.userService.getAllUser();
+  }
+
+  @Get('get-user/:fullName')
+  async getUserByName(@Param('fullName') fullName: string) {
+    return await this.userService.getUserByName(fullName);
   }
 
   @Post('create-user')
@@ -63,7 +68,7 @@ export class UserController {
 
     const permissions: Array<string> = updateRoleDto.roles;
     // if (typeof(permissions) !== "string" || typeof(permissions) !== "object" ){throw new}
-    if (permissions.length === 0 && (typeof(permissions) !== "string" || typeof(permissions) !== "object")) throw new BadRequestException('Quyền không hợp lệ!--');
+    if (permissions.length === 0 && (typeof (permissions) !== "string" || typeof (permissions) !== "object")) throw new BadRequestException('Quyền không hợp lệ!--');
     const role = await this.userService.getPermission(updateRoleDto.roles);
     if (!(role.isManager || role.isAdmin || role.isTeacher)) throw new ForbiddenException('Bạn không có quyền để thực hiện điều này!');
     if (role.isManager) {
