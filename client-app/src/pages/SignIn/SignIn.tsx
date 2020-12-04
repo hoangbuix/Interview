@@ -25,7 +25,8 @@ const SignIn: React.FC = () => {
 
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        await UserApi.signIn(debouncedUsername, debouncedPassword).then(res => {
+        const payload = { username, password }
+        await UserApi.signIn(payload).then(res => {
             if (res) {
                 window.sessionStorage.setItem('@token', res.data.token)
                 history.push("/")
