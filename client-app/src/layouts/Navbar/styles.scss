@@ -1,0 +1,39 @@
+.container-navbar {
+    background-color: red;
+    margin: 0;
+    padding: 0;
+
+    .wrapper-navbar {
+        background-color: royalblue;
+        width: 100%;
+        height: auto;
+
+        & > .navbar-menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            position: sticky;
+            top: 0;
+        }
+        .navbar-item {
+            float: left;
+        }
+        .navbar-item a {
+            display: block;
+            color: yellow;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar-item  a:hover {
+            background-color: yellow;
+            color: black;
+        }
+          
+        // .active {
+        //     background-color: #4CAF50;
+        // }
+    }
+}

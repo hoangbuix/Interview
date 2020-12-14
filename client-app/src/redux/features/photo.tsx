@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment, incrementAsync, incrementByAmount, selectCount } from '../slices/counterSlice';
-import { login, userApp } from '../slices/userSlice';
 import styles from './Counter.module.css';
 
 export function Counter() {
     const count = useSelector(selectCount);
-    const user = useSelector(userApp);
     const dispatch = useDispatch();
     const [incrementAmount, setIncrementAmount] = useState('2');
-    console.log(user)
+
     return (
         <div>
             <div className={styles.row}>
                 <button
                     className={styles.button}
                     aria-label="Increment value"
-                    onClick={() => dispatch(login())}
+                    onClick={() => dispatch(increment())}
                 >
                     +
                 </button>
-                <span className={styles.value}>{count}+''+{user}</span>
+                <span className={styles.value}>{count}</span>
                 <button
                     className={styles.button}
                     aria-label="Decrement value"

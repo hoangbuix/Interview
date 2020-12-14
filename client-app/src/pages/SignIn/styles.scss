@@ -1,0 +1,42 @@
+.container-signin {
+    background-color: red;
+    padding: 0;
+    margin: 0;
+
+    .wrapper-signin {
+        background-color: wheat;
+        height: 400px;
+        width: 300px;
+        position: absolute;
+        top: 7vmax;
+        left: 30vmax;
+        border: 1px solid white;
+        box-shadow: wheat 10px 20px 20px;
+        color: black;
+        font-size: 18px;
+        font-weight: 100;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+
+        .wrapper-input {
+            padding: 10px;
+             & > input{
+                width: 19vmax;
+                height: 1vmax;
+                padding: 10px;
+             }
+        }
+        .wrapper-link {
+            padding: 10px;
+            a {
+                text-align: center;
+            }
+        }
+        .wrapper-button {
+            padding: 10px;
+            & > button {
+                width: 20vmax;
+                height: 3vmax;
+            }
+        }
+    }
+}
