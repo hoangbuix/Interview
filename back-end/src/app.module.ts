@@ -23,7 +23,7 @@ import { ImageModule } from './modules/image.module';
 
 const userString = config.db.user && config.db.pass ? (config.db.user + ':' + config.db.pass + '@') : '';
 const authSource = config.db.authSource ? ('?authSource=' + config.db.authSource + '&w=1') : '';
-const dv = "mongodb+srv://hoangbuix:151998@cluster0.utilx.mongodb.net/interview?retryWrites=true&w=majority"
+const dv = "mongodb+srv://hoangbuix:151998@cluster0.utilx.mongodb.net/interview?retryWrites=true&w=majority";
 
 @Module({
   imports: [
@@ -40,7 +40,7 @@ const dv = "mongodb+srv://hoangbuix:151998@cluster0.utilx.mongodb.net/interview?
     ImageModule,
   ],
 })
-export class AppModule  implements NestModule {
+export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)

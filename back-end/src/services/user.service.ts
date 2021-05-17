@@ -105,7 +105,7 @@ export class UserService {
   }
 
   async findByEmail(email: string) {
-    return await this.userModel.findOne({ email: email }).exec(err => { throw new NotFoundException('Không tìm thấy user' + err.message) });
+    await this.userModel.findOne({ email: email }).exec(err => { throw new NotFoundException('Không tìm thấy user' + err.message) });
   }
 
   async findOne(username: string): Promise<UserModel | undefined> {
@@ -153,7 +153,7 @@ export class UserService {
   async createUser(createUserDto: CreateUserDto): Promise<UserModel> {
     if (this.isValidEmail(createUserDto.email) && createUserDto.password) {
       const userRegistered = await this.findByEmail(createUserDto.email);
-      if (!userRegistered) {
+      if (userRegistered === null) {
         const salt = await bcrypt.genSaltSync(12);
         const username = createUserDto.username;
         let password = createUserDto.password;
@@ -174,8 +174,6 @@ export class UserService {
         });
         const createUser = new this.userModel(newUser);
         return await createUser.save();
-      } else if (!userRegistered.email) {
-        return userRegistered;
       } else {
         throw new HttpException('REGISTRATION.USER_ALREADY_REGISTERED', HttpStatus.FORBIDDEN);
       }
