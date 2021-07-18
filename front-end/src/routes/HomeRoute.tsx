@@ -1,25 +1,22 @@
-import React from "react";
-import { Switch } from "react-router";
-// import Loading from "../components/Loading/Loading";
-// import AuthenticatedGuard from "../guards/AuthenticatedGuard";
-import Home from "../pages/Home/Home";
-// const Home = lazy(() => import("../pages/Home/Home"))
+import React, { lazy, Suspense } from "react"
+import { Switch } from "react-router-dom"
+import Loading from "../components/Loading/Loading"
+import { PATH } from "../constains/paths";
+import AuthenticatedGuard from "../gaurds/AuthenticatedGuard";
 
-const HomeRoute = () => {
+const Home = lazy(() => import("../pages/Home/Home"));
+export default function HomeRoutes() {
     return (
         <Switch>
-            {/* <AuthenticatedGuard
-                exact={true}
-                path={`${'/home'}`}
+            <AuthenticatedGuard
+                exact
+                path={PATH.HOME}
                 component={() => (
-                <Suspense fallback={<Loading />}>
-                    <Home />
-                </Suspense>
+                    <Suspense fallback={<Loading />}>
+                        <Home />
+                    </Suspense>
                 )}
-            />    */}
-            <Home/>
+            />
         </Switch>
     )
-};
-
-export default HomeRoute;
+}

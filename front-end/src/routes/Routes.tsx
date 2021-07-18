@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-// import Login from "../pages/Login/Login";
-import HomeRoute from "./HomeRoute";
+import HomeRoutes from "./HomeRoute";
+import LoginRoute from "./LoginRoute";
 
 export default function Routes() {
-    return (
-        <BrowserRouter>
-            <HomeRoute />
-            {/* <Login /> */}
-        </BrowserRouter>
-    )
+  return (
+    <BrowserRouter>
+      <LoginRoute />
+      <HomeRoutes />
+    </BrowserRouter>
+  )
 }
