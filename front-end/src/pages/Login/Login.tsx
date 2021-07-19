@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { PATH } from "../../constains/paths";
 import { login } from "../../reduxs/thunks/user-thunk";
+import "./Login.style.scss";
+import { FiArrowRight } from "react-icons/fi";
 
 
 
@@ -17,17 +19,22 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 interface Props extends ConnectedProps<typeof connector> { }
 const Login = (props: Props) => {
-    const { login, isFetching } = props
+    const { login, isFetching } = props;
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
     const history = useHistory()
+
     const handleUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value)
     }
 
-    const handlePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.target.value)
+    const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.value.length > 0) {
+            setPassword(e.target.value);
+        } else {
+            setPassword("");
+        }
     }
 
     const submit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -44,12 +51,36 @@ const Login = (props: Props) => {
         }
     }
     return (
-        <div className="container">
-            <form action="post" onSubmit={submit}>
-                <input type="text" onChange={handleUsername} />
-                <input type="password" onChange={handlePassword} />
-                <button type="submit">submit</button>
-            </form>
+        <div className="auth-wrapper wrapper-center">
+            <div className="auth_container wrapper-box">
+                <header>
+                    <img src="https://lhu.edu.vn/ViewPage/LHUVNB4/_default/image/Logo_LHU_Vi.png" alt="logo" />
+                </header>
+                <div className="auth-form">
+                    <form onSubmit={submit}>
+                        <div className="group--input">
+                            <input type="text" placeholder="Tài khoản của bạn..." value={username}
+                                onChange={handleUsername} />
+                        </div>
+                        <div className="group--input">
+                            <input type="password" placeholder="Mật khẩu của bạn..."
+                                value={password} onChange={handlePassword} />
+                        </div>
+                        <div className="group--button">
+                            <button type="submit">
+                                <FiArrowRight />
+                            </button>
+                        </div>
+                        <div className="group--checkbox">
+                            {/* <input type="checkbox" />
+                            <label htmlFor="rePassword">Giữ đăng nhập !</label> */}
+                        </div>
+                        <div className="group--link">
+                            <a href="/">Quên mật khẩu ?</a>by
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     )
 };

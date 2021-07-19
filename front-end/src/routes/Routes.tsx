@@ -1,13 +1,15 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import HomeRoutes from "./HomeRoute";
-import LoginRoute from "./LoginRoute";
+import LoginRoutes from "./LoginRoute";
+import ProfileRoutes from "./ProfileRoute";
 
 export default function Routes() {
   return (
     <BrowserRouter>
-      <LoginRoute />
+      <LoginRoutes />
       <HomeRoutes />
+      <ProfileRoutes />
     </BrowserRouter>
   )
 }

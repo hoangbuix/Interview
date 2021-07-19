@@ -5,7 +5,7 @@ import { Route, Switch } from "react-router-dom";
 const Login = lazy(() => import("../pages/Login/Login"))
 
 
-export default function LoginRoute() {
+export default function LoginRoutes() {
     return (
         <Switch>
             <Route
