@@ -1,24 +1,18 @@
 .wrapper-header {
-    background-color: antiquewhite;
-    height: 70px;
-    align-items: center;
-    text-align: center;
-    position: relative;
-}
-
-.header {
+    width: 100%;
+    height: 60px;
+    background-color: beige;
     position: fixed;
     top: 0;
-    z-index: 1;
+    left: 0;
+    z-index: 999;
     padding-top: 1rem;
 }
-.wrapper__header-search {
-    display: block;
-    
 
+.wrapper__header-search {
     input {
         height: 31px;
-       width: 200px;
+       width: 180px;
        border: none;
        outline: none;
        border-top-left-radius: 10px;
@@ -41,10 +35,15 @@
 }
 .wrapper__header-auth {
     display: flex;
+
     .header-auth-access{
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: row;
         flex-wrap: wrap;
-        flex: 1;
+        flex: 1; 
+        padding: 0 1rem;
+    }
+    .icon__access {
+        padding: 0 1rem;
     }
 }

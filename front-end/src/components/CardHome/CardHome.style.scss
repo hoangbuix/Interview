@@ -1,0 +1,38 @@
+.wrapper__card-home {
+    position: relative;
+    top: 3.5rem;
+    bottom: 3.5rem;
+    overflow: hidden;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 2rem 0;
+    // padding: 0.5rem;
+    align-items: center;
+    
+}
+.card-home__header {
+    padding: 0.5rem 1.5rem;
+    border-bottom: 1px solid black;
+    min-width: 480px;
+    img {
+        padding-left: 0.5rem;
+        width: 80px;
+        height: 80px;
+    }
+    a { 
+        text-decoration: none;
+        color: black;
+    }
+    svg {
+        padding-right: 0.5rem;
+    }
+}
+.card-home__body{
+    padding: 0.5rem;
+    min-width: 480px;
+    img {
+        min-width: 460px;
+        width:800px;
+        height: 450px;
+    }
+}

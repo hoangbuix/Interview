@@ -5,14 +5,14 @@ import "./Header.style.scss";
 const Header = () => {
     return (
         <div className="wrapper-header">
-            <div className="grid wide header ">
-                <div className="row">
-                    <div className="c-6 m-3 l-3">
+            <div className="grid wide">
+                <div className="row " >
+                    <div className="c-4 m-1 l-2">
                         <div className="wrapper__header-logo">
                             logo
                         </div>
                     </div>
-                    <div className="c-0 m-5 l-5">
+                    <div className="c-0 m-5 l-6">
                         <div className="wrapper__header-search">
                             <form>
                                 <input type="text" placeholder="Tìm kiếm..." />
@@ -20,21 +20,21 @@ const Header = () => {
                             </form>
                         </div>
                     </div>
-                    <div className="c-6 m-4 l-4">
+                    <div className="c-8 m-6 l-4">
                         <div className="wrapper__header-auth">
-                            <div className="header-auth_login">
+                            {/* <div className="header-auth_login">
                                 <button type="submit">
                                     Đăng nhập
                                 </button>
-                            </div>
+                            </div> */}
                             <div className="header-auth-access">
-                                <div className="header-auth-access-message">
+                                <div className="header-auth-access-message icon__access">
                                     message
                                 </div>
-                                <div className="header-auth-access-notice">
+                                <div className="header-auth-access-notice icon__access">
                                     notice
                                 </div>
-                                <div className="header-auth-access-profile">
+                                <div className="header-auth-access-profile icon__access">
                                     profile
                                 </div>
                             </div>
