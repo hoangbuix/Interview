@@ -157,6 +157,35 @@ export class UserService {
         const salt = await bcrypt.genSaltSync(12);
         const username = createUserDto.username;
         let password = createUserDto.password;
+        password = await bcrypt.hashSync(password, salt);
+        const newUser: UserModel = new this.userModel({
+          fullName: createUserDto.fullName,
+          gender: createUserDto.gender,
+          birthDay: createUserDto.birthday,
+          address: createUserDto.address,
+          phone: createUserDto.phone,
+          email: createUserDto.email,
+          avatar: createUserDto.avatar,
+          password: password,
+          username: username,
+          changePasswordAt: new Date(),
+          updateAt: new Date()
+        });
+        const createUser = new this.userModel(newUser);
+        return await createUser.updateOne();
+      } else {
+        throw new HttpException('REGISTRATION.USER_ALREADY_REGISTERED', HttpStatus.FORBIDDEN);
+      }
+    }
+  }
+
+  async updateUser(createUserDto: CreateUserDto): Promise<UserModel> {
+    if (this.isValidEmail(createUserDto.email) && createUserDto.password) {
+      const userRegistered = await this.findByEmail(createUserDto.email);
+      if (userRegistered === null) {
+        const salt = await bcrypt.genSaltSync(12);
+        const username = createUserDto.username;
+        let password = createUserDto.password;
         const major = await this.majorService.getMajorById(createUserDto.majorId);
         const teachers = await this.teacherService.getTeacherId(createUserDto.teacherId);
         const company = await this.companyService.getCompanyById(createUserDto.companyId)

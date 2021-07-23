@@ -17,6 +17,15 @@ export default function ProfileRoutes() {
                     </Suspense>
                 )}
             />
+            <AuthenticatedGuard
+                exact
+                path={PATH.PROFILE + "/:idUser"}
+                component={() => (
+                    <Suspense fallback={<Loading />}>
+                        <Profile />
+                    </Suspense>
+                )}
+            />
         </Switch>
     )
 }

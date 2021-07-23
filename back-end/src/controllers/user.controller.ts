@@ -31,6 +31,14 @@ export class UserController {
     return await this.userService.getAllUser();
   }
 
+  @Get('get-user-id/:id')
+  // @Roles()
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  async geUserById(@Param('id') id: string) {
+    return await this.userService.getUserById(id);
+  }
+
+
   @Get('get-user/:fullName')
   async getUserByName(@Param('fullName') fullName: string) {
     return await this.userService.getUserByName(fullName);
@@ -41,6 +49,16 @@ export class UserController {
     const userExit = await this.userService.getUserByUserName(createUserDto.username);
     if (userExit) throw new BadRequestException('Tên người dùng đã tồn tại!');
     const users = await this.userService.createUser(
+      createUserDto
+    );
+    res.status(200).json(responseUser(users));
+  }
+
+  @Post('update-user')
+  async updateUser(@Request() req, @Response() res, @Body() createUserDto: CreateUserDto) {
+    const userExit = await this.userService.getUserByUserName(createUserDto.username);
+    if (!userExit) throw new BadRequestException('Tên người dùng không tồn tại!');
+    const users = await this.userService.updateUser(
       createUserDto
     );
     res.status(200).json(responseUser(users));

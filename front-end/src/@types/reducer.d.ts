@@ -1,4 +1,4 @@
-import rootReducer from "../reduxs/reducers/root-reducer";
+import rootReducer from "../reduxs/root-reducer";
 
 
 declare global {

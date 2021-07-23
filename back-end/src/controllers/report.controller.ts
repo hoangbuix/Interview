@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Response, Request } from "@nestjs/common";
+import { Controller, Get, Post, Body, Response, Request, Param } from "@nestjs/common";
 import { ReportModel } from "src/models/report.model";
 import { ReportService } from "src/services/report.service";
 import { BadRequestException } from "src/exceptions/bad-request.exception";
@@ -18,8 +18,13 @@ export class ReportController {
         return await this.reportService.getAllReport();
     }
 
+    @Get('/get-report-user/:id')
+    async getReportByUserId(@Param('id') id: string): Promise<ReportModel> {
+        return await this.reportService.getReportByUserId(id);
+    }
+
     @Post()
-    async createReport(@Request() req,@Response() res, @Body() createReportDto: CreateReportDto) {
+    async createReport(@Request() req, @Response() res, @Body() createReportDto: CreateReportDto) {
         const checkExits = await this.reportService.getReportName(createReportDto.reportName)
         if (checkExits) throw new BadRequestException('Tên báo cáo đã tồn tại!');
         const report = await this.reportService.createReport(createReportDto);

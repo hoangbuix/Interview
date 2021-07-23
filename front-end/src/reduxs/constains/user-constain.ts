@@ -1,3 +1,7 @@
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_FAILER = "login/failer";
+export const LOGIN_FAILER = "LOGIN_FAILER";
+
+export const GET_USER_ID_START = "GET_USER_ID_START";
+export const GET_USER_ID_SUCCESS = "GET_USER_ID_SUCCESS";
+export const GET_USER_ID_FAILER = "GET_USER_ID_FAILER";

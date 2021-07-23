@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { PATH } from "../../constains/paths";
@@ -57,6 +57,7 @@ const Login = (props: Props) => {
                     <img src="https://lhu.edu.vn/ViewPage/LHUVNB4/_default/image/Logo_LHU_Vi.png" alt="logo" />
                 </header>
                 <div className="auth-form">
+                    {error ? <span></span> : ''}
                     <form onSubmit={submit}>
                         <div className="group--input">
                             <input type="text" placeholder="Tài khoản của bạn..." value={username}
@@ -76,7 +77,7 @@ const Login = (props: Props) => {
                             <label htmlFor="rePassword">Giữ đăng nhập !</label> */}
                         </div>
                         <div className="group--link">
-                            <a href="/">Quên mật khẩu ?</a>by
+                            <a href="/">Quên mật khẩu ?</a> or <a href="/register">Tạo tài khoản?</a>
                         </div>
                     </form>
                 </div>

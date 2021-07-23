@@ -16,7 +16,7 @@ export class ReportService {
     @InjectModel('report') private readonly reportModel: Model<ReportModel>
   ) { }
 
-  
+
 
 
   async createReport(createReportDto: CreateReportDto) {
@@ -31,7 +31,7 @@ export class ReportService {
       await checkExits.save();
     }
 
-    const results = await this.reportModel.findOneAndUpdate({checkExits}, {
+    const results = await this.reportModel.findOneAndUpdate({ checkExits }, {
       $push: {
         'info': {
           'reportName': createReportDto.reportName,
@@ -54,7 +54,7 @@ export class ReportService {
 
 
   async updateCompany(id: string, update: UpdateReportDto) {
-    const results = await this.reportModel.findByIdAndUpdate({"_id": id, active: true}, {
+    const results = await this.reportModel.findByIdAndUpdate({ "_id": id, active: true }, {
       $push: {
         'info': {
           'reportName': update.reportName,
@@ -73,14 +73,14 @@ export class ReportService {
       throw new BadRequestException("Báo cáo đã tồn tại ")
     });
     return results;
-}
+  }
 
-async deleteReport(id: string) {
-    const report = await this.reportModel.findByIdAndUpdate({"_id": id}, {active: false}, { new: true}).exec().catch((err) => {
-        throw new NotFoundException("Không tìm thấy báo cáo để xóa!");
+  async deleteReport(id: string) {
+    const report = await this.reportModel.findByIdAndUpdate({ "_id": id }, { active: false }, { new: true }).exec().catch((err) => {
+      throw new NotFoundException("Không tìm thấy báo cáo để xóa!");
     });
     return report;
-}
+  }
 
 
   async getAllReport() {
@@ -94,6 +94,11 @@ async deleteReport(id: string) {
     return report;
   }
 
+  async getReportByUserId(id: string) {
+    const report = await this.reportModel.findOne({ userId: id }).exec();
+    if (!report) throw new NotFoundException("Không tìm thấy id báo cáo của bạn");
+    return report;
+  }
 
   async getReportName(reportName: string) {
     const report = await this.reportModel.findOne({ 'info.reportName': reportName }).exec();

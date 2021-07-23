@@ -2,6 +2,7 @@ import { Document } from 'mongoose';
 
 export interface UserModel extends Document {
   readonly fullName: string;
+  readonly avatar: string;
   readonly gender: string;
   readonly birthday: string;
   readonly address: string;
