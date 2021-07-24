@@ -8,7 +8,7 @@ import { UpdateCompanyDto } from "src/dto/update-dto/update-company.dto";
 import { UpdateRoleDto } from "src/dto/update-dto/update-role";
 import { ForbiddenException } from "src/exceptions/forbidden.exception";
 import { CompanyModel } from "src/models/company.model";
-import { UserRole } from "src/models/user-role.enum";
+import { UserRole } from "src/utils/user-role.enum";
 import { CompanyService } from "src/services/company.service";
 
 
@@ -24,12 +24,12 @@ export class CompanyController {
     }
 
     @Get('/get-company/:id')
-    async getCompanyById(@Param('id') id: string): Promise<CompanyModel>{
+    async getCompanyById(@Param('id') id: string): Promise<CompanyModel> {
         return await this.companyService.getCompanyById(id);
     }
 
     @Post('/create-company')
-    @Roles(UserRole.admin,  UserRole.manager)
+    @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
     async createCompany(@Res() res, @Req() req, @Body() createCompanyDto: CreateCompanyDto): Promise<CompanyModel> {
         const role = this.companyService.getPermission(req.user.roles);
@@ -42,25 +42,25 @@ export class CompanyController {
     }
 
     @Put('update-company/:id')
-    @Roles(UserRole.admin,  UserRole.manager)
+    @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
-    async updateCompany(@Req() req, @Res() res, @Param('id') id: string, @Body() update:UpdateCompanyDto ){
+    async updateCompany(@Req() req, @Res() res, @Param('id') id: string, @Body() update: UpdateCompanyDto) {
         // console.log(req.user)
         const role = this.companyService.getPermission(req.user.roles);
         if (!(role.isAdmin || role.isManager)) throw new ForbiddenException('Bạn không có quyền để thực hiện điều này!');
-        await this.companyService.updateCompany( id, update);
-        res.json({message: 'Cập nhật thành công!'});
+        await this.companyService.updateCompany(id, update);
+        res.json({ message: 'Cập nhật thành công!' });
     }
 
 
     @Delete("delete-company/:id")
-    @Roles(UserRole.admin,  UserRole.manager)
+    @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
     async deleteCompany(@Req() req, @Res() res, @Param('id') id: string) {
         const role = this.companyService.getPermission(req.user.roles);
         if (!(role.isAdmin || role.isManager)) throw new ForbiddenException('Bạn không có quyền để thực hiện điều này!');
         await this.companyService.deleteCompany(id);
-        res.json({message: 'Xóa công ty thành công!'});
+        res.json({ message: 'Xóa công ty thành công!' });
     }
 
 

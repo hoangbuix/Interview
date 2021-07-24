@@ -5,7 +5,7 @@ import { TeacherModel } from 'src/models/teacher.model';
 import { NotFoundException } from 'src/exceptions/not-found.exception';
 import { CreateTeacherDto } from 'src/dto/create-dto/create-teacher.dto';
 import { UpdateTeacherDto } from 'src/dto/update-dto/update-teacher.dto';
-import { UserRole } from 'src/models/user-role.enum';
+import { UserRole } from 'src/utils/user-role.enum';
 
 @Injectable()
 export class TeacherService {
@@ -18,14 +18,14 @@ export class TeacherService {
   }
 
   async addTeacher(createdTeacherDto: CreateTeacherDto): Promise<TeacherModel> {
-    const exitTeacher = await this.teacherModel.findOne({ teacherName: createdTeacherDto.teacherName});
-    
+    const exitTeacher = await this.teacherModel.findOne({ teacherName: createdTeacherDto.teacherName });
+
     if (!exitTeacher) {
       throw new NotFoundException("Không tồn tại")
     } else {
       const createTeacher = new this.teacherModel(createdTeacherDto);
       return await createTeacher.save();
-    } 
+    }
   }
 
   async updateTeacher(id: string, update: UpdateTeacherDto): Promise<TeacherModel> {

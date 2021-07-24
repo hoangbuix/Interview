@@ -5,7 +5,7 @@ import { Model } from 'mongoose';
 import { NotFoundException } from 'src/exceptions/not-found.exception';
 import { CreateMajorDto } from 'src/dto/create-dto/create-major.dto';
 import { UpdateMajorDto } from 'src/dto/update-dto/update-major.dto';
-import { UserRole } from 'src/models/user-role.enum';
+import { UserRole } from 'src/utils/user-role.enum';
 
 @Injectable()
 export class MajorService {
@@ -26,22 +26,22 @@ export class MajorService {
     return await major.save();
   }
 
-  async updateMajor(id: string, update: UpdateMajorDto): Promise<MajorModel>{
-    const major = await this.majorModel.findByIdAndUpdate({ _id: id, active: true}, {majorId: update.majorId, majorName: update.majorName, majorDescription: update.majorDescription, updatedAt: new Date()}).exec().catch(err => {
+  async updateMajor(id: string, update: UpdateMajorDto): Promise<MajorModel> {
+    const major = await this.majorModel.findByIdAndUpdate({ _id: id, active: true }, { majorId: update.majorId, majorName: update.majorName, majorDescription: update.majorDescription, updatedAt: new Date() }).exec().catch(err => {
       throw new NotFoundException('Không tìm thấy ngành này của bạn yêu cầu!');
     });
     return major;
   }
 
   async deleteMajor(id: string) {
-    const major = await this.majorModel.findByIdAndUpdate({"_id": id}, {active: false}, { new: true}).exec().catch((err) => {
-        throw new NotFoundException("Không tìm thấy ngành học để xóa!");
+    const major = await this.majorModel.findByIdAndUpdate({ "_id": id }, { active: false }, { new: true }).exec().catch((err) => {
+      throw new NotFoundException("Không tìm thấy ngành học để xóa!");
     });
     return major;
-}
+  }
 
   async getMajorName(majorName: string) {
-    const major = await this.majorModel.findOne({majorName: majorName }).exec();
+    const major = await this.majorModel.findOne({ majorName: majorName }).exec();
     if (!major) throw new NotFoundException("Không tìm thấy ngành học của bạn!");
     return major
   }
@@ -60,6 +60,6 @@ export class MajorService {
     const isStudent = permissions.includes(role.student);
     const isManager = permissions.includes(role.manager);
     return { isAdmin, isManager, isTeacher, isStudent, isUser }
-}
+  }
 
 }

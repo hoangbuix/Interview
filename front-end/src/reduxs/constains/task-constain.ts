@@ -1,0 +1,3 @@
+export const GET_TASK_START = "GET_TASK_START";
+export const GET_TASK_SUCCESS = "GET_TASK_SUCCESS";
+export const GET_TASK_FAILER = "GET_TASK_FAILER";

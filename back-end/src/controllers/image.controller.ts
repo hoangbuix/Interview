@@ -5,7 +5,7 @@ import { diskStorage } from 'multer';
 import { Roles } from "src/auth/decorators/roles.decorator";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { ImageService } from "src/services/image.service";
-import { UserRole } from "src/models/user-role.enum";
+import { UserRole } from "src/utils/user-role.enum";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 
 

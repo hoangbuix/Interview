@@ -6,7 +6,7 @@ import { UpdateCompanyDto } from "src/dto/update-dto/update-company.dto";
 import { BadRequestException } from "src/exceptions/bad-request.exception";
 import { NotFoundException } from "src/exceptions/not-found.exception";
 import { CompanyModel } from "src/models/company.model";
-import { UserRole } from "src/models/user-role.enum";
+import { UserRole } from "src/utils/user-role.enum";
 
 
 @Injectable()

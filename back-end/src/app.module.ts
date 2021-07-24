@@ -20,6 +20,8 @@ import { TeacherController } from './controllers/teacher.controller';
 import { TopicController } from './controllers/topic.controller';
 import { TaskController } from './controllers/task.controller';
 import { ImageModule } from './modules/image.module';
+import { ClassModule } from './modules/class.module';
+import { ClassController } from './controllers/class.controller';
 
 const userString = config.db.user && config.db.pass ? (config.db.user + ':' + config.db.pass + '@') : '';
 const authSource = config.db.authSource ? ('?authSource=' + config.db.authSource + '&w=1') : '';
@@ -38,12 +40,14 @@ const dv = "mongodb+srv://hoangbuix:151998@cluster0.utilx.mongodb.net/interview?
     MeetModule,
     AuthModule,
     ImageModule,
+    ClassModule
   ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)
-      .forRoutes(UserController, CompanyController, MajorController, MeetController, ReportController, TeacherController, TopicController, TaskController);
+      .forRoutes(UserController, CompanyController, MajorController,
+        MeetController, ReportController, TeacherController, TopicController, TaskController, ClassController);
   }
 }

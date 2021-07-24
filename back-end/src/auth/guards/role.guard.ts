@@ -6,13 +6,13 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { UserRole } from 'src/models/user-role.enum';
+import { UserRole } from 'src/utils/user-role.enum';
 import { UserModel } from 'src/models/user.model';
 import { InstanceType } from 'typegoose';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-  constructor(private readonly _reflector: Reflector) {}
+  constructor(private readonly _reflector: Reflector) { }
 
   canActivate(context: ExecutionContext): boolean {
     const roles = this._reflector.get<UserRole[]>(

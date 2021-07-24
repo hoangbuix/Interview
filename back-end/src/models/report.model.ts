@@ -4,6 +4,7 @@ export interface ReportModel extends Document {
   userId: string,
   teacherId: string;
   companyId: string;
+  topicId: string;
   info: [{
     reportName: string,
     meetId: string,

@@ -7,7 +7,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { RolesGuard } from 'src/auth/guards/role.guard';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { UserRole } from 'src/models/user-role.enum';
+import { UserRole } from 'src/utils/user-role.enum';
 import { UpdateRoleDto } from 'src/dto/update-dto/update-role';
 import { AuthGuard } from '@nestjs/passport';
 import * as jwt from 'jsonwebtoken'

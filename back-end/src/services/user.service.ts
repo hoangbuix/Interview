@@ -14,7 +14,7 @@ import { UnAuthorizedException } from 'src/exceptions/un-authorized.exception';
 import { JwtPayload } from 'src/models/jwtPayload.model';
 import { jwtConstants } from 'src/exceptions/constants';
 import { AuthService } from './auth.service';
-import { UserRole } from 'src/models/user-role.enum';
+import { UserRole } from 'src/utils/user-role.enum';
 import { BadRequestException } from 'src/exceptions/bad-request.exception';
 import { LoginDto } from 'src/dto/req/login.dto';
 import { CreateUserDto } from 'src/dto/create-dto/create-user.dto';

@@ -2,7 +2,7 @@ import { TaskService } from 'src/services/task.service';
 import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res, UseGuards } from '@nestjs/common';
 import { TaskModel } from 'src/models/task.model';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { UserRole } from 'src/models/user-role.enum';
+import { UserRole } from 'src/utils/user-role.enum';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/guards/role.guard';
@@ -15,20 +15,20 @@ import { UpdateTaskDto } from 'src/dto/update-dto/update-task.dto';
 @ApiTags('task')
 @Controller('task')
 export class TaskController {
-  constructor(private readonly taskService: TaskService) {}
+    constructor(private readonly taskService: TaskService) { }
 
-  @Get('/get-all')
-  async getAll(): Promise<TaskModel[]> {
-    return await this.taskService.getAll();
-  }
+    @Get('/get-all')
+    async getAll(): Promise<TaskModel[]> {
+        return await this.taskService.getAll();
+    }
 
-  @Get('/get-task/:id')
-    async getTaskById(@Param('id') id: string): Promise<TaskModel>{
+    @Get('/get-task/:id')
+    async getTaskById(@Param('id') id: string): Promise<TaskModel> {
         return await this.taskService.getTaskById(id);
     }
 
     @Post('/create-task')
-    @Roles(UserRole.admin,  UserRole.manager)
+    @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
     async createTask(@Res() res, @Req() req, @Body() create: CreateTaskDto): Promise<TaskModel> {
         const role = this.taskService.getPermission(req.user.roles);
@@ -41,25 +41,25 @@ export class TaskController {
     }
 
     @Put('update-task/:id')
-    @Roles(UserRole.admin,  UserRole.manager)
+    @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
-    async updateTask(@Req() req, @Res() res, @Param('id') id: string, @Body() update: UpdateTaskDto ){
+    async updateTask(@Req() req, @Res() res, @Param('id') id: string, @Body() update: UpdateTaskDto) {
         // console.log(req.user)
         const role = this.taskService.getPermission(req.user.roles);
         if (!(role.isAdmin || role.isManager)) throw new ForbiddenException('Bạn không có quyền để thực hiện điều này!');
-        await this.taskService.updateTask( id, update);
-        res.json({message: 'Cập nhật thành công!'});
+        await this.taskService.updateTask(id, update);
+        res.json({ message: 'Cập nhật thành công!' });
     }
 
 
     @Delete("delete-task/:id")
-    @Roles(UserRole.admin,  UserRole.manager)
+    @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
     async deleteTask(@Req() req, @Res() res, @Param('id') id: string) {
         const role = this.taskService.getPermission(req.user.roles);
         if (!(role.isAdmin || role.isManager)) throw new ForbiddenException('Bạn không có quyền để thực hiện điều này!');
         await this.taskService.deleteTask(id);
-        res.json({message: 'Xóa công việc thành công!'});
+        res.json({ message: 'Xóa công việc thành công!' });
     }
 
 }

@@ -5,7 +5,7 @@ import { BadRequestException } from "src/exceptions/bad-request.exception";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { Roles } from "src/auth/decorators/roles.decorator";
 import { CreateTeacherDto } from "src/dto/create-dto/create-teacher.dto";
-import { UserRole } from "src/models/user-role.enum";
+import { UserRole } from "src/utils/user-role.enum";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { RolesGuard } from "src/auth/guards/role.guard";
 import { UpdateTeacherDto } from "src/dto/update-dto/update-teacher.dto";

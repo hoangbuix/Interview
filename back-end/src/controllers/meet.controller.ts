@@ -7,14 +7,14 @@ import { CreateMeetDto } from "src/dto/create-dto/create-meet.dto";
 import { UpdateMeetDto } from "src/dto/update-dto/update-meet.dto";
 import { ForbiddenException } from "src/exceptions/forbidden.exception";
 import { MeetModel } from "src/models/meet.model";
-import { UserRole } from "src/models/user-role.enum";
+import { UserRole } from "src/utils/user-role.enum";
 import { MeetService } from "src/services/meet.service";
 
 @ApiBearerAuth()
 @ApiTags('meet')
 @Controller('meet')
 export class MeetController {
-    constructor(private readonly meetService: MeetService) {}
+    constructor(private readonly meetService: MeetService) { }
 
 
 
@@ -28,25 +28,25 @@ export class MeetController {
     }
 
     @Put('update-meet/:id')
-    @Roles(UserRole.admin,  UserRole.manager)
+    @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
-    async updateMeet(@Req() req, @Res() res, @Param('id') id: string, @Body() update: UpdateMeetDto ){
+    async updateMeet(@Req() req, @Res() res, @Param('id') id: string, @Body() update: UpdateMeetDto) {
         // console.log(req.user)
         const role = this.meetService.getPermission(req.user.roles);
         if (!(role.isAdmin || role.isManager)) throw new ForbiddenException('Bạn không có quyền để thực hiện điều này!');
-        await this.meetService.updateMeet( id, update);
-        res.json({message: 'Cập nhật thành công!'});
+        await this.meetService.updateMeet(id, update);
+        res.json({ message: 'Cập nhật thành công!' });
     }
 
 
     @Delete("delete-meet/:id")
-    @Roles(UserRole.admin,  UserRole.manager)
+    @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
     async deleteCompany(@Req() req, @Res() res, @Param('id') id: string) {
         const role = this.meetService.getPermission(req.user.roles);
         if (!(role.isAdmin || role.isManager)) throw new ForbiddenException('Bạn không có quyền để thực hiện điều này!');
         await this.meetService.deleteMeet(id);
-        res.json({message: 'Xóa cuộc đối thoại thành công!'});
+        res.json({ message: 'Xóa cuộc đối thoại thành công!' });
     }
 
     @Get('/get-all')
@@ -55,7 +55,7 @@ export class MeetController {
     }
 
     @Get('/get-meet/:id')
-    async getMeetById(@Param('id') id: string): Promise<MeetModel>{
+    async getMeetById(@Param('id') id: string): Promise<MeetModel> {
         return await this.meetService.getMeetById(id);
     }
 

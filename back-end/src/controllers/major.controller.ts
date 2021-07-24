@@ -5,7 +5,7 @@ import { CreateMajorDto } from "src/dto/create-dto/create-major.dto";
 import { UpdateMajorDto } from "src/dto/update-dto/update-major.dto";
 import { ForbiddenException } from "src/exceptions/forbidden.exception";
 import { Roles } from "src/auth/decorators/roles.decorator";
-import { UserRole } from "src/models/user-role.enum";
+import { UserRole } from "src/utils/user-role.enum";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { RolesGuard } from "src/auth/guards/role.guard";
 import { MajorModel } from "src/models/major.model";
@@ -15,12 +15,12 @@ import { MajorModel } from "src/models/major.model";
 @ApiTags('major')
 @Controller('major')
 export class MajorController {
-    constructor(private readonly majorService: MajorService) {}
+    constructor(private readonly majorService: MajorService) { }
 
-    
+
 
     @Post('create-major')
-    @Roles(UserRole.admin,  UserRole.manager)
+    @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
     async createMajor(@Res() res, @Body() createMajorDto: CreateMajorDto) {
         const major = await this.majorService.createMajor(createMajorDto);
@@ -31,24 +31,24 @@ export class MajorController {
     }
 
     @Put('/update-major/:id')
-    @Roles(UserRole.admin,  UserRole.manager)
+    @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
-    async updateMajor(@Req() req, @Res() res, @Param('id') id: string, @Body()  update: UpdateMajorDto ){
+    async updateMajor(@Req() req, @Res() res, @Param('id') id: string, @Body() update: UpdateMajorDto) {
         // console.log(req.user)
         const role = this.majorService.getPermission(req.user.roles);
         if (!(role.isAdmin || role.isManager)) throw new ForbiddenException('Bạn không có quyền để thực hiện điều này!');
         await this.majorService.updateMajor(id, update);
-        res.json({message: 'Cập nhật thành công!'});
+        res.json({ message: 'Cập nhật thành công!' });
     }
 
     @Delete("delete-major/:id")
-    @Roles(UserRole.admin,  UserRole.manager)
+    @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
     async deleteMajor(@Req() req, @Res() res, @Param('id') id: string) {
         const role = this.majorService.getPermission(req.user.roles);
         if (!(role.isAdmin || role.isManager)) throw new ForbiddenException('Bạn không có quyền để thực hiện điều này!');
         await this.majorService.deleteMajor(id);
-        res.json({message: 'Xóa ngành học thành công!'});
+        res.json({ message: 'Xóa ngành học thành công!' });
     }
 
 
@@ -59,7 +59,7 @@ export class MajorController {
     }
 
     @Get('/get-major/:id')
-    async getMajorById(@Param('id') id: string): Promise<MajorModel>{
+    async getMajorById(@Param('id') id: string): Promise<MajorModel> {
         return await this.majorService.getMajorById(id);
     }
 

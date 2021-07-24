@@ -5,7 +5,7 @@ import { ReportModel } from 'src/models/report.model';
 import { BadRequestException } from 'src/exceptions/bad-request.exception';
 import { CreateReportDto } from 'src/dto/create-dto/create-report.dto';
 import { NotFoundException } from 'src/exceptions/not-found.exception';
-import { UserRole } from 'src/models/user-role.enum';
+import { UserRole } from 'src/utils/user-role.enum';
 import { UpdateRoleDto } from 'src/dto/update-dto/update-role';
 import { UpdateReportDto } from 'src/dto/update-dto/update-report.dto';
 import { report } from 'process';

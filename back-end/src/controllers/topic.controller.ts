@@ -7,7 +7,7 @@ import { CreateTopicDto } from "src/dto/create-dto/create-topic.dto";
 import { UpdateTopicDto } from "src/dto/update-dto/update-topic.dto";
 import { ForbiddenException } from "src/exceptions/forbidden.exception";
 import { TopicModel } from "src/models/topic.model";
-import { UserRole } from "src/models/user-role.enum";
+import { UserRole } from "src/utils/user-role.enum";
 import { TopicService } from "src/services/topic.service";
 
 @ApiBearerAuth()
@@ -16,7 +16,7 @@ import { TopicService } from "src/services/topic.service";
 export class TopicController {
     constructor(private readonly topicService: TopicService) { }
 
-    
+
 
     @Post('/create-topic')
     async createTopic(@Res() res, @Body() createTopicDto: CreateTopicDto): Promise<TopicModel> {
@@ -28,25 +28,25 @@ export class TopicController {
     }
 
     @Put('update-topic/:id')
-    @Roles(UserRole.admin,  UserRole.manager)
+    @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
-    async updateTopic(@Req() req, @Res() res, @Param('id') id: string, @Body() update: UpdateTopicDto ){
+    async updateTopic(@Req() req, @Res() res, @Param('id') id: string, @Body() update: UpdateTopicDto) {
         // console.log(req.user)
         const role = this.topicService.getPermission(req.user.roles);
         if (!(role.isAdmin || role.isManager)) throw new ForbiddenException('Bạn không có quyền để thực hiện điều này!');
-        await this.topicService.updateTopic( id, update);
-        res.json({message: 'Cập nhật thành công!'});
+        await this.topicService.updateTopic(id, update);
+        res.json({ message: 'Cập nhật thành công!' });
     }
 
 
     @Delete("delete-topic/:id")
-    @Roles(UserRole.admin,  UserRole.manager)
+    @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
     async deleteCompany(@Req() req, @Res() res, @Param('id') id: string) {
         const role = this.topicService.getPermission(req.user.roles);
         if (!(role.isAdmin || role.isManager)) throw new ForbiddenException('Bạn không có quyền để thực hiện điều này!');
         await this.topicService.deleteTopic(id);
-        res.json({message: 'Xóa chủ đề thành công!'});
+        res.json({ message: 'Xóa chủ đề thành công!' });
     }
 
     @Get('/get-all')

@@ -6,7 +6,7 @@ import { UpdateMeetDto } from "src/dto/update-dto/update-meet.dto";
 import { BadRequestException } from "src/exceptions/bad-request.exception";
 import { NotFoundException } from "src/exceptions/not-found.exception";
 import { MeetModel } from "src/models/meet.model";
-import { UserRole } from "src/models/user-role.enum";
+import { UserRole } from "src/utils/user-role.enum";
 
 
 @Injectable()
@@ -26,15 +26,15 @@ export class MeetService {
         return await createdMeet.save();
     }
 
-    async updateMeet(id: string, update: UpdateMeetDto): Promise<MeetModel>{
-        const meet = await this.meetModel.findByIdAndUpdate({"_id": id, active: true}, {meetName:update.meetName, description: update.description, active: update.active, updatedAt: new Date()}, {new: true}).exec().catch(err => {
+    async updateMeet(id: string, update: UpdateMeetDto): Promise<MeetModel> {
+        const meet = await this.meetModel.findByIdAndUpdate({ "_id": id, active: true }, { meetName: update.meetName, description: update.description, active: update.active, updatedAt: new Date() }, { new: true }).exec().catch(err => {
             throw new NotFoundException('Không tìm thấy cuộc đối thoại này của bạn yêu cầu!');
         });
         return meet;
     }
 
     async deleteMeet(id: string) {
-        const meet = await this.meetModel.findByIdAndUpdate({"_id": id}, {active: false}, { new: true}).exec().catch((err) => {
+        const meet = await this.meetModel.findByIdAndUpdate({ "_id": id }, { active: false }, { new: true }).exec().catch((err) => {
             throw new NotFoundException("Không tìm thấy cuộc đối thoại để xóa!");
         });
         return meet;
@@ -45,7 +45,7 @@ export class MeetService {
     }
 
     async getMeetById(id: string) {
-        const meet = await this.meetModel.findById({_id: id }).exec()
+        const meet = await this.meetModel.findById({ _id: id }).exec()
         if (!meet) throw new NotFoundException("Id này không tồn tại");
         return meet;
     }

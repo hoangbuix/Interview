@@ -41,17 +41,17 @@ const Report: React.FC<Props> = (props: Props) => {
             if (report === null) {
                 getReportByUserId(data._id);
             }
-            if (report && teacher === null || meet === null) {
-                getTeacherById(report?.teacherId);
+            if (report && (teacher === null || meet === null || user === null)) {
+                getTeacherById(report.teacherId);
                 report?.info.map((v: any) => getMeet(v.meetId))
                 getUserById(report?.userId)
             }
             getReportList()
-        }, 10)
+        }, 300)
 
     }, [report, teacher, meet, user, getReportList, getReportByUserId, getTeacherById, getMeet, getUserById])
 
-    console.log(meet)
+    console.log(user)
 
     return (
         <>
@@ -114,9 +114,17 @@ const Report: React.FC<Props> = (props: Props) => {
                             </div>
                         </div>
                         <div className="c-12 m-4 l-4">
+                            <span>Khoa: {user?.majorId}</span>
+                            <br />
                             <span>Tên giáo viên hướng dẫn: {teacher?.teacherName}</span>
                             <br />
                             <span>Sinh viên thực hiện: {user?.fullName}</span>
+                            <br />
+                            <span>Lớp: {user?.inClass}</span>
+                            <br />
+                            <span>Chủ đề báo cáo: {user?.topicId}</span>
+                            <br />
+                            <span>Tên công ty: {user?.companyId}</span>
                         </div>
                     </div>
                 </div>
