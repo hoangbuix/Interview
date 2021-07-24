@@ -1,4 +1,4 @@
-import { getTeacherId } from "../../services/Teacher-service";
+import { getTeacherId } from "../../services/teacher-service";
 import * as actions from "../actions/teacher-action";
 
 export const getTeacherById = (id: string) => (dispatch?: any) => {

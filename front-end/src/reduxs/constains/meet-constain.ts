@@ -1,0 +1,3 @@
+export const GET_MEET_START = "GET_MEET_START";
+export const GET_MEET_SUCCESS = "GET_MEET_SUCCESS";
+export const GET_MEET_FAILER = "GET_MEET_FAILER";

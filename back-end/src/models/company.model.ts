@@ -2,13 +2,14 @@ import { Document } from "mongoose";
 
 
 export interface CompanyModel extends Document {
-    companyId: string;
-    companyName: string;
-    description: string;
-    mentorCompany: string;
-    startDate:string;
-    endDate: string;
-    active: boolean;
-    createdAt: Date;
-    updatedAt: Date;
+    readonly companyId: string;
+    readonly companyName: string;
+    readonly description: string;
+    readonly mentorCompany: string;
+    readonly task?: Array<any>;
+    readonly startDate: string;
+    readonly endDate: string;
+    readonly active: boolean;
+    readonly createdAt: Date;
+    readonly updatedAt: Date;
 }

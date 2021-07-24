@@ -10,7 +10,7 @@ import { getReportList } from "../../reduxs/thunks/report-thunk"
 
 
 const mapStateToProps = (state: AppState) => ({
-    report: state.report.report
+    reports: state.report.reports
 })
 
 const mapDispatchToProps = {
@@ -23,7 +23,7 @@ interface Props extends ConnectedProps<typeof connector> { }
 
 const HomeLayout = (props: Props) => {
 
-    const { report, getReportList } = props
+    const { reports, getReportList } = props
 
     useEffect(() => {
         setTimeout(() => {
@@ -54,7 +54,7 @@ const HomeLayout = (props: Props) => {
                         </div>
                     </div>
                     <div className="c-12 m-8 l-8">
-                        {report.map((value: any, key: number) => (
+                        {reports.map((value: any, key: number) => (
                             <CardHome data={value} key={key} />
                         ))}
                     </div>

@@ -4,4 +4,5 @@ export class CreateCompanyDto {
     readonly description: string;
     readonly startDate: string | Date;
     readonly endDate: string | Date;
+    readonly taskId: string;
 }
