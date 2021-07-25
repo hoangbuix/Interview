@@ -1,9 +1,13 @@
+import axios from "axios";
 import axiosClient from "./auth-header";
+
+
+const url: string | undefined = "http://localhost:9090";
 
 export const loginUser = ({ username, password }: ReqLogin): Promise<ResLoginApi> =>
     new Promise((resolve, reject) => {
         setTimeout(() => {
-            axiosClient.post(`/user/login`, { username, password }).then((response) => {
+            axios.post(`${url}/user/login`, { username, password }).then((response) => {
                 resolve({
                     data: {
                         access_token: response.data.token
@@ -12,6 +16,7 @@ export const loginUser = ({ username, password }: ReqLogin): Promise<ResLoginApi
             }).catch(err => {
                 reject(new Error('Login failer!'))
             })
+
         }, 500);
     });
 
