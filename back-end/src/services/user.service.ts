@@ -5,10 +5,6 @@ import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken'
 import { UserModel } from 'src/models/user.model';
 import { responseUser } from 'src/response-data/user.response';
-import { MajorService } from './major.service';
-import { TeacherService } from './teacher.service';
-import { CompanyService } from './company.service';
-import { TopicService } from './topic.service';
 import { NotAcceptableException } from 'src/exceptions/not-acceptable.exception';
 import { UnAuthorizedException } from 'src/exceptions/un-authorized.exception';
 import { JwtPayload } from 'src/models/jwtPayload.model';
@@ -19,15 +15,10 @@ import { BadRequestException } from 'src/exceptions/bad-request.exception';
 import { LoginDto } from 'src/dto/req/login.dto';
 import { CreateUserDto } from 'src/dto/create-dto/create-user.dto';
 
-
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel('user') private readonly userModel: Model<UserModel>,
-    private readonly majorService: MajorService,
-    private readonly teacherService: TeacherService,
-    private readonly companyService: CompanyService,
-    private readonly topicService: TopicService,
+    @InjectModel('user') private readonly userModel: Model<UserModel>
   ) { }
 
   protected generatorToken = (payload) => {
@@ -78,24 +69,7 @@ export class UserService {
 
 
   async getAllUser() {
-    const query = [
-      {
-        path: 'majorId',
-        select: 'majorName'
-      },
-      {
-        path: 'companyId',
-        select: 'companyName'
-      },
-      {
-        path: 'teacherId',
-        select: 'teacherName'
-      }, {
-        path: 'topicId',
-        select: 'topicName'
-      }//populate nested array
-    ];
-    const user = await this.userModel.find().populate(query).lean().exec().catch(err => {
+    const user = await this.userModel.find().exec().catch((err) => {
       throw new NotFoundException('Không tìm thấy user' + err.message);
     });
     const users = user.map(u => {
@@ -169,6 +143,7 @@ export class UserService {
           password: password,
           username: username,
           changePasswordAt: new Date(),
+          createAt: new Date(),
           updateAt: new Date()
         });
         const createUser = new this.userModel(newUser);
@@ -186,17 +161,9 @@ export class UserService {
         const salt = await bcrypt.genSaltSync(12);
         const username = createUserDto.username;
         let password = createUserDto.password;
-        const major = await this.majorService.getMajorById(createUserDto.majorId);
-        const teachers = await this.teacherService.getTeacherId(createUserDto.teacherId);
-        const company = await this.companyService.getCompanyById(createUserDto.companyId)
-        const topic = await this.topicService.getTopicId(createUserDto.topicId);
         password = await bcrypt.hashSync(password, salt);
         const newUser: UserModel = new this.userModel({
           ...createUserDto,
-          majorId: major._id,
-          teacherId: teachers._id,
-          companyId: company._id,
-          topicId: topic._id,
           password: password,
           username: username,
           changePasswordAt: new Date(),

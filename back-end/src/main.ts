@@ -8,13 +8,14 @@ import * as helmet from 'helmet';
 import * as bodyParser from "body-parser";
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AllExceptionsFilter } from './filters/all-exception.filter';
+import { HttpExceptionFilter } from './filters/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.use('/public', express.static(join(__dirname, '../../public')));
   app.use(bodyParser.json({ limit: '5mb' }));
   app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
-  app.useGlobalFilters(new AllExceptionsFilter());
+
 
   /* SECURITY */
   app.enable("trust proxy");
@@ -57,6 +58,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('/', app, document);
 
+  app.setGlobalPrefix('api');
+  app.useGlobalFilters(new HttpExceptionFilter());
   await app.listen(9090);
+  console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

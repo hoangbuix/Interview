@@ -8,26 +8,70 @@ import { NotFoundException } from 'src/exceptions/not-found.exception';
 import { UserRole } from 'src/utils/user-role.enum';
 import { UpdateRoleDto } from 'src/dto/update-dto/update-role';
 import { UpdateReportDto } from 'src/dto/update-dto/update-report.dto';
-import { report } from 'process';
+import { MeetService } from './meet.service';
+import { TopicService } from './topic.service';
+import { TeacherService } from './teacher.service';
+import { UserService } from './user.service';
+import { CompanyService } from './company.service';
 
 @Injectable()
 export class ReportService {
   constructor(
-    @InjectModel('report') private readonly reportModel: Model<ReportModel>
+    @InjectModel('report') private readonly reportModel: Model<ReportModel>,
+    private readonly meetService: MeetService,
+    private readonly topicService: TopicService,
+    private readonly teacherService: TeacherService,
+    private readonly userService: UserService,
+    private readonly companyService: CompanyService
   ) { }
 
 
 
 
   async createReport(createReportDto: CreateReportDto) {
-    const checkExits: ReportModel = new this.reportModel({
-      userId: createReportDto.userId,
-      teacherId: createReportDto.teacherId,
+    const query = [
+      {
+        path: 'userId',
+        select: 'fullName'
+      },
+      {
+        path: 'majorId',
+        select: 'majorName'
+      },
+      {
+        path: 'companyId',
+        select: 'companyName'
+      },
+      {
+        path: 'teacherId',
+        select: 'teacherName'
+      }, {
+        path: 'topicId',
+        select: 'topicName'
+      }, //populate nested array
+    ];
+
+    const exist = await this.reportModel.find().populate(query).lean().exec().catch(err => {
+      throw new NotFoundException('Không tìm thấy' + err.message);
     });
 
-    const checkUser = await this.reportModel.findOne({ userId: createReportDto.userId }).exec();
 
-    if (checkUser == null) {
+    const _userId = this.userService.getUserById(createReportDto.userId);
+    const teacherId = this.teacherService.getTeacherId(createReportDto.teacherId);
+    const topicId = this.topicService.getTopicId(createReportDto.topicId);
+    const companyId = this.companyService.getCompanyById(createReportDto.companyId);
+    const meetId = this.meetService.getMeetById(createReportDto.meetId);
+
+
+    const checkExits: ReportModel = new this.reportModel({
+      ...createReportDto,
+      userId: _userId,
+      teacherId: teacherId,
+      topicId: topicId,
+      companyId: companyId
+    });
+    const checkUser = await this.reportModel.findOne({ userId: createReportDto.userId }).exec();
+    if (checkUser == null && exist == null) {
       await checkExits.save();
     }
 
@@ -35,7 +79,7 @@ export class ReportService {
       $push: {
         'info': {
           'reportName': createReportDto.reportName,
-          'meetId': createReportDto.meetId,
+          'meetId': meetId,
           'active': true,
           'content': {
             'contentReport': createReportDto.contentReport,
@@ -54,12 +98,53 @@ export class ReportService {
 
 
   async updateCompany(id: string, update: UpdateReportDto) {
+    const query = [
+      {
+        path: 'userId',
+        select: 'fullName'
+      },
+      {
+        path: 'majorId',
+        select: 'majorName'
+      },
+      {
+        path: 'companyId',
+        select: 'companyName'
+      },
+      {
+        path: 'teacherId',
+        select: 'teacherName'
+      }, {
+        path: 'topicId',
+        select: 'topicName'
+      }, //populate nested array
+    ];
+
+    const exist = await this.reportModel.find().populate(query).lean().exec().catch(err => {
+      throw new NotFoundException('Không tìm thấy' + err.message);
+    });
+    const _userId = this.userService.getUserById(update.userId);
+    const teacherId = this.teacherService.getTeacherId(update.teacherId);
+    const topicId = this.topicService.getTopicId(update.topicId);
+    const companyId = this.companyService.getCompanyById(update.companyId);
+    const meetId = this.meetService.getMeetById(update.meetId); const checkExits: ReportModel = new this.reportModel({
+      ...update,
+      userId: _userId,
+      teacherId: teacherId,
+      topicId: topicId,
+      companyId: companyId,
+      updateAt: new Date(),
+    });
+    const checkUser = await this.reportModel.findOne({ userId: update.userId }).exec();
+    if (checkUser == null && exist == null) {
+      await checkExits.updateOne();
+    }
     const results = await this.reportModel.findByIdAndUpdate({ "_id": id, active: true }, {
       $push: {
         'info': {
           'reportName': update.reportName,
-          'meetId': update.meetId,
-          'active': true,
+          'meetId': meetId,
+          'active': update.active,
           'content': {
             'contentReport': update.contentReport,
             'teacherRequest': update.teacherRequest,

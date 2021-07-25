@@ -5,7 +5,7 @@ export const CompanySchema = new mongoose.Schema({
     description: { type: String },
     mentorCompany: { type: String },
     task: [{
-        taskId: { type: String, ref: 'task', }
+        taskId: { type: String, ref: 'task' }
     }],
     startDate: { type: String },
     endDate: { type: String },

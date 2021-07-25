@@ -6,11 +6,11 @@ import { MeetService } from "src/services/meet.service";
 
 
 @Module({
-    imports: [MongooseModule.forFeature([{ name:'meeting', schema: MeetSchema}])],
+    imports: [MongooseModule.forFeature([{ name: 'meet', schema: MeetSchema }])],
     controllers: [MeetController],
     providers: [MeetService],
     exports: [MeetService]
 })
 
 
-export class MeetModule {}
+export class MeetModule { }

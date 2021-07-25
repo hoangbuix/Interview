@@ -7,11 +7,13 @@ import { BadRequestException } from "src/exceptions/bad-request.exception";
 import { NotFoundException } from "src/exceptions/not-found.exception";
 import { CompanyModel } from "src/models/company.model";
 import { UserRole } from "src/utils/user-role.enum";
+import { TaskService } from "./task.service";
 
 
 @Injectable()
 export class CompanyService {
-    constructor(@InjectModel('company') private readonly companyModel: Model<CompanyModel>) { }
+    constructor(@InjectModel('company') private readonly companyModel: Model<CompanyModel>,
+        private readonly taskService: TaskService) { }
 
 
     async createCompany(createCompanyDto: CreateCompanyDto): Promise<CompanyModel> {
@@ -21,10 +23,11 @@ export class CompanyService {
         if (exitCompany === null) {
             await company.save();
         }
+        const _taskId = this.taskService.getTaskById(createCompanyDto.taskId)
         const results = await this.companyModel.findOneAndUpdate({ company }, {
             $push: {
                 'task': {
-                    'taskId': createCompanyDto.taskId
+                    'taskId': _taskId
                 }
             }
         }, { new: true, upsert: true }).exec().catch((err) => {

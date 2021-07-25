@@ -17,7 +17,7 @@ export class ImageService {
         if (!exitImage) {
             const image: ImageModel = new this.imageModel({
                 imageName: img.originalname,
-                image_file: img.check | img.filename ,
+                image_file: img.check | img.filename,
                 url: img.path,
                 size: img.size,
                 type: img.mimetype,

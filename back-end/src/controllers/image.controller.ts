@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Post, Req, Res, UploadedFile, UploadedFil
 import { FileInterceptor } from "@nestjs/platform-express";
 import { extname, join } from "path";
 import { diskStorage } from 'multer';
+import { Express } from 'express';
 import { Roles } from "src/auth/decorators/roles.decorator";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { ImageService } from "src/services/image.service";
@@ -31,8 +32,7 @@ export class ImageController {
     @UseInterceptors(FileInterceptor('image', storage))
     @UseGuards()
     @UsePipes(new ValidationPipe({ whitelist: true }))
-    createImage(@UploadedFile() img, @Res() res) {
-        // console.log(img)
+    createImage(@UploadedFile() img, @Res() res,) {
         const check = img ? (img.filename || img.name) : ""
         const data = { ...img, check }
         const image = this.imageService.createImage(data);
@@ -46,5 +46,17 @@ export class ImageController {
     getImage(@Param('image') image, @Res() res): void | any {
         return res.sendFile(join(process.cwd(), '/uploads/' + image))
     }
+
+    // @UseInterceptors(FileInterceptor('file'))
+    // @Post('file')
+    // uploadFile(
+    //     @Body() body: any,
+    //     @UploadedFile() file: Express.Multer.File,
+    // ) {
+    //     return {
+    //         body,
+    //         file: file.buffer.toString(),
+    //     };
+    // }
 }
 

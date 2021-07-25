@@ -1,4 +1,3 @@
-import { Schema } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 import { UserRole } from 'src/utils/user-role.enum';
 

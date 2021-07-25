@@ -15,7 +15,7 @@ export class TopicService {
 
 
     async createTopic(createTopicDto: CreateTopicDto) {
-        const checkExit = await this.topicModel.findOne({ topicId: createTopicDto.topicId });
+        const checkExit = await this.topicModel.findOne({ topicName: createTopicDto.topicName });
         if (checkExit) throw new BadRequestException("Đề tài này đã tồn tại!")
 
         const newTopic: TopicModel = new this.topicModel({
@@ -28,9 +28,10 @@ export class TopicService {
     }
 
     async updateTopic(id: string, update: UpdateTopicDto): Promise<TopicModel> {
-        const topic = await this.topicModel.findByIdAndUpdate({ "_id": id, active: true }, { topicName: update.topicName, description: update.description, active: update.active, updatedAt: new Date() }, { new: true }).exec().catch((err) => {
-            throw new NotFoundException('Không tìm thấy chủ đề này của bạn yêu cầu!');
-        });
+        const topic = await this.topicModel.findByIdAndUpdate({ "_id": id, active: true },
+            { topicName: update.topicName, description: update.description, active: update.active, updatedAt: new Date() }, { new: true }).exec().catch((err) => {
+                throw new NotFoundException('Không tìm thấy chủ đề này của bạn yêu cầu!');
+            });
         return topic;
     }
 

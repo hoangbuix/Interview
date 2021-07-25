@@ -1,14 +1,13 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { TopicController } from "src/controllers/topic.controller";
-import { AuthMiddleware } from "src/middleware/auth.middleware";
 import { TopicSchema } from "src/schemas/topic.schema";
 import { TopicService } from "src/services/topic.service";
 
 
 
 @Module({
-    imports: [MongooseModule.forFeature([{ name: 'topic', schema: TopicSchema}])],
+    imports: [MongooseModule.forFeature([{ name: 'topic', schema: TopicSchema }])],
     controllers: [TopicController],
     providers: [TopicService],
     exports: [TopicService]
@@ -17,7 +16,7 @@ import { TopicService } from "src/services/topic.service";
 export class TopicModule implements NestModule {
     public configure(consumer: MiddlewareConsumer) {
         consumer
-          .apply()
-          .forRoutes({path: '/topic', method: RequestMethod.ALL});
-      }
+            .apply()
+            .forRoutes({ path: '/topic', method: RequestMethod.ALL });
+    }
 }

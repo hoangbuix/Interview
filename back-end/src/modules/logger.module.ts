@@ -5,10 +5,10 @@ import { LoggerService } from "src/services/logger.service";
 
 
 @Module({
-    imports: [MongooseModule.forFeature([{ name: 'logger', schema: LoggerSchema}])],
+    imports: [MongooseModule.forFeature([{ name: 'logger', schema: LoggerSchema }])],
     controllers: [],
     providers: [LoggerService],
     exports: [LoggerService],
 })
 
-export class LoggerModule {}
+export class LoggerModule { }

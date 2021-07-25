@@ -9,16 +9,17 @@ import { Reflector } from '@nestjs/core';
 import { UserRole } from 'src/utils/user-role.enum';
 import { UserModel } from 'src/models/user.model';
 import { InstanceType } from 'typegoose';
+import { ROLES_KEY } from '../decorators/roles.decorator';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
   constructor(private readonly _reflector: Reflector) { }
 
   canActivate(context: ExecutionContext): boolean {
-    const roles = this._reflector.get<UserRole[]>(
-      'roles',
+    const roles = this._reflector.getAllAndOverride<UserRole[]>(ROLES_KEY, [
       context.getHandler(),
-    );
+      context.getClass()
+    ]);
 
     if (!roles || roles.length === 0) {
       return true;
@@ -30,7 +31,7 @@ export class RolesGuard implements CanActivate {
     const hasRole = () => user.roles.some(role => roles.indexOf(role) >= 0);
 
     if (user && user.roles && hasRole()) {
-      return true;
+      return roles.some((role) => user.roles?.includes(role));;
     }
 
     throw new HttpException(

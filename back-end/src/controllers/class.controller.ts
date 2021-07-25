@@ -4,7 +4,7 @@ import { Roles } from "src/auth/decorators/roles.decorator";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { RolesGuard } from "src/auth/guards/role.guard";
 import { ForbiddenException } from "src/exceptions/forbidden.exception";
-import { classModel } from "src/models/class.model";
+import { ClassModel } from "src/models/class.model";
 import { ClassService } from "src/services/class.service";
 
 
@@ -48,14 +48,14 @@ export class ClassController {
     // }
 
     @Get('/get-all')
-    async getAll(): Promise<classModel[]> {
+    async getAll(): Promise<ClassModel[]> {
         return await this.classService.getAll();
     }
 
-    // @Get('/get-meet/:id')
-    // async getMeetById(@Param('id') id: string): Promise<MeetModel> {
-    //     return await this.meetService.getMeetById(id);
-    // }
+    @Get('/get-class/:id')
+    async getClassById(@Param('id') id: string): Promise<ClassModel> {
+        return await this.classService.getClassById(id);
+    }
 
 
 

@@ -7,10 +7,10 @@ import { CreateLogDto } from 'src/dto/create-dto/create-log.dto';
 export class LoggerService {
   constructor(
     @Inject('logger')
-    private readonly loggerModal: Model <LoggerModel>,
-  ){
+    private readonly loggerModal: Model<LoggerModel>,
+  ) {
   }
-  async SaveLog(logDto: CreateLogDto){
+  async SaveLog(logDto: CreateLogDto) {
     const newLog = new this.loggerModal(logDto);
     return await newLog.save();
   }

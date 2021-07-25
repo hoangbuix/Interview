@@ -15,6 +15,7 @@ import { LoginDto } from 'src/dto/req/login.dto';
 import { LoggingInterceptor } from 'src/interceptors/logging.interceptor';
 import { TransformInterceptor } from 'src/interceptors/transform.interceptor';
 import { CreateUserDto } from 'src/dto/create-dto/create-user.dto';
+import { UpdateUserDto } from 'src/dto/update-dto/update-user.dto';
 
 
 @ApiBearerAuth()
@@ -25,21 +26,23 @@ export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Get('get-all')
-  // @Roles()
-  // @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles()
+  @UseGuards(JwtAuthGuard, RolesGuard)
   async getAll() {
     return await this.userService.getAllUser();
   }
 
   @Get('get-user-id/:id')
-  // @Roles()
-  // @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles()
+  @UseGuards(JwtAuthGuard, RolesGuard)
   async geUserById(@Param('id') id: string) {
     return await this.userService.getUserById(id);
   }
 
 
   @Get('get-user/:fullName')
+  @Roles()
+  @UseGuards(JwtAuthGuard, RolesGuard)
   async getUserByName(@Param('fullName') fullName: string) {
     return await this.userService.getUserByName(fullName);
   }
@@ -48,20 +51,20 @@ export class UserController {
   async create(@Request() req, @Response() res, @Body() createUserDto: CreateUserDto) {
     const userExit = await this.userService.getUserByUserName(createUserDto.username);
     if (userExit) throw new BadRequestException('Tên người dùng đã tồn tại!');
-    const users = await this.userService.createUser(
-      createUserDto
-    );
+    const users = await this.userService.createUser(createUserDto);
     res.status(200).json(responseUser(users));
   }
 
   @Post('update-user')
-  async updateUser(@Request() req, @Response() res, @Body() createUserDto: CreateUserDto) {
-    const userExit = await this.userService.getUserByUserName(createUserDto.username);
+  @Roles()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async updateUser(@Request() req, @Response() res, @Body() updateUserDto: UpdateUserDto) {
+    const userExit = await this.userService.getUserByUserName(updateUserDto.username);
     if (!userExit) throw new BadRequestException('Tên người dùng không tồn tại!');
-    const users = await this.userService.updateUser(
-      createUserDto
+    const user = await this.userService.updateUser(
+      updateUserDto
     );
-    res.status(200).json(responseUser(users));
+    res.status(200).json(responseUser(user));
   }
 
   @UsePipes(new ValidationPipe())

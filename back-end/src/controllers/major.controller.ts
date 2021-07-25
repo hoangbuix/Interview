@@ -19,16 +19,16 @@ export class MajorController {
 
 
 
-    @Post('create-major')
-    @Roles(UserRole.admin, UserRole.manager)
-    @UseGuards(JwtAuthGuard, RolesGuard)
-    async createMajor(@Res() res, @Body() createMajorDto: CreateMajorDto) {
-        const major = await this.majorService.createMajor(createMajorDto);
-        return res.status(HttpStatus.OK).json({
-            message: 'Major created successfully',
-            major
-        });
-    }
+    // @Post('create-major')
+    // @Roles(UserRole.admin, UserRole.manager)
+    // @UseGuards(JwtAuthGuard, RolesGuard)
+    // async createMajor(@Res() res, @Body() createMajorDto: CreateMajorDto) {
+    //     const major = await this.majorService.createMajor(createMajorDto);
+    //     return res.status(HttpStatus.OK).json({
+    //         message: 'Major created successfully',
+    //         major
+    //     });
+    // }
 
     @Put('/update-major/:id')
     @Roles(UserRole.admin, UserRole.manager)

@@ -25,9 +25,11 @@ export class ReportController {
 
     @Post()
     async createReport(@Request() req, @Response() res, @Body() createReportDto: CreateReportDto) {
-        const checkExits = await this.reportService.getReportName(createReportDto.reportName)
-        if (checkExits) throw new BadRequestException('Tên báo cáo đã tồn tại!');
-        const report = await this.reportService.createReport(createReportDto);
-        return res.status(200).json(report);
+        if (createReportDto !== null) {
+            const checkExits = await this.reportService.getReportName(createReportDto.reportName)
+            if (checkExits) throw new BadRequestException('Tên báo cáo đã tồn tại!');
+            const report = await this.reportService.createReport(createReportDto);
+            return res.status(200).json(report);
+        }
     }
 }

@@ -19,8 +19,10 @@ export class TeacherController {
     constructor(private readonly teacherService: TeacherService) { }
 
     @Post('/create-teacher')
+    @Roles(UserRole.admin, UserRole.manager)
+    @UseGuards(JwtAuthGuard, RolesGuard)
     async createTeacher(@Request() req, @Response() res, @Body() createTeacherDto: CreateTeacherDto) {
-        const teacherExist = await this.teacherService.getTeacherId(createTeacherDto.teacherId);
+        const teacherExist = await this.teacherService.getTeacherName(createTeacherDto.teacherName);
         if (teacherExist) { throw new BadRequestException('Giáo viên đã tồn tại'); }
         else {
             const teacher = await this.teacherService.addTeacher(createTeacherDto);
@@ -35,7 +37,6 @@ export class TeacherController {
     @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
     async updateTeacher(@Req() req, @Res() res, @Param('id') id: string, @Body() update: UpdateTeacherDto) {
-        // console.log(req.user)
         const role = this.teacherService.getPermission(req.user.roles);
         if (!(role.isAdmin || role.isManager)) throw new ForbiddenException('Bạn không có quyền để thực hiện điều này!');
         await this.teacherService.updateTeacher(id, update);
@@ -54,12 +55,15 @@ export class TeacherController {
     }
 
     @Get('/get-all')
-    // @Roles('admin')
+    @Roles(UserRole.admin, UserRole.manager)
+    @UseGuards(JwtAuthGuard, RolesGuard)
     async getAll(): Promise<TeacherModel[]> {
         return await this.teacherService.getAll();
     }
 
     @Get('/get-teacher/:id')
+    @Roles(UserRole.admin, UserRole.manager)
+    @UseGuards(JwtAuthGuard, RolesGuard)
     async getTeacherById(@Param('id') id: string): Promise<TeacherModel> {
         return await this.teacherService.getTeacherId(id);
     }

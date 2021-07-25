@@ -6,10 +6,7 @@ export interface MajorModel extends Document {
   readonly manager: [{
     teacher: [{ teacherId: string }];
     user: [{ userId: string }];
-    class: [{
-      teacherId: string;
-      classId: string;
-    }]
+    class: [{ classId: string }]
   }];
   readonly active: boolean;
   readonly createdAt: Date;

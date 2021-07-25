@@ -11,7 +11,7 @@ import { UserRole } from "src/utils/user-role.enum";
 
 @Injectable()
 export class MeetService {
-    constructor(@InjectModel('meeting') private readonly meetModel: Model<MeetModel>) { }
+    constructor(@InjectModel('meet') private readonly meetModel: Model<MeetModel>) { }
 
     async createMeet(createMeetDto: CreateMeetDto) {
         const checkExit = await this.meetModel.findOne({ meetName: createMeetDto.meetName });

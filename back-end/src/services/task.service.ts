@@ -14,7 +14,7 @@ export class TaskService {
     ) { }
 
     async createTask(createTaskDto: CreateTaskDto): Promise<TaskModel> {
-        const exitTask = await this.taskModel.findOne({ _id: createTaskDto.taskId });
+        const exitTask = await this.taskModel.findOne({ taskName: createTaskDto.taskName });
         if (exitTask) throw new NotFoundException('Task đã tồn tại!');
         const task: TaskModel = new this.taskModel(createTaskDto);
         return await task.save();

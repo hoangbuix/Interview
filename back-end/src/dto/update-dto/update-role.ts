@@ -1,4 +1,5 @@
 export class UpdateRoleDto {
-    roles: any;
-    userId: string;
+    readonly roles: any;
+    readonly userId: string;
+    readonly updatedAt: Date;
 }
