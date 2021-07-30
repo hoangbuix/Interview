@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
+import DashboardRoutes from "./DashboardRoute";
 import HomeRoutes from "./HomeRoute";
 import LoginRoutes from "./LoginRoute";
 import ProfileRoutes from "./ProfileRoute";
@@ -14,6 +15,7 @@ export default function Routes() {
       <HomeRoutes />
       <ProfileRoutes />
       <ReportRoutes />
+      <DashboardRoutes />
     </BrowserRouter>
   )
 }

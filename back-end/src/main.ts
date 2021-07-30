@@ -12,6 +12,7 @@ import { HttpExceptionFilter } from './filters/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  // const hostDomain = AppModule.isDev ? `${AppModule.host}:${AppModule.port}` : AppModule.host;
   app.use('/public', express.static(join(__dirname, '../../public')));
   app.use(bodyParser.json({ limit: '5mb' }));
   app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
@@ -49,14 +50,16 @@ async function bootstrap() {
   });
 
   const options = new DocumentBuilder()
-    .setTitle('Api interview')
-    .setDescription('API')
-    .setVersion('1.0')
-    .addBearerAuth()
-    .addTag('interview')
+    .setTitle('Nest MEAN')
+    .setDescription('API Documentation')
+    .setVersion('1.0.0')
+    .setSchemes('http')
+    .setBasePath('/api')
+    .addBearerAuth('Authorization', 'header')
     .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('/', app, document);
+  SwaggerModule.setup('/api', app, document);
+
 
   app.setGlobalPrefix('api');
   app.useGlobalFilters(new HttpExceptionFilter());

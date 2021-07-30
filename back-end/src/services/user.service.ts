@@ -48,7 +48,7 @@ export class UserService {
     const payload: JwtPayload = { _id: user._id, username: user.username, changePasswordAt: user.changePasswordAt };
     const token = await this.generatorToken(payload);
     await user.save();
-    return { token };
+    return {token};
   }
 
   async verify(req: any) {

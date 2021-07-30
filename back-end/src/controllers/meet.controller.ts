@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res, UseGuards } from "@nestjs/common";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { ApiUseTags } from "@nestjs/swagger";
 import { Roles } from "src/auth/decorators/roles.decorator";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { RolesGuard } from "src/auth/guards/role.guard";
@@ -10,8 +10,8 @@ import { MeetModel } from "src/models/meet.model";
 import { UserRole } from "src/utils/user-role.enum";
 import { MeetService } from "src/services/meet.service";
 
-@ApiBearerAuth()
-@ApiTags('meet')
+
+@ApiUseTags('meet')
 @Controller('meet')
 export class MeetController {
     constructor(private readonly meetService: MeetService) { }

@@ -49,7 +49,7 @@ const Report: React.FC<Props> = (props: Props) => {
             getReportList()
         }, 300)
 
-    }, [report, teacher, meet, user, getReportList, getReportByUserId, getTeacherById, getMeet, getUserById])
+    }, [report, reports, teacher, meet, user, getReportList, getReportByUserId, getTeacherById, getMeet, getUserById])
 
     console.log(user)
 

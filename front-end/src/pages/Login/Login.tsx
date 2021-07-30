@@ -7,7 +7,6 @@ import "./Login.style.scss";
 import { FiArrowRight } from "react-icons/fi";
 
 
-
 const mapStateToProps = (state: any) => ({
     users: state.user.users,
     isFetching: state.user.isFetching
@@ -52,9 +51,10 @@ const Login = (props: Props) => {
     }
     return (
         <div className="auth-wrapper wrapper-center">
+            {/* <ToastNotice /> */}
             <div className="auth_container wrapper-box">
                 <header>
-                    <img src="https://lhu.edu.vn/ViewPage/LHUVNB4/_default/image/Logo_LHU_Vi.png" alt="logo" />
+                    <img src="https://cs.lhu.edu.vn/ViewPage/LHUVNB4/_default/image/Logo_ChimLac_W.png" alt="logo" />
                 </header>
                 <div className="auth-form">
                     {error ? <span></span> : ''}

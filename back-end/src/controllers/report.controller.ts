@@ -2,12 +2,11 @@ import { Controller, Get, Post, Body, Response, Request, Param } from "@nestjs/c
 import { ReportModel } from "src/models/report.model";
 import { ReportService } from "src/services/report.service";
 import { BadRequestException } from "src/exceptions/bad-request.exception";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { ApiUseTags } from "@nestjs/swagger";
 import { CreateReportDto } from "src/dto/create-dto/create-report.dto";
 
 
-@ApiBearerAuth()
-@ApiTags('report')
+@ApiUseTags('report')
 @Controller('report')
 export class ReportController {
     constructor(private readonly reportService: ReportService) { }
@@ -23,7 +22,7 @@ export class ReportController {
         return await this.reportService.getReportByUserId(id);
     }
 
-    @Post()
+    @Post('/create-report')
     async createReport(@Request() req, @Response() res, @Body() createReportDto: CreateReportDto) {
         if (createReportDto !== null) {
             const checkExits = await this.reportService.getReportName(createReportDto.reportName)

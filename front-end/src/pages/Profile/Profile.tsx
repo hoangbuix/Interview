@@ -3,6 +3,7 @@ import { useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
+import LightBoxImg from "../../components/LightBoxImg/LightBoxImg";
 import { decode } from "../../helpers/decode";
 import { getUserById } from "../../reduxs/thunks/user-thunk"
 
@@ -29,21 +30,21 @@ const Profile: React.FC<Props> = (props: Props) => {
         if (user === null) {
             getUserById(data._id)
         }
-        if (idUser) {
-            getUserById(idUser)
-        }
+
         setData(user)
-        localStorage.setItem('user', user?.avatar)
-    }, [user, getUserById, params])
+
+    }, [getUserById, params])
+    localStorage.setItem('user', user?.avatar)
+    console.log(user)
 
     return (
         <>
             <Header />
-            <div className="ui semantic container">
+
+            <LightBoxImg />
+            {/* <div className="ui semantic container">
                 <h1>xxx</h1>
-                {/* <img src={data?.avatar} alt="avartar" /> */}
-                {data?.email}
-            </div>
+            </div> */}
         </>
     )
 };

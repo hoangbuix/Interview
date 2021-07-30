@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res, UseGuards } from "@nestjs/common";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { ApiUseTags } from "@nestjs/swagger";
 import { Roles } from "src/auth/decorators/roles.decorator";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { RolesGuard } from "src/auth/guards/role.guard";
@@ -8,8 +8,7 @@ import { ClassModel } from "src/models/class.model";
 import { ClassService } from "src/services/class.service";
 
 
-@ApiBearerAuth()
-@ApiTags('class')
+@ApiUseTags('class')
 @Controller('class')
 export class ClassController {
     constructor(private readonly classService: ClassService) { }

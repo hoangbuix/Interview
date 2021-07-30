@@ -2,7 +2,7 @@ import { Controller, Get, Body, Response, Request, Post, Put, UseGuards, Req, Re
 import { TeacherService } from "src/services/teacher.service";
 import { TeacherModel } from "src/models/teacher.model";
 import { BadRequestException } from "src/exceptions/bad-request.exception";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { ApiUseTags } from "@nestjs/swagger";
 import { Roles } from "src/auth/decorators/roles.decorator";
 import { CreateTeacherDto } from "src/dto/create-dto/create-teacher.dto";
 import { UserRole } from "src/utils/user-role.enum";
@@ -12,8 +12,7 @@ import { UpdateTeacherDto } from "src/dto/update-dto/update-teacher.dto";
 import { ForbiddenException } from "src/exceptions/forbidden.exception";
 
 
-@ApiBearerAuth()
-@ApiTags('teacher')
+@ApiUseTags('teacher')
 @Controller('teacher')
 export class TeacherController {
     constructor(private readonly teacherService: TeacherService) { }

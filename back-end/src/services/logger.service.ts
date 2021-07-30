@@ -14,4 +14,8 @@ export class LoggerService {
     const newLog = new this.loggerModal(logDto);
     return await newLog.save();
   }
+
+  async getAll() {
+    return await this.loggerModal.find().exec();
+  }
 }

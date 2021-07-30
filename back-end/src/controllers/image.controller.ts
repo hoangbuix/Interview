@@ -4,7 +4,7 @@ import { extname, join } from "path";
 import { diskStorage } from 'multer';
 import { Express } from 'express';
 import { Roles } from "src/auth/decorators/roles.decorator";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { ApiUseTags } from "@nestjs/swagger";
 import { ImageService } from "src/services/image.service";
 import { UserRole } from "src/utils/user-role.enum";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
@@ -21,8 +21,7 @@ const storage = {
 }
 
 
-@ApiBearerAuth()
-@ApiTags('image')
+@ApiUseTags('image')
 @Controller('image')
 export class ImageController {
     constructor(private readonly imageService: ImageService) { }

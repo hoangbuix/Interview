@@ -3,7 +3,7 @@ import { UserService } from '../services/user.service';
 import { BadRequestException } from 'src/exceptions/bad-request.exception';
 import { responseUser } from 'src/response-data/user.response';
 import { ValidationPipe } from 'src/pipe/validation.pipe';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiUseTags } from '@nestjs/swagger';
 import { RolesGuard } from 'src/auth/guards/role.guard';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
@@ -19,15 +19,15 @@ import { UpdateUserDto } from 'src/dto/update-dto/update-user.dto';
 
 
 @ApiBearerAuth()
-@ApiTags('user')
+@ApiUseTags('user')
 @Controller('user')
 @UseInterceptors(LoggingInterceptor, TransformInterceptor)
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Get('get-all')
-  @Roles()
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles()
+  // @UseGuards(JwtAuthGuard, RolesGuard)
   async getAll() {
     return await this.userService.getAllUser();
   }

@@ -1,6 +1,6 @@
 import { MajorService } from "src/services/major.service";
 import { Controller, Get, Post, Body, HttpStatus, Res, Put, Param, Req, UseGuards, Delete } from "@nestjs/common";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { ApiUseTags } from "@nestjs/swagger";
 import { CreateMajorDto } from "src/dto/create-dto/create-major.dto";
 import { UpdateMajorDto } from "src/dto/update-dto/update-major.dto";
 import { ForbiddenException } from "src/exceptions/forbidden.exception";
@@ -11,8 +11,7 @@ import { RolesGuard } from "src/auth/guards/role.guard";
 import { MajorModel } from "src/models/major.model";
 
 
-@ApiBearerAuth()
-@ApiTags('major')
+@ApiUseTags('major')
 @Controller('major')
 export class MajorController {
     constructor(private readonly majorService: MajorService) { }

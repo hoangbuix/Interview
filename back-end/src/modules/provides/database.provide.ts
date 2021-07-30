@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import { default as config } from '../../config';
+import { default as config } from '../../configuration/config';
 
 
 const userString = config.db.user && config.db.pass ? (config.db.user + ':' + config.db.pass + '@') : '';

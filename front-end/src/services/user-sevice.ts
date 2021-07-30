@@ -1,8 +1,9 @@
 import axios from "axios";
 import axiosClient from "./auth-header";
+// import axiosClient from "./auth-header";
 
 
-const url: string | undefined = "http://localhost:9090";
+const url: string | undefined = "http://localhost:9090/api";
 
 export const loginUser = ({ username, password }: ReqLogin): Promise<ResLoginApi> =>
     new Promise((resolve, reject) => {
@@ -27,7 +28,7 @@ export const getUserId = (id: string): Promise<ResGetUserIdApi> =>
             axiosClient.get(`/user/get-user-id/${id}`).then((response) => {
                 resolve({
                     data: {
-                        user: response.data.data
+                        user: response.data
                     },
                     message: 'success!'
                 })

@@ -21,8 +21,9 @@ import { ClassModule } from './modules/class.module';
 import { ClassController } from './controllers/class.controller';
 import { MajorModule } from './modules/major.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { default as config } from './config';
-
+import { ConfigurationService } from './configuration/configuration.service';
+import { Configuration } from './configuration/configuration.enum';
+import { default as config } from './configuration/config';
 
 const userString = config.db.user && config.db.pass ? (config.db.user + ':' + config.db.pass + '@') : '';
 const authSource = config.db.authSource ? ('?authSource=' + config.db.authSource + '&w=1') : '';
@@ -30,7 +31,8 @@ const dv = "mongodb+srv://hoangbuix:151998@cluster0.utilx.mongodb.net/interview?
 
 
 @Module({
-  imports: [MongooseModule.forRoot(dv || 'mongodb://' + userString + config.db.host + ':' + (config.db.port || '27017') + '/' + config.db.database + authSource),
+  imports: [
+    MongooseModule.forRoot(dv || 'mongodb://' + userString + config.db.host + ':' + (config.db.port || '27017') + '/' + config.db.database + authSource),
     UserModule,
     TeacherModule,
     TaskModule,

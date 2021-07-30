@@ -1,12 +1,9 @@
-import axios from "axios";
-
-
-const url: string | undefined = "http://10.15.0.4:9090";
+import axiosClient from "./auth-header";
 
 export const getAllReport = (): Promise<ResGetReportApi> =>
     new Promise((resolve, reject) => {
         setTimeout(() => {
-            axios.get(`${url}/report/get-all`).then((response) => {
+            axiosClient.get(`/report/get-all`).then((response) => {
                 resolve({
                     data: {
                         report: response.data
@@ -20,7 +17,7 @@ export const getAllReport = (): Promise<ResGetReportApi> =>
 export const getReportUserId = (id: string): Promise<ResGetReportApi> =>
     new Promise((resolve, reject) => {
         setTimeout(() => {
-            axios.get(`${url}/report/get-report-user/${id}`).then((response) => {
+            axiosClient.get(`/report/get-report-user/${id}`).then((response) => {
                 resolve({
                     data: {
                         report: response.data
