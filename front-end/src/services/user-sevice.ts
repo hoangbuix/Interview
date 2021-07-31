@@ -37,3 +37,19 @@ export const getUserId = (id: string): Promise<ResGetUserIdApi> =>
             })
         }, 500);
     });
+
+export const getUserAll = (): Promise<ResGetUserAllApi> =>
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+            axiosClient.get(`/user/get-all`).then((response) => {
+                resolve({
+                    data: {
+                        users: response.data
+                    },
+                    message: 'success!'
+                })
+            }).catch(err => {
+                reject(new Error('Get failer!'))
+            })
+        }, 500);
+    });

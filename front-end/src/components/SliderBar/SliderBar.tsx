@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 const SliderBar = () => {
-
     const [isActive, setIsActive] = useState(false);
     const showSliderBar = () => {
         if (!isActive) {
@@ -11,6 +11,7 @@ const SliderBar = () => {
             setIsActive(false)
         }
     }
+
 
     return (
         <>
@@ -27,64 +28,64 @@ const SliderBar = () => {
                         <span className="tooltip">Search</span>
                     </li>
                     <li>
-                        <a href="/dashboard">
+                        <Link to="/dashboard">
                             <i className="bx bx-grid-alt" />
                             <span className="links_name">Dashboard</span>
-                        </a>
+                        </Link>
                         <span className="tooltip">Dashboard</span>
                     </li>
                     <li>
-                        <a href="_">
+                        <Link to="/dashboard/user">
                             <i className="bx bx-user" />
                             <span className="links_name">User</span>
-                        </a>
+                        </Link>
                         <span className="tooltip">User</span>
                     </li>
                     <li>
-                        <a href="_">
-                            <i className="bx bx-chat" />
-                            <span className="links_name">Messages</span>
-                        </a>
-                        <span className="tooltip">Messages</span>
+                        <Link to="/dashboard/teacher">
+                            <i className="bx bx-group" />
+                            <span className="links_name">Teacher</span>
+                        </Link>
+                        <span className="tooltip">Teacher</span>
                     </li>
                     <li>
-                        <a href="_">
+                        <Link to="/c">
                             <i className="bx bx-pie-chart-alt-2" />
                             <span className="links_name">Analytics</span>
-                        </a>
+                        </Link>
                         <span className="tooltip">Analytics</span>
                     </li>
                     <li>
-                        <a href="_">
+                        <Link to="_">
                             <i className="bx bx-folder" />
                             <span className="links_name">File Manager</span>
-                        </a>
+                        </Link>
                         <span className="tooltip">Files</span>
                     </li>
                     <li>
-                        <a href="_">
+                        <Link to="_">
                             <i className="bx bx-cart-alt" />
                             <span className="links_name">Order</span>
-                        </a>
+                        </Link>
                         <span className="tooltip">Order</span>
                     </li>
                     <li>
-                        <a href="_">
+                        <Link to="_">
                             <i className="bx bx-heart" />
                             <span className="links_name">Saved</span>
-                        </a>
+                        </Link>
                         <span className="tooltip">Saved</span>
                     </li>
                     <li>
-                        <a href="_">
+                        <Link to="_">
                             <i className="bx bx-cog" />
                             <span className="links_name">Setting</span>
-                        </a>
+                        </Link>
                         <span className="tooltip">Setting</span>
                     </li>
                     <li className="profile">
                         <div className="profile-details">
-                            <img src="https://pbs.twimg.com/profile_images/1156426317/assassins-creed-2_400x400.jpg" alt="profileImg" />
+                            <img src="https://pbs.twimg.com/profile_images/1156426317/Linkssassins-creed-2_400x400.jpg" alt="profileImg" />
                             <div className="name_job">
                                 <div className="name">James</div>
                                 <div className="job">Web designer</div>

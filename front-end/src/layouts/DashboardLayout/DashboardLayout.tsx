@@ -1,75 +1,53 @@
 import React from "react";
 import "./DashboardLayout.style.scss";
 import SliderBar from "../../components/SliderBar/SliderBar";
-import { Bar } from "react-chartjs-2";
+import { BrowserRouter as Router, Route, Switch, useRouteMatch } from "react-router-dom";
 import User from "./User/User";
+import Teacher from "./Teacher/Teacher";
+import { useEffect } from "react";
 
+
+
+const routes = [
+    {
+        path: "/",
+        exact: true,
+        main: () => <h2>Home</h2>
+    },
+    {
+        path: "/user",
+        main: () => <User />
+    },
+    {
+        path: "/teacher",
+        main: () => <Teacher />
+    }];
 
 const DashboardLayout = () => {
-    const data = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [
-            {
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
-                borderWidth: 1,
-            },
-        ],
-    };
+    let { url, path } = useRouteMatch();
+    useEffect(() => { }, [url, path])
 
-    const options = {
-        indexAxis: 'y',
-        // Elements options apply to all of the options unless overridden in a dataset
-        // In this case, we are setting the border of each horizontal bar to be 2px wide
-        elements: {
-            bar: {
-                borderWidth: 2,
-            },
-        },
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'right',
-            },
-            title: {
-                display: true,
-                text: 'Chart.js Horizontal Bar Chart',
-            },
-        },
-    };
+    console.log(path + "---------------" + url)
+
     return (
-        <>
+        <Router>
             <SliderBar />
             <section className="home-section">
                 <div className="text" >Dashboard</div>
-
                 <div className="gird wide">
-                    <User />
-                    {/* <div className="row">
-                        <div className="col l-6">
-                            <Bar data={data} options={options} />
-                        </div>
-                        <div className="col l-6"></div>
-                    </div> */}
+                    <Switch >
+                        {routes.map((route, index) => (
+                            <Route
+                                key={index}
+                                path={path + route.path}
+                                exact={route.exact}
+                                children={<route.main />}
+                            />
+                        ))}
+                    </Switch>
                 </div>
             </section>
-        </>
+        </Router>
     )
 };
 

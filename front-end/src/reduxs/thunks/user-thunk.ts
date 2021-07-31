@@ -1,4 +1,4 @@
-import { loginUser, getUserId } from "../../services/user-sevice";
+import { loginUser, getUserId, getUserAll } from "../../services/user-sevice";
 import * as actions from "../actions/user-action";
 
 export const login = (payload: ReqLogin) => (dispatch?: any) => {
@@ -14,4 +14,11 @@ export const getUserById = (id: string) => (dispatch?: any) => {
     return getUserId(id).then(res => {
         return dispatch(actions.getUserIdSuccess(res))
     }).catch(err => dispatch(actions.getUserIdFailer(err)))
+}
+
+export const getAllUser = () => (dispatch?: any) => {
+    dispatch(actions.getUserAllStart())
+    return getUserAll().then(res => {
+        return dispatch(actions.getUserAllSuccess(res))
+    }).catch(err => dispatch(actions.getUserAllFailer(err)))
 }

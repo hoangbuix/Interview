@@ -27,3 +27,17 @@ export const getUserIdFailer = (messageError: string) => ({
     type: types.GET_USER_ID_FAILER,
     payload: messageError
 });
+
+export const getUserAllStart = () => ({
+    type: types.GET_USER_ALL_START
+});
+
+export const getUserAllSuccess = (users: ResGetUserAllApi) => ({
+    type: types.GET_USER_ALL_SUCCESS,
+    payload: users
+});
+
+export const getUserAllFailer = (messageError: string) => ({
+    type: types.GET_USER_ALL_FAILER,
+    payload: messageError
+});

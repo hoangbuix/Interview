@@ -43,3 +43,12 @@ interface ResGetUserIdApi extends Res {
 interface ResGetUserId extends ActionRedux {
     payload: ResGetUserIdApi
 }
+
+interface ResGetUserAllApi extends Res {
+    data: {
+        users: []
+    }
+}
+interface ResGetUserAll extends ActionRedux {
+    payload: ResGetUserAllApi
+}

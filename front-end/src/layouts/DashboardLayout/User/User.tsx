@@ -1,8 +1,33 @@
 import React from "react";
+import { connect, ConnectedProps } from "react-redux";
 import "./User.style.scss";
+import { getAllUser } from "../../../reduxs/thunks/user-thunk"
+import { useEffect } from "react";
 
 
-const User = () => {
+const mapStateToProps = (state: AppState) => ({
+    users: state.user.users
+})
+
+const mapDispatchToProps = {
+    getAllUser
+}
+
+const connector = connect(mapStateToProps, mapDispatchToProps)
+
+interface Props extends ConnectedProps<typeof connector> { }
+
+const User: React.FC<Props> = (props: Props) => {
+    const { users, getAllUser } = props;
+    useEffect(() => {
+        setTimeout(() => {
+            if (users === null) { getAllUser() }
+        }, 300);
+        // return () => {
+        //     clearTimeout(timer);
+        // };
+    }, [users, getAllUser]);
+    console.log(users)
     return (
         <>
             <table>
@@ -50,4 +75,4 @@ const User = () => {
         </>
     )
 };
-export default User;
+export default connector(User);
