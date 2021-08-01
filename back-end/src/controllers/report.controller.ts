@@ -2,11 +2,12 @@ import { Controller, Get, Post, Body, Response, Request, Param } from "@nestjs/c
 import { ReportModel } from "src/models/report.model";
 import { ReportService } from "src/services/report.service";
 import { BadRequestException } from "src/exceptions/bad-request.exception";
-import { ApiUseTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { CreateReportDto } from "src/dto/create-dto/create-report.dto";
 
 
-@ApiUseTags('report')
+@ApiBearerAuth()
+@ApiTags('report')
 @Controller('report')
 export class ReportController {
     constructor(private readonly reportService: ReportService) { }

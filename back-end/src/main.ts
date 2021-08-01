@@ -50,18 +50,17 @@ async function bootstrap() {
   });
 
   const options = new DocumentBuilder()
-    .setTitle('Nest MEAN')
-    .setDescription('API Documentation')
-    .setVersion('1.0.0')
-    .setSchemes('http')
-    .setBasePath('/api')
-    .addBearerAuth('Authorization', 'header')
+    .setTitle('Api interview')
+    .setDescription('API')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .addTag('interview')
     .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('/api', app, document);
+  SwaggerModule.setup('/', app, document);
 
 
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('');
   app.useGlobalFilters(new HttpExceptionFilter());
   await app.listen(9090);
   console.log(`Application is running on: ${await app.getUrl()}`);

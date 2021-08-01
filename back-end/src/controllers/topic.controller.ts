@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res, UseGuards } from "@nestjs/common";
-import { ApiBearerAuth, ApiUseTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { Roles } from "src/auth/decorators/roles.decorator";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { RolesGuard } from "src/auth/guards/role.guard";
@@ -11,7 +11,7 @@ import { UserRole } from "src/utils/user-role.enum";
 import { TopicService } from "src/services/topic.service";
 
 @ApiBearerAuth()
-@ApiUseTags('topic')
+@ApiTags('topic')
 @Controller('topic')
 export class TopicController {
     constructor(private readonly topicService: TopicService) { }

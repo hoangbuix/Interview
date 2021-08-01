@@ -1,7 +1,7 @@
 import { TaskService } from 'src/services/task.service';
 import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res, UseGuards } from '@nestjs/common';
 import { TaskModel } from 'src/models/task.model';
-import { ApiUseTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UserRole } from 'src/utils/user-role.enum';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
@@ -11,7 +11,8 @@ import { ForbiddenException } from 'src/exceptions/forbidden.exception';
 import { UpdateTaskDto } from 'src/dto/update-dto/update-task.dto';
 
 
-@ApiUseTags('task')
+@ApiBearerAuth()
+@ApiTags('task')
 @Controller('task')
 export class TaskController {
     constructor(private readonly taskService: TaskService) { }

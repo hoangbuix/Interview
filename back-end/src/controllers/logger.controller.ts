@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res, UseGuards } from "@nestjs/common";
-import { ApiUseTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { Roles } from "src/auth/decorators/roles.decorator";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { RolesGuard } from "src/auth/guards/role.guard";
@@ -8,7 +8,8 @@ import { LoggerModel } from "src/models/logger.model";
 import { LoggerService } from "src/services/logger.service";
 
 
-@ApiUseTags('logger')
+@ApiBearerAuth()
+@ApiTags('logger')
 @Controller('logger')
 export class ClassController {
     constructor(private readonly loggerService: LoggerService) { }

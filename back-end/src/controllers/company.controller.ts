@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Res, UseGuards, Param, Put, Req, Delete } from "@nestjs/common";
-import { ApiUseTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { Roles } from "src/auth/decorators/roles.decorator";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { RolesGuard } from "src/auth/guards/role.guard";
@@ -13,7 +13,8 @@ import { CompanyService } from "src/services/company.service";
 
 
 
-@ApiUseTags('company')
+@ApiBearerAuth()
+@ApiTags('company')
 @Controller('company')
 export class CompanyController {
     constructor(private readonly companyService: CompanyService) { }
