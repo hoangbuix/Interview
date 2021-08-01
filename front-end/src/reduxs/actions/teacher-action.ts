@@ -13,3 +13,17 @@ export const getTeacherFailer = (messageError: string) => ({
     type: types.GET_TEACHER_FAILER,
     payload: messageError
 });
+
+export const getTeacherAllStart = () => ({
+    type: types.GET_TEACHER_ALL_START
+});
+
+export const getTeacherAllSuccess = (teachers: ResGetTeacherAllApi) => ({
+    type: types.GET_TEACHER_ALL_SUCCESS,
+    payload: teachers
+});
+
+export const getTeacherAllFailer = (messageError: string) => ({
+    type: types.GET_TEACHER_ALL_FAILER,
+    payload: messageError
+});

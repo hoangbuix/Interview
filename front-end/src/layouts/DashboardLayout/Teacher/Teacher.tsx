@@ -1,7 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect, ConnectedProps } from "react-redux";
 import "./Teacher.style.scss";
+import { getAllTeacher } from "../../../reduxs/thunks/teacher-thunk"
 
-const Teacher = () => {
+
+const mapStateToProps = (state: AppState) => ({
+    teachers: state.teacher.teachers
+})
+
+const mapDispatchToProps = {
+    getAllTeacher
+}
+
+const connector = connect(mapStateToProps, mapDispatchToProps)
+
+interface Props extends ConnectedProps<typeof connector> { }
+
+
+const Teacher: React.FC<Props> = (props: Props) => {
+    const { teachers, getAllTeacher } = props;
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            getAllTeacher()
+        }, 300);
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [getAllTeacher]);
+
+    console.log(teachers)
+
     return (
         <>
             <div className="container">
@@ -12,34 +40,20 @@ const Teacher = () => {
                         <div className="col col-3">Amount Due</div>
                         <div className="col col-4">Payment Status</div>
                     </li>
-                    <li className="table-row">
-                        <div className="col col-1" data-label="Job Id">42235</div>
-                        <div className="col col-2" data-label="Customer Name">John Doe</div>
-                        <div className="col col-3" data-label="Amount">$350</div>
-                        <div className="col col-4" data-label="Payment Status">Pending</div>
-                    </li>
-                    <li className="table-row">
-                        <div className="col col-1" data-label="Job Id">42442</div>
-                        <div className="col col-2" data-label="Customer Name">Jennifer Smith</div>
-                        <div className="col col-3" data-label="Amount">$220</div>
-                        <div className="col col-4" data-label="Payment Status">Pending</div>
-                    </li>
-                    <li className="table-row">
-                        <div className="col col-1" data-label="Job Id">42257</div>
-                        <div className="col col-2" data-label="Customer Name">John Smith</div>
-                        <div className="col col-3" data-label="Amount">$341</div>
-                        <div className="col col-4" data-label="Payment Status">Pending</div>
-                    </li>
-                    <li className="table-row">
-                        <div className="col col-1" data-label="Job Id">42311</div>
-                        <div className="col col-2" data-label="Customer Name">John Carpenter</div>
-                        <div className="col col-3" data-label="Amount">$115</div>
-                        <div className="col col-4" data-label="Payment Status">Pending</div>
-                    </li>
+                    {
+                        teachers?.map((teacher: Teacher, i: number) => (
+                            <li className="table-row" key={i}>
+                                <div className="col col-1" data-label="Job Id">{i + 1}</div>
+                                <div className="col col-2" data-label="Customer Name">John Doe</div>
+                                <div className="col col-3" data-label="Amount">$350</div>
+                                <div className="col col-4" data-label="Payment Status">Pending</div>
+                            </li>
+                        ))
+                    }
                 </ul>
             </div>
 
         </>
     )
 };
-export default Teacher;
+export default connector(Teacher);

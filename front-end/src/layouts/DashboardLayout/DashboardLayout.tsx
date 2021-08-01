@@ -40,7 +40,7 @@ const DashboardLayout = () => {
                             <Route
                                 key={index}
                                 path={path + route.path}
-                                exact={route.exact}
+                                exact={route?.exact}
                                 children={<route.main />}
                             />
                         ))}

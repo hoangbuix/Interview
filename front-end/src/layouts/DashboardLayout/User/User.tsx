@@ -20,55 +20,48 @@ interface Props extends ConnectedProps<typeof connector> { }
 const User: React.FC<Props> = (props: Props) => {
     const { users, getAllUser } = props;
     useEffect(() => {
-        setTimeout(() => {
-            if (users === null) { getAllUser() }
+        const timer = setTimeout(() => {
+            getAllUser()
         }, 300);
-        // return () => {
-        //     clearTimeout(timer);
-        // };
-    }, [users, getAllUser]);
-    console.log(users)
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [getAllUser]);
     return (
         <>
             <table>
                 <thead>
                     <tr>
-                        <th><label>Invoice</label></th>
-                        <th><label>Details</label></th>
-                        <th><label>Due Date</label></th>
-                        <th><label>Amount</label></th>
+                        <th><label>Id</label></th>
+                        <th><label>FullName</label></th>
+                        <th><label>Gender</label></th>
+                        <th><label>BirthDay</label></th>
+                        <th><label>Address</label></th>
+                        <th><label>Phone</label></th>
+                        <th><label>Username</label></th>
+                        <th><label>Email</label></th>
+                        <th><label>Role</label></th>
+                        <th><label>Active</label></th>
                         <th><label>Payment</label></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td data-label="Invoice">A11289678234</td>
-                        <td data-label="Details">With Payment of Tax</td>
-                        <td data-label="Due Date">August 13, 2018</td>
-                        <td data-label="Amount">$78.00</td>
-                        <td data-label="Payment"><button className="btn-invoice">Make Payment </button></td>
-                    </tr>
-                    <tr>
-                        <td data-label="Invoice">B11289678234</td>
-                        <td data-label="Details">With Payment of Tax</td>
-                        <td data-label="Due Date">July 13, 2018</td>
-                        <td data-label="Amount">$56.00</td>
-                        <td data-label="Payment"><button className="btn-invoice">Make Payment</button></td>
-                    </tr>
-                    <tr>
-                        <td data-label="Invoice">C11289678234</td>
-                        <td data-label="Details">With Payment of Tax</td>
-                        <td data-label="Due Date">June 13, 2018</td>
-                        <td data-label="Amount">$46.00</td>
-                        <td data-label="Payment"><button className="btn-invoice">Make Payment</button></td>
-                    </tr>
-                    <tr>
-                        <td data-label="Invoice">D11289678234</td>
-                        <td data-label="Details">With Payment of Tax</td>
-                        <td data-label="Due Date">May 13, 2018</td>
-                        <td data-label="Amount">$28.00</td>
-                        <td data-label="Payment"><button className="btn-invoice">Make Payment</button></td>
-                    </tr>
+                    {users.map((data: User, i: number) => (
+                        <tr key={i}>
+                            <td data-label="Id">{i + 1}</td>
+                            <td data-label="Full name">{data.fullName}</td>
+                            <td data-label="Gender">{data.gender}</td>
+                            <td data-label="Birthday">{data.birthday}</td>
+                            <td data-label="Address">{data.address}</td>
+                            <td data-label="Phone">{data.phone}</td>
+                            <td data-label="Username">{data.username}</td>
+                            <td data-label="Email">{data.email.split('gmail.com').join('...')}</td>
+                            <td data-label="Role">{data.roles[0] + ',' + data.roles[1]}</td>
+                            <td data-label="Active" >{data.active === true ? "true" : "false"}</td>
+                            <td data-label="Payment"><button className="btn-invoice">Make Payment </button></td>
+                        </tr>
+                    ))
+                    }
                 </tbody>
             </table>
 

@@ -1,4 +1,4 @@
-import { getTeacherId } from "../../services/teacher-service";
+import { getTeacherAll, getTeacherId } from "../../services/teacher-service";
 import * as actions from "../actions/teacher-action";
 
 export const getTeacherById = (id: string) => (dispatch?: any) => {
@@ -6,4 +6,12 @@ export const getTeacherById = (id: string) => (dispatch?: any) => {
     return getTeacherId(id).then(res => {
         return dispatch(actions.getTeacherSuccess(res))
     }).catch(err => Promise.reject(dispatch(actions.getTeacherFailer(err))))
+};
+
+
+export const getAllTeacher = () => (dispatch?: any) => {
+    dispatch(actions.getTeacherAllStart())
+    return getTeacherAll().then(res => {
+        return dispatch(actions.getTeacherAllSuccess(res))
+    }).catch(err => Promise.reject(dispatch(actions.getTeacherAllFailer(err))))
 };

@@ -14,3 +14,18 @@ export const getTeacherId = (id: string): Promise<ResGetTeacherApi> =>
             })
         }, 100);
     });
+
+export const getTeacherAll = (): Promise<ResGetTeacherAllApi> =>
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+            axiosClient.get(`/teacher/get-all`).then((response) => {
+                resolve({
+                    data: {
+                        teachers: response.data
+                    }, message: 'Get success!'
+                })
+            }).catch(err => {
+                reject(new Error('Get failer!'))
+            })
+        }, 100);
+    });

@@ -13,6 +13,18 @@ interface ResGetTeacherApi extends Res {
     }
 }
 
-interface ResTeacher extends ActionRedux {
+interface ResGetTeacher extends ActionRedux {
     payload: ResGetTeacherApi
+}
+
+
+
+interface ResGetTeacherAllApi extends Res {
+    data: {
+        teachers: []
+    }
+}
+
+interface ResGetTeacherAll extends ActionRedux {
+    payload: ResGetTeacherAllApi
 }

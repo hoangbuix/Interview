@@ -14,7 +14,7 @@ const userReducer = (state = inintialState, action: { type: any, payload: any })
         case types.LOGIN_START:
             return { ...state, isFetching: true };
         case types.LOGIN_SUCCESS:
-            return { ...state, isFetching: false, data: action.payload, isAuthenticated: true };
+            return { ...state, isFetching: false, user: action.payload, isAuthenticated: true };
         case types.LOGIN_FAILER:
             return { ...state, messageError: action.payload };
         case types.GET_USER_ID_START:

@@ -8,7 +8,7 @@ import { FiArrowRight } from "react-icons/fi";
 
 
 const mapStateToProps = (state: any) => ({
-    users: state.user.users,
+    users: state.user.data,
     isFetching: state.user.isFetching
 })
 

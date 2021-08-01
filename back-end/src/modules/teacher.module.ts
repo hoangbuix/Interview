@@ -17,6 +17,6 @@ export class TeacherModule implements NestModule {
     public configure(consumer: MiddlewareConsumer) {
         consumer
             .apply()
-            .forRoutes({ path: 'teacher', method: RequestMethod.ALL })
+            .forRoutes({ path: 'teacher', method: RequestMethod.PUT })
     }
 }
