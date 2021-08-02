@@ -3,7 +3,7 @@ import axiosClient from "./auth-header";
 // import axiosClient from "./auth-header";
 
 
-const url: string | undefined = "http://localhost:9090/api";
+const url: string | undefined = "http://localhost:9090";
 
 export const loginUser = ({ username, password }: ReqLogin): Promise<ResLoginApi> =>
     new Promise((resolve, reject) => {

@@ -19,11 +19,13 @@ export const getTeacherAll = (): Promise<ResGetTeacherAllApi> =>
     new Promise((resolve, reject) => {
         setTimeout(() => {
             axiosClient.get(`/teacher/get-all`).then((response) => {
+                let res: any = response;
                 resolve({
                     data: {
-                        teachers: response.data
+                        teachers: res
                     }, message: 'Get success!'
                 })
+                console.log(response)
             }).catch(err => {
                 reject(new Error('Get failer!'))
             })

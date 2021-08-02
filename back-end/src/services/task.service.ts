@@ -6,6 +6,7 @@ import { NotFoundException } from "src/exceptions/not-found.exception";
 import { CreateTaskDto } from "src/dto/create-dto/create-task.dto";
 import { UpdateTaskDto } from "src/dto/update-dto/update-task.dto";
 import { UserRole } from "src/utils/user-role.enum";
+import { BadRequestException } from "src/exceptions/bad-request.exception";
 
 @Injectable()
 export class TaskService {
@@ -15,7 +16,7 @@ export class TaskService {
 
     async createTask(createTaskDto: CreateTaskDto): Promise<TaskModel> {
         const exitTask = await this.taskModel.findOne({ taskName: createTaskDto.taskName });
-        if (exitTask) throw new NotFoundException('Task đã tồn tại!');
+        if (exitTask) throw new BadRequestException('Task đã tồn tại!');
         const task: TaskModel = new this.taskModel(createTaskDto);
         return await task.save();
     }

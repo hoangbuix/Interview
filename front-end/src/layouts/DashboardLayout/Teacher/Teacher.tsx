@@ -4,6 +4,7 @@ import "./Teacher.style.scss";
 import { getAllTeacher } from "../../../reduxs/thunks/teacher-thunk"
 
 
+
 const mapStateToProps = (state: AppState) => ({
     teachers: state.teacher.teachers
 })
@@ -26,6 +27,7 @@ const Teacher: React.FC<Props> = (props: Props) => {
         return () => {
             clearTimeout(timer);
         };
+
     }, [getAllTeacher]);
 
     console.log(teachers)
@@ -40,8 +42,8 @@ const Teacher: React.FC<Props> = (props: Props) => {
                         <div className="col col-3">Amount Due</div>
                         <div className="col col-4">Payment Status</div>
                     </li>
-                    {
-                        teachers?.map((teacher: Teacher, i: number) => (
+                    {/* {
+                        teachers?.map((teacher: any, i: number) => (
                             <li className="table-row" key={i}>
                                 <div className="col col-1" data-label="Job Id">{i + 1}</div>
                                 <div className="col col-2" data-label="Customer Name">John Doe</div>
@@ -49,7 +51,7 @@ const Teacher: React.FC<Props> = (props: Props) => {
                                 <div className="col col-4" data-label="Payment Status">Pending</div>
                             </li>
                         ))
-                    }
+                    } */}
                 </ul>
             </div>
 

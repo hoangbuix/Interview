@@ -4,7 +4,6 @@ const inintialState = {
     teachers: [],
     isFetching: false,
     messageError: '',
-    isAuthenticated: false,
     teacher: null as Teacher | null,
 }
 
@@ -13,13 +12,13 @@ const teacherReducer = (state = inintialState, action: { type: any, payload: any
         case types.GET_TEACHER_START:
             return { ...state, isFetching: true };
         case types.GET_TEACHER_SUCCESS:
-            return { ...state, isFetching: false, teacher: action.payload.data.teacher, isAuthenticated: true };
+            return { ...state, isFetching: false, teacher: action.payload.data.teacher };
         case types.GET_TEACHER_FAILER:
             return { ...state, messageError: action.payload };
         case types.GET_TEACHER_ALL_START:
             return { ...state, isFetching: true };
         case types.GET_TEACHER_ALL_SUCCESS:
-            return { ...state, isFetching: false, teachers: action.payload.data.teachers, isAuthenticated: true };
+            return { ...state, isFetching: false, teachers: action.payload.data.teachers };
         case types.GET_TEACHER_ALL_FAILER:
             return { ...state, messageError: action.payload };
         default:

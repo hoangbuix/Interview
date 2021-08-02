@@ -3,7 +3,7 @@ interface Teacher {
     createdAt: string;
     updatedAt: string;
     _id: string;
-    teacherId: string;
+    role: any;
     teacherName: string
 }
 
@@ -21,7 +21,7 @@ interface ResGetTeacher extends ActionRedux {
 
 interface ResGetTeacherAllApi extends Res {
     data: {
-        teachers: []
+        teachers: Teacher[]
     }
 }
 

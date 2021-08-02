@@ -22,15 +22,11 @@ export class TeacherController {
     @Roles(UserRole.admin, UserRole.manager)
     @UseGuards(JwtAuthGuard, RolesGuard)
     async createTeacher(@Request() req, @Response() res, @Body() createTeacherDto: CreateTeacherDto) {
-        const teacherExist = await this.teacherService.getTeacherName(createTeacherDto.teacherName);
-        if (teacherExist) { throw new BadRequestException('Giáo viên đã tồn tại'); }
-        else {
-            const teacher = await this.teacherService.addTeacher(createTeacherDto);
-            res.status(200).json({
-                message: "Tạo mới thành công",
-                teacher
-            });
-        }
+        const teacher = await this.teacherService.addTeacher(createTeacherDto);
+        res.status(200).json({
+            message: "Tạo mới thành công",
+            teacher
+        });
     }
 
     @Put('update-teacher/:id')
