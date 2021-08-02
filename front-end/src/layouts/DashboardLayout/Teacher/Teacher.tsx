@@ -57,6 +57,7 @@ const Teacher: React.FC<Props> = (props: Props) => {
             editteacherById(id, newData);
         }, 300);
         return () => clearTimeout(timer);
+        window.history.back()
     }
 
     const handleDelete = (id: string) => {
