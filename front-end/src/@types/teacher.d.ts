@@ -28,3 +28,23 @@ interface ResGetTeacherAllApi extends Res {
 interface ResGetTeacherAll extends ActionRedux {
     payload: ResGetTeacherAllApi
 }
+
+interface ResEditTeacherApi extends Res {
+    data: {
+        editTeacher: Teacher
+    }
+}
+
+interface ResEditTeacher extends ActionRedux {
+    payload: ResEditTeacherApi
+}
+
+interface ResDeleteTeacherApi extends Res {
+    data: {
+        deleteTeacher: Teacher
+    }
+}
+
+interface ResDeleteTeacher extends ActionRedux {
+    payload: ResDeleteTeacherApi
+}

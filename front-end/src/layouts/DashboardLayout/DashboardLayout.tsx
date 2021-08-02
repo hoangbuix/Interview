@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch, useRouteMatch } from "react-rou
 import User from "./User/User";
 import Teacher from "./Teacher/Teacher";
 import { useEffect } from "react";
+import BarChart from "./Chart/BarChart";
 
 
 
@@ -12,7 +13,7 @@ const routes = [
     {
         path: "/",
         exact: true,
-        main: () => <h2>Home</h2>
+        main: () => <BarChart />
     },
     {
         path: "/user",
@@ -26,8 +27,6 @@ const routes = [
 const DashboardLayout = () => {
     let { url, path } = useRouteMatch();
     useEffect(() => { }, [url, path])
-
-    console.log(path + "---------------" + url)
 
     return (
         <Router>

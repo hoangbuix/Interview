@@ -85,7 +85,7 @@ const SliderBar = () => {
                     </li>
                     <li className="profile">
                         <div className="profile-details">
-                            <img src="https://pbs.twimg.com/profile_images/1156426317/Linkssassins-creed-2_400x400.jpg" alt="profileImg" />
+                            <img src="https://w0.peakpx.com/wallpaper/19/741/HD-wallpaper-assassins-creed-asasin-asasins-creed-assassins-creed.jpg" alt="profileImg" />
                             <div className="name_job">
                                 <div className="name">James</div>
                                 <div className="job">Web designer</div>
