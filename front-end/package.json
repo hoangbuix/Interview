@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "concurrently \"react-scripts start\" \"cd ../back-end && yarn start\"",
-    "build": "react-scripts build",
+    "build": "concurrently \"react-scripts build \" \"cd ../back-end && yarn build && yarn start:prod\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
