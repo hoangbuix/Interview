@@ -41,7 +41,7 @@ const Teacher: React.FC<Props> = (props: Props) => {
                         <div className="col col-2">Teacher Name</div>
                         <div className="col col-3">Role</div>
                         <div className="col col-4">Status</div>
-                        <div className="col col-5">Action</div>
+                        <div className="col col-5" >Action</div>
                     </li>
                     {
                         teachers?.map((v: Teacher, i: number) => (
