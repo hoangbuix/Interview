@@ -38,20 +38,25 @@ const Teacher: React.FC<Props> = (props: Props) => {
                 <ul className="responsive-table">
                     <li className="table-header">
                         <div className="col col-1">Job Id</div>
-                        <div className="col col-2">Customer Name</div>
-                        <div className="col col-3">Amount Due</div>
-                        <div className="col col-4">Payment Status</div>
+                        <div className="col col-2">Teacher Name</div>
+                        <div className="col col-3">Role</div>
+                        <div className="col col-4">Status</div>
+                        <div className="col col-5">Action</div>
                     </li>
-                    {/* {
-                        teachers?.map((teacher: any, i: number) => (
+                    {
+                        teachers?.map((v: Teacher, i: number) => (
                             <li className="table-row" key={i}>
                                 <div className="col col-1" data-label="Job Id">{i + 1}</div>
-                                <div className="col col-2" data-label="Customer Name">John Doe</div>
-                                <div className="col col-3" data-label="Amount">$350</div>
-                                <div className="col col-4" data-label="Payment Status">Pending</div>
+                                <div className="col col-2" data-label="Teacher Name">{v.teacherName}</div>
+                                <div className="col col-3" data-label="Role">{v.role}</div>
+                                <div className="col col-4" data-label="Status">{v.active === true ? 'true' : 'false'}</div>
+                                <div className="col col-5" data-label="Action" style={{ display: 'flex', textAlign: 'center' }}>
+                                    <button style={{ padding: '0 0.5rem', margin: '0 0.5rem' }}>Edit </button> Or
+                                    <button style={{ padding: '0 0.5rem', margin: '0 0.5rem' }}>Delete</button>
+                                </div>
                             </li>
                         ))
-                    } */}
+                    }
                 </ul>
             </div>
 
