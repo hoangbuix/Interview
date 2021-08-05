@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import "./Teacher.style.scss";
-import { getAllTeacher, editteacherById, deleteTeacherById } from "../../../reduxs/thunks/teacher-thunk"
+import { getAllTeacher, teacherAdd, editTeacherById, deleteTeacherById } from "../../../reduxs/thunks/teacher-thunk"
 import Modal from "../../../components/Modal/Modal";
-import { type } from "os";
+import Loading from "../../../components/Loading/Loading";
+import useDebounce from "../../../hooks/useDebounce";
 
 
 
 const mapStateToProps = (state: AppState) => ({
     teachers: state.teacher.teachers,
+    addTeacher: state.teacher.addTeacher,
     editTeacher: state.teacher.editTeacher,
     deleteTeacher: state.teacher.deleteTeacher
 })
 
 const mapDispatchToProps = {
     getAllTeacher,
-    editteacherById,
+    teacherAdd,
+    editTeacherById,
     deleteTeacherById
 }
 
@@ -24,13 +27,20 @@ const connector = connect(mapStateToProps, mapDispatchToProps)
 interface Props extends ConnectedProps<typeof connector> { }
 
 
+
 const Teacher: React.FC<Props> = (props: Props) => {
-    const { teachers, getAllTeacher, editTeacher, editteacherById, deleteTeacher, deleteTeacherById } = props;
-    const [isShow, setIsShow] = useState(false);
+    const { teachers, getAllTeacher, addTeacher, teacherAdd, editTeacher, editTeacherById, deleteTeacher, deleteTeacherById } = props;
+
+    const [isShowAdd, setIsShowAdd] = useState(false);
+    const [isShowEdit, setIsShowEdit] = useState(false);
+    const [isShowDelete, setIsShowDelete] = useState(false);
+    const [idTeacher, setIdTeacher] = useState<string>();
     const [data, setData] = useState<Teacher>();
     const [teacherName, setTeacherName] = useState<string>('');
-    const [role, setRole] = useState<[]>();
-    const [status, setStatus] = useState<boolean>(true)
+    const [role, setRole] = useState<string>('');
+    const [status, setStatus] = useState<string>('');
+    const debouncedValue = useDebounce<string>(teacherName, 500)
+
 
 
     useEffect(() => {
@@ -38,40 +48,82 @@ const Teacher: React.FC<Props> = (props: Props) => {
             getAllTeacher();
         }, 100);
         return () => clearTimeout(timer);
-    }, [getAllTeacher, editteacherById, deleteTeacherById]);
+    }, [data, getAllTeacher, teacherAdd, editTeacherById, deleteTeacherById, debouncedValue]);
+
+    const btnAdd = () => {
+        setIsShowAdd(true)
+    }
 
     const btnEdit = (id: string) => {
+        setIdTeacher(id);
         const newTeacher = teachers?.filter((item: Teacher) => item._id === id);
-        setIsShow(true);
+        setIsShowEdit(true);
         setData(newTeacher);
     }
 
+    const btnDelete = (id: string) => {
+        setIdTeacher(id);
+        setIsShowDelete(true);
+    }
+
+
     const btnClose = () => {
-        setIsShow(false);
+        setIsShowAdd(false)
+        setIsShowEdit(false);
+        setIsShowDelete(false);
     }
 
-    const handleEdit = () => {
-        const id: any = data?._id;
-        const newData: any = { teacherName, role, status };
+    const handleSetTeacherName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTeacherName(e.target.value);
+    }
+
+    const handleChangeRole = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setRole(e.target.value);
+    }
+
+    const handleChangeStatus = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setStatus(e.target.value);
+    }
+
+    const handleAdd = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        let active: boolean = status === 'true' ? true : false;
+        let aTeacher = { teacherName, role, active }
         const timer = setTimeout(() => {
-            editteacherById(id, newData);
+            teacherAdd(aTeacher);
+            setIsShowAdd(false)
         }, 300);
         return () => clearTimeout(timer);
-        window.history.back()
     }
 
-    const handleDelete = (id: string) => {
+
+    const handleEdit = (event: React.FormEvent<HTMLFormElement>) => {
+        if (idTeacher !== '') {
+            event.preventDefault()
+            let active: boolean = status === 'true' ? true : false;
+            let updateTeacher = { teacherName, role, active }
+            const timer = setTimeout(() => {
+                editTeacherById(idTeacher, updateTeacher);
+                setIsShowEdit(false)
+            }, 300);
+            return () => clearTimeout(timer);
+        }
+    }
+
+    const handleDelete = () => {
         const timer = setTimeout(() => {
-            deleteTeacherById(id);
+            deleteTeacherById(idTeacher);
+            setIsShowDelete(false)
         }, 300);
         return () => clearTimeout(timer);
     }
 
-
+    console.log(teacherName)
 
     return (
         <>
             <div className="container">
+                <button style={{ padding: '0 0.5rem', margin: '0 0.5rem', background: 'yellow' }} onClick={btnAdd}>Add +</button>
                 <ul className="responsive-table">
                     <li className="table-header">
                         <div className="col col-1">Id</div>
@@ -89,38 +141,85 @@ const Teacher: React.FC<Props> = (props: Props) => {
                                 <div className="col col-4" data-label="Status">{v.active === true ? 'true' : 'false'}</div>
                                 <div className="col col-5" data-label="Action" style={{ display: 'flex', textAlign: 'center' }}>
                                     <button style={{ padding: '0 0.5rem', margin: '0 0.5rem', background: 'yellow' }} onClick={() => btnEdit(v._id)}>Edit </button> Or
-                                    <button style={{ padding: '0 0.5rem', margin: '0 0.5rem', background: 'tomato' }} onClick={() => handleDelete(v._id)}>Delete</button>
+                                    <button style={{ padding: '0 0.5rem', margin: '0 0.5rem', background: 'tomato' }} onClick={() => btnDelete(v._id)}>Delete</button>
                                 </div>
                             </li>
                         ))
                     }
+                    {/* {
+                        teachers?.filter((item: Teacher) => item.active === false).map((v: Teacher, i: number) => (
+                            <li className="table-row" key={i} >
+                                <div className="col col-1" data-label="Job Id">{(i + 1) * (-1)}</div>
+                                <div className="col col-2" data-label="Teacher Name">{v.teacherName}</div>
+                                <div className="col col-3" data-label="Role">{v.role}</div>
+                                <div className="col col-4" data-label="Status">{v.active === true ? 'true' : 'false'}</div>
+                                <div className="col col-5" data-label="Action" style={{ display: 'flex', textAlign: 'center' }}>
+                                    <button style={{ padding: '0 0.5rem', margin: '0 0.5rem', background: 'yellow' }} onClick={() => btnEdit(v._id)}>Edit </button> Or
+                                    <button style={{ padding: '0 0.5rem', margin: '0 0.5rem', background: 'tomato' }} onClick={() => btnDelete(v._id)}>Delete</button>
+                                </div>
+                            </li>
+                        ))
+                    } */}
                 </ul>
             </div>
-
-            {isShow &&
-                <Modal show={isShow} handleClose={btnClose} title={`${'Teacher'}`}>
-                    <form className="modal-form" onSubmit={handleEdit}>
+            {isShowAdd &&
+                <Modal show={isShowAdd} handleClose={btnClose} title={`${'Teacher'}`} submit={handleAdd} btnName='Submit'>
+                    <form className="modal-form" >
                         <div className="form-row">
                             <label >Teacher Name</label>
-                            <input type="text" value={teacherName} />
+                            <input type="text" value={teacherName} onChange={handleSetTeacherName} placeholder={teacherName} />
                         </div>
                         <div className="form-row">
-                            <label htmlFor="iduser">Role</label>
-                            <select className="user-select" name="user-name" id="user">
+                            <label htmlFor="idteacher" >Role</label>
+                            <select className="role-select" value={role} onChange={handleChangeRole}>
                                 <option selected disabled>Pick a role</option>
-                                <option >Teacher</option>
-                                <option >Manager</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="manager">Manager</option>
                             </select>
                         </div>
                         <div className="form-row">
-                            <label htmlFor="iduser">Status</label>
-                            <select className="user-select" name="user-name" id="user">
+                            <label htmlFor="idstatus">Status</label>
+                            <select className="status-select" value={status} onChange={handleChangeStatus}>
                                 <option selected disabled>Pick a status</option>
                                 <option value="true">True</option>
                                 <option value="false">False</option>
                             </select>
                         </div>
                     </form>
+                </Modal>
+            }
+
+            {isShowEdit && data &&
+                <Modal show={isShowEdit} handleClose={btnClose} title={`${'Teacher'}`} submit={handleEdit} btnName='Submit'>
+                    <form className="modal-form" >
+                        <div className="form-row">
+                            <label >Teacher Name</label>
+                            <input type="text" value={teacherName} onChange={handleSetTeacherName} />
+                        </div>
+                        <div className="form-row">
+                            <label htmlFor="idteacher" >Role</label>
+                            <select className="role-select" value={role} onChange={handleChangeRole}>
+                                <option selected disabled>Pick a role</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="manager">Manager</option>
+                            </select>
+                        </div>
+                        <div className="form-row">
+                            <label htmlFor="idstatus">Status</label>
+                            <select className="status-select" value={status} onChange={handleChangeStatus}>
+                                <option selected disabled>Pick a status</option>
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                            </select>
+                        </div>
+                    </form>
+                </Modal>
+            }
+
+            {
+                isShowDelete &&
+                <Modal title='Yes or No' show={isShowDelete} handleClose={btnClose} btnName='Yes' submit={handleDelete}>
+                    <span>Are you sure?</span>
                 </Modal>
             }
 

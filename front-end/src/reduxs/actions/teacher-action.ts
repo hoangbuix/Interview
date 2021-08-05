@@ -28,6 +28,20 @@ export const getTeacherAllFailer = (messageError: string) => ({
     payload: messageError
 });
 
+export const addTeacherStart = () => ({
+    type: types.ADD_TEACHER_START
+});
+
+export const addTeacherSuccess = (teacher: ResAddTeacherApi) => ({
+    type: types.ADD_TEACHER_SUCCESS,
+    payload: teacher
+});
+
+export const addTeacherFailer = (messageError: string) => ({
+    type: types.ADD_TEACHER_FAILER,
+    payload: messageError
+});
+
 export const editTeacherStart = () => ({
     type: types.EDIT_TEACHER_START
 });

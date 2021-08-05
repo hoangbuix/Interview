@@ -84,7 +84,11 @@
 /*   MODAL   */
 /*************/
 /* The Modal (background) */
-
+.cancel {
+  color: #ff7473;
+  border-color: #FFFFF3;
+  background: #FFFFF3;
+}
 .modal {
 	// display: none;
 	/* Hidden by default */

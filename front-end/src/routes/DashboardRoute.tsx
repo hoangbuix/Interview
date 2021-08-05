@@ -17,15 +17,6 @@ export default function DashboardRoutes() {
                     </Suspense>
                 )}
             />
-            {/* <AuthenticatedGuard
-                exact
-                path={PATH.DASHBOARD + '/:idDashboard'}
-                component={() => (
-                    <Suspense fallback={<Loading />}>
-                        <Dashboard />
-                    </Suspense>
-                )}
-            /> */}
         </Switch>
     )
 }

@@ -32,7 +32,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"cd ../back-end && yarn start\"",
+    "start": "react-scripts start",
     "build": "concurrently \"react-scripts build && serve -s build -l 3000 \" \"cd ../back-end && yarn build && yarn start:prod\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

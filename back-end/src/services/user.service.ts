@@ -38,6 +38,7 @@ export class UserService {
   }
 
 
+
   async signIn(loginDto: LoginDto): Promise<{ token: string }> {
     const { username, password } = loginDto;
     const user: any = await this.getUserByUserName(username);
@@ -48,7 +49,7 @@ export class UserService {
     const payload: JwtPayload = { _id: user._id, username: user.username, changePasswordAt: user.changePasswordAt };
     const token = await this.generatorToken(payload);
     await user.save();
-    return {token};
+    return { token };
   }
 
   async verify(req: any) {
@@ -99,6 +100,31 @@ export class UserService {
         throw new NotFoundException('Người dùng không tồn tại');
       });
     return user;
+  }
+
+  async countUser() {
+    const count = await this.userModel.aggregate([
+      {
+        "$group": {
+          "_id": { "$toLower": "$role" },
+          "count": { "$sum": 1 }
+        }
+      },
+      {
+        "$group": {
+          "_id": null,
+          "counts": {
+            "$push": { "k": "$_id", "v": "$count" }
+          }
+        }
+      },
+      {
+        "$replaceRoot": {
+          "newRoot": { "$arrayToObject": "$counts" }
+        }
+      }
+    ])
+    return null;
   }
 
   async getUserByUserName(username: string) {

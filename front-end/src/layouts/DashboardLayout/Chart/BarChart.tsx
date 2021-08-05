@@ -43,7 +43,19 @@ const options = {
 const BarChart = () => {
     return (
         <>
-            <Bar data={data} options={options} />
+            <div className="gird wide">
+                <div className="row">
+                    <div className="col l-2-4">
+                        <Bar data={data} options={options} />
+                    </div>
+                    <div className="col l-2-4">
+                        <Bar data={data} options={options} />
+                    </div>
+                    <div className="col l-2-4">
+                        <Bar data={data} options={options} />
+                    </div>
+                </div>
+            </div>
         </>
     )
 };

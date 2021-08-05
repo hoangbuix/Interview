@@ -29,15 +29,34 @@ interface ResGetTeacherAll extends ActionRedux {
     payload: ResGetTeacherAllApi
 }
 
+
+interface EditTeacher {
+    teacherName: string;
+    role: any;
+    active: boolean;
+}
+
 interface ResEditTeacherApi extends Res {
     data: {
-        editTeacher: Teacher
+        editTeacher: EditTeacher
     }
 }
 
 interface ResEditTeacher extends ActionRedux {
     payload: ResEditTeacherApi
 }
+
+interface ResAddTeacherApi extends Res {
+    data: {
+        addTeacher: EditTeacher
+    }
+}
+
+interface ResAddTeacher extends ActionRedux {
+    payload: ResAddTeacherApi
+}
+
+
 
 interface ResDeleteTeacherApi extends Res {
     data: {

@@ -3,11 +3,13 @@ import "./Modal.style.scss";
 
 interface Props {
     handleClose: () => void;
+    submit: any;
     show: boolean;
     title: string;
+    btnName: string;
 }
 
-const Modal: React.FC<Props> = ({ handleClose, show, children, title }) => {
+const Modal: React.FC<Props> = ({ handleClose, submit, show, children, title, btnName }) => {
     const showHideClassName = show ? 'modal display-block' : 'modal display-none';
 
     return (
@@ -22,7 +24,8 @@ const Modal: React.FC<Props> = ({ handleClose, show, children, title }) => {
                         {children}
                     </div>
                     <div className="modal-footer">
-                        <input type="submit" className="button good" />
+                        <button className="cancel" onClick={handleClose}> Cancel </button>
+                        <button type="submit" onClick={submit} className="button good" >{btnName}</button>
                     </div>
                 </div>
             </div>
