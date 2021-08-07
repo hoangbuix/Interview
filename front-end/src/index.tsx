@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import "./scss/_gird.scss";
-import "./scss/_form.scss";
+import './scss/_index.scss';
+import "./scss/gird.scss";
+import "./scss/_theme.scss";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';

@@ -5,6 +5,7 @@ import meetReducer from "./reducers/meet-reducer";
 import reportReducer from "./reducers/report-reducer";
 import taskReducer from "./reducers/task-reducer";
 import teacherReducer from "./reducers/teacher-reducer";
+import themeReducer from "./reducers/theme-reducer";
 import topicReducer from "./reducers/topic-reducer";
 import userReducer from "./reducers/user-reducer";
 
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     topic: topicReducer,
     task: taskReducer,
     company: companyReducer,
-    major: majorReducer
+    major: majorReducer,
+    theme: themeReducer
 });
 
 export default rootReducer;

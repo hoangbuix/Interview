@@ -29,7 +29,21 @@ export const getTeacherAll = (): Promise<ResGetTeacherAllApi> =>
             })
         }, 100);
     });
-export const editTeacher = (id: string, teacher: any): Promise<ResEditTeacherApi> =>
+export const addTeacher = (teacher: EditTeacher): Promise<ResAddTeacherApi> =>
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+            axiosClient.post(`/teacher/create-teacher`, teacher).then((response) => {
+                resolve({
+                    data: {
+                        addTeacher: response.data !== undefined ? response.data : response
+                    }, message: 'Get success!'
+                })
+            }).catch(err => {
+                reject(new Error('Get failer!'))
+            })
+        }, 100);
+    });
+export const editTeacher = (id: string, teacher: EditTeacher): Promise<ResEditTeacherApi> =>
     new Promise((resolve, reject) => {
         setTimeout(() => {
             axiosClient.put(`/teacher/update-teacher/${id}`, teacher).then((response) => {

@@ -5,7 +5,8 @@ const inintialState = {
     isFetching: false,
     messageError: '',
     teacher: null as Teacher | null,
-    editTeacher: null as Teacher | null,
+    addTeacher: null as EditTeacher | null,
+    editTeacher: null as EditTeacher | null,
     deleteTeacher: null as Teacher | null,
 }
 
@@ -23,10 +24,16 @@ const teacherReducer = (state = inintialState, action: { type: any, payload: any
             return { ...state, isFetching: false, teachers: action.payload.data.teachers };
         case types.GET_TEACHER_ALL_FAILER:
             return { ...state, messageError: action.payload };
+        case types.ADD_TEACHER_START:
+            return { ...state, isFetching: true };
+        case types.ADD_TEACHER_SUCCESS:
+            return { ...state, isFetching: false, addTteacher: action.payload.data.addTeacher };
+        case types.ADD_TEACHER_FAILER:
+            return { ...state, messageError: action.payload };
         case types.EDIT_TEACHER_START:
             return { ...state, isFetching: true };
         case types.EDIT_TEACHER_SUCCESS:
-            return { ...state, isFetching: false, editTeacher: action.payload.data.editTeacher };
+            return { ...state, isFetching: false, editTeacher: action.payload };
         case types.EDIT_TEACHER_FAILER:
             return { ...state, messageError: action.payload };
         case types.DELETE_TEACHER_START:
