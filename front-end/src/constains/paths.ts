@@ -9,28 +9,10 @@ export const PATH = {
     LOGIN: "/login",
     REGISTER: "/register",
     REPORT: "/report",
-    DASHBOARD: "/dashboard"
+    DASHBOARD: "/dashboard",
+    CUSTOMER: '/customer'
 };
 
-const DashboardPath = [
-    {
-        path: "/dashboard",
-        component: DashboardLayout,
-        exact: true,
-        routes: [
-            {
-                path: "/dashboard/user",
-                component: User
-            },
-            {
-                path: "/dashboard/teacher",
-                component: Teacher
-            }
-        ]
-    }
-];
-
-export default DashboardPath;
 
 
 export const SideBar_Item = [

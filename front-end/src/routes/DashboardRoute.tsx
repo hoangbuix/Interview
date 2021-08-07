@@ -5,6 +5,8 @@ import { PATH } from "../constains/paths";
 import AuthenticatedGuard from "../gaurds/AuthenticatedGuard";
 
 
+
+
 const Dashboard = lazy(() => import("../pages/Dashboard/Dashboard"));
 export default function DashboardRoutes() {
     return (
@@ -18,7 +20,6 @@ export default function DashboardRoutes() {
                     </Suspense>
                 )}
             />
-
         </Switch>
     )
 }

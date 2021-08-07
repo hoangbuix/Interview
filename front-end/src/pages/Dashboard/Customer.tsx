@@ -1,6 +1,6 @@
 import React from 'react'
-import Table from '../components/Table/Table'
-import customerList from '../constains/customers-list.json'
+import Table from '../../components/Table/Table'
+import customerList from '../../constains/customers-list.json'
 
 const customerTableHead = [
     '',

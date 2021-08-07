@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './scss/_index.scss';
 import "./scss/gird.scss";
+import "./scss/_gird.scss";
 import "./scss/_theme.scss";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
