@@ -1,31 +1,33 @@
-import axiosClient from "./auth-header";
+import useFetch from "../hooks/useFetch";
 
-export const getAllReport = (): Promise<ResGetReportApi> =>
+export const getAllReport = (): Promise<ResGetAllReportApi> =>
     new Promise((resolve, reject) => {
         setTimeout(() => {
-            axiosClient.get(`/report/get-all`).then((response) => {
+            const { data, error } = useFetch<Report[]>('http://localhost:9090' + `/report/get-report`);
+            if (data) {
                 resolve({
                     data: {
-                        report: response.data
+                        reports: data
                     }, message: 'Get success!'
                 })
-            }).catch(err => {
-                reject(new Error('Get failer!'))
-            })
+            } else {
+                reject(error)
+            }
         }, 100);
     });
-export const getReportUserId = (id: string): Promise<ResGetReportApi> =>
+export const getReportUserId = (id: string): Promise<ResGetReportByIdApi> =>
     new Promise((resolve, reject) => {
         setTimeout(() => {
-            axiosClient.get(`/report/get-report-user/${id}`).then((response) => {
+            const { data, error } = useFetch<Report>('http://localhost:9090' + `/report/get-report-user/${id}`);
+            if (data) {
                 resolve({
                     data: {
-                        report: response.data
+                        report: data
                     }, message: 'Get success!'
                 })
-            }).catch(err => {
-                reject(new Error('Get failer!'))
-            })
+            } else {
+                reject(error)
+            }
         }, 100);
     });
 

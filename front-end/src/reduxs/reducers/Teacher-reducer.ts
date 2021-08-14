@@ -10,7 +10,7 @@ const inintialState = {
     deleteTeacher: null as Teacher | null,
 }
 
-const teacherReducer = (state = inintialState, action: { type: any, payload: any }) => {
+const teacherReducer = (state = inintialState, action: { type: string, payload: any }) => {
     switch (action.type) {
         case types.GET_TEACHER_START:
             return { ...state, isFetching: true };

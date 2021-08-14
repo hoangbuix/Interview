@@ -22,12 +22,22 @@ interface Report {
     ],
 }
 
-interface ResGetReportApi extends Res {
+interface ResGetAllReportApi extends Res {
+    data: {
+        reports: Report[]
+    }
+}
+
+interface ResGetAllReport extends ActionRedux {
+    payload: ResGetAllReportApi
+}
+
+interface ResGetReportByIdApi extends Res {
     data: {
         report: Report
     }
 }
 
-interface ResGetReport extends ActionRedux {
-    payload: ResGetUserIdApi
+interface ResGetReportById extends ActionRedux {
+    payload: ResGetReportByIdApi
 }

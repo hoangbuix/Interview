@@ -1,17 +1,18 @@
-import axiosClient from "./auth-header";
+import useFetch from "../hooks/useFetch";
 
 export const getTaskId = (id: string): Promise<ResGetTaskApi> =>
     new Promise((resolve, reject) => {
         setTimeout(() => {
-            axiosClient.get(`/task/get-task/${id}`).then((response) => {
+            const { data, error } = useFetch<Task>('http://localhost:9090' + `/task/get-task/${id}`);
+            if (data) {
                 resolve({
                     data: {
-                        task: response.data
+                        task: data
                     }, message: 'Get success!'
                 })
-            }).catch(err => {
-                reject(new Error('Get failer!'))
-            })
-        }, 100);
+            } else {
+                reject(error);
+            }
+        }, 1000);
     });
 

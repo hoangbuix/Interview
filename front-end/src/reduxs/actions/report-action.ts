@@ -4,9 +4,9 @@ export const getReportStart = () => ({
     type: types.GET_REPORT_START
 });
 
-export const getReportSuccess = (report: ResGetReportApi) => ({
+export const getReportSuccess = (reports: ResGetAllReportApi) => ({
     type: types.GET_REPORT_SUCCESS,
-    payload: report
+    payload: reports
 });
 
 export const getReportFailer = (messageError: string) => ({
@@ -19,7 +19,7 @@ export const getReportByUserStart = () => ({
     type: types.GET_REPORT_BY_USER_START
 });
 
-export const getReportByUserSuccess = (report: ResGetReportApi) => ({
+export const getReportByUserSuccess = (report: ResGetReportByIdApi) => ({
     type: types.GET_REPORT_BY_USER_SUCCESS,
     payload: report
 });
